@@ -1,9 +1,17 @@
 package modelo;
 
-public class ClienteRegistrado extends Cliente{
+public class ClienteRegistrado extends Cliente
+{
+	
 	private String nombre;
 	private String cedula;
 	private int puntos;
+		
+	
+	public ClienteRegistrado(String nombre, String cedula) 
+	{
+		super(nombre, cedula);
+	}
 	
 	@Override 
 	public void sumarPuntos(int puntos)

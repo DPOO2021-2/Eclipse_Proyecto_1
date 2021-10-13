@@ -8,16 +8,28 @@ public class Lote {
 		private double precio_publico_unidad;
 		private double precio_publico_unidad_medida;
 		
-		
 //		este será el identificador
 		private String fechaLote;
 		
+		
+		public Lote(double cantidadOriginal, double cantidadActual, String fechaVencimiento, double costoTotal,
+				double precio_publico_unidad, double precio_publico_unidad_medida, String fechaLote)
+		{
+			this.cantidadOriginal = cantidadOriginal;
+			this.cantidadActual = cantidadActual;
+			this.fechaVencimiento = fechaVencimiento;
+			this.costoTotal = costoTotal;
+			this.precio_publico_unidad = precio_publico_unidad;
+			this.precio_publico_unidad_medida = precio_publico_unidad_medida;
+			this.fechaLote = fechaLote;
+		}
 		
 		
 		public double getCostoLote() 
 		{
 			return this.costoTotal;
 		}
+		
 		
 		public double restarCantidad(double cantidad)
 		{

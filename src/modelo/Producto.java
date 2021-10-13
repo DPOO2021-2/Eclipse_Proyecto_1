@@ -18,6 +18,20 @@ public abstract class Producto {
 	
 	private HashMap<String, Lote> lotes;
 	
+	
+	public Producto(String nombre, String codigoBarras, String categoria, String subcategoria1, String subcategoria2, 
+			String tipoRefrigerado, int precioActual, int ganaciaTotal)
+	{
+		this.nombre = nombre;
+		this.codigoBarras = codigoBarras;
+		this.categoria = categoria;
+		this.subcategoria1 = subcategoria1;
+		this.subcategoria2 = subcategoria2;
+		this.tipoRefrigerado = tipoRefrigerado;
+		this.precioActual = precioActual;
+		this.gananciaTotal = ganaciaTotal;
+	}
+	
 	public int getPrecioActual()
 	{return this.precioActual;}
 	

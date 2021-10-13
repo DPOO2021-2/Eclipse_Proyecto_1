@@ -4,15 +4,23 @@ import java.util.HashMap;
 
 public class ProductoUnidades extends Producto
 {
+	
+	
+	public ProductoUnidades(String nombre, String codigoBarras, String categoria, String subcategoria1,
+			String subcategoria2, String tipoRefrigerado, int precioActual, int ganaciaTotal) 
+	{
+		super(nombre, codigoBarras, categoria, subcategoria1, subcategoria2, tipoRefrigerado, precioActual, ganaciaTotal);
+	}
+
 	public double calcularPrecio(double cantidad)
 	{
-		//aqui hayq ue revisar que cantidad se un entero
+		//aqui hay que revisar que cantidad se un entero
 		return getPrecioActual()*cantidad;
 	}
 	
 	public void comprarProducto(double cantidad)
 	{
-		//aqui hayq ue revisar que cantidad se un entero
+		//aqui hay que revisar que cantidad se un entero
 		
 		 HashMap<String, Lote> lotes = getLotes();
 		 for (Lote lote: lotes.values())

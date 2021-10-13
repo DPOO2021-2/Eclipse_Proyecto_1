@@ -3,11 +3,22 @@ package modelo;
 import java.util.ArrayList;
 
 public class Compra {
+	
 	private Integer costoFinal;
 	
 	private Cliente cliente;
 	
 	private ArrayList<Producto> productos;
+	
+	
+	public Compra(Integer costoFinal, Cliente cliente, ArrayList<Producto> productos) 
+	{
+		this.costoFinal = costoFinal;
+		this.cliente = cliente;
+		this.productos = productos;
+	}
+	
+	
 	
 	public Integer getCostoFinal()
 	{

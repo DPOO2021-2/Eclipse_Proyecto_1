@@ -6,9 +6,13 @@ import java.util.HashMap;
 public class ProductoKilos extends Producto
 {
 
+	public ProductoKilos(String nombre, String codigoBarras, String categoria, String subcategoria1,
+			String subcategoria2, String tipoRefrigerado, int precioActual, int ganaciaTotal) 
+	{
+		super(nombre, codigoBarras, categoria, subcategoria1, subcategoria2, tipoRefrigerado, precioActual, ganaciaTotal);
+	}
 	
-	
-	
+
 	public double calcularPrecio(double cantidad)
 	{
 		return getPrecioActual()*cantidad;
