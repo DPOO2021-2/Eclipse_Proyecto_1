@@ -20,7 +20,7 @@ public abstract class Producto {
 	
 	
 	public Producto(String nombre, String codigoBarras, String categoria, String subcategoria1, String subcategoria2, 
-			String tipoRefrigerado, int precioActual, int ganaciaTotal)
+			String tipoRefrigerado, int precioActual)
 	{
 		this.nombre = nombre;
 		this.codigoBarras = codigoBarras;
@@ -29,7 +29,8 @@ public abstract class Producto {
 		this.subcategoria2 = subcategoria2;
 		this.tipoRefrigerado = tipoRefrigerado;
 		this.precioActual = precioActual;
-		this.gananciaTotal = ganaciaTotal;
+		this.gananciaTotal = 0;
+		this.lotes = new HashMap<String, Lote>();
 	}
 	
 	public int getPrecioActual()
@@ -68,6 +69,16 @@ public abstract class Producto {
 	public void agregarLote(Lote lote)
 	{
 		lotes.put(lote.getFecha(), lote);
+	}
+	
+	public double cantidadTotal()
+	{
+		double cantidad = 0;
+		for (Lote lote: getLotes().values())
+		{
+			cantidad = cantidad + lote.getCantidadActual();
+		}
+		return cantidad;
 	}
 	
 

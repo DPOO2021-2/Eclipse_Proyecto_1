@@ -1,23 +1,27 @@
 package modelo;
 
-import java.util.Collection;
+
 import java.util.HashMap;
 
 public class ProductoKilos extends Producto
 {
-
+	
 	public ProductoKilos(String nombre, String codigoBarras, String categoria, String subcategoria1,
-			String subcategoria2, String tipoRefrigerado, int precioActual, int ganaciaTotal) 
+			String subcategoria2, String tipoRefrigerado, int precioActual) 
 	{
-		super(nombre, codigoBarras, categoria, subcategoria1, subcategoria2, tipoRefrigerado, precioActual, ganaciaTotal);
+		super(nombre, codigoBarras, categoria, subcategoria1, subcategoria2, tipoRefrigerado, precioActual);
 	}
 	
 
+	//antes de llamar este metodo asegurese de que 
+	//cantidad<cantidadTotal()
 	public double calcularPrecio(double cantidad)
 	{
 		return getPrecioActual()*cantidad;
 	}
 	
+	//antes de llamar este metodo asegurese de que 
+	//cantidad<cantidadTotal()
 	public void comprarProducto(double cantidad)
 	{
 		

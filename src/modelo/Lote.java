@@ -12,11 +12,11 @@ public class Lote {
 		private String fechaLote;
 		
 		
-		public Lote(double cantidadOriginal, double cantidadActual, String fechaVencimiento, double costoTotal,
+		public Lote(double cantidadOriginal, String fechaVencimiento, double costoTotal,
 				double precio_publico_unidad, double precio_publico_unidad_medida, String fechaLote)
 		{
 			this.cantidadOriginal = cantidadOriginal;
-			this.cantidadActual = cantidadActual;
+			this.cantidadActual = cantidadOriginal;
 			this.fechaVencimiento = fechaVencimiento;
 			this.costoTotal = costoTotal;
 			this.precio_publico_unidad = precio_publico_unidad;
