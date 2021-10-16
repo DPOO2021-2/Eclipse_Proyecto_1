@@ -18,6 +18,19 @@ public class Supermercado
 	
 	public Supermercado (String nombre)
 	{
+		
+		/*nos falta:
+		 * 
+		 * 2. req func: registrar lotes y productos (se registran por un csv, input: String nombreArchivo)
+		 * 3. req func: eliminar lotes vencidos (inputs=[cdoigoBarras, codigoLote])
+		 * 
+		 * 
+		 *  
+		 * 5. Hacer ambas consolas
+		 * 
+		 * 6. Hacer archivos: guardar y leer
+		 * 
+		 */
 		this.nombre = nombre;
 		this.fecha = new Date();
 		
@@ -30,6 +43,17 @@ public class Supermercado
 	public Inventario getInventario()
 	{
 		return this.inventario;
+	}
+	
+	public SistemaPuntos getSistemaPuntos()
+	{
+		return this.sistemaPuntos;
+	}
+	
+	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral)
+	{
+		return getSistemaPuntos().registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
+		//retorna false si el cliente ya estaba registrado (no lo registra de nuevo)
 	}
 	
 	
@@ -68,5 +92,7 @@ public class Supermercado
 		}
 		else { return "Las cantidades de estos productos no estaban disponibles";}
 	}
+	
+
 
 }

@@ -10,9 +10,19 @@ public class SistemaPuntos
 	
 	private HashMap<String, ClienteRegistrado> clientes;
 	
-	public void registrarCliente(int infoCliente) 
+	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
 	{
+		ClienteRegistrado cliente = new ClienteRegistrado(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
 		
+		if(clientes.containsKey(cedula))
+		{
+			return false;
+		}
+		else
+		{
+			clientes.put(cedula, cliente);
+			return true;
+		}
 	}
 	
 	public ClienteRegistrado getCliente(String cedula) 

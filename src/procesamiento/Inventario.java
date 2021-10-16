@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import modelo.Lote;
 import modelo.Producto;
+import java.util.Date;
 
 public class Inventario 
 {

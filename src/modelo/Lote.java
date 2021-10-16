@@ -1,19 +1,25 @@
 package modelo;
 
-public class Lote {
+import java.util.Date;
+
+public class Lote 
+{
 		private double cantidadOriginal;
 		private double cantidadActual;
-		private String fechaVencimiento;
+		private Date fechaVencimiento;
 		private double costoTotal;
 		private double precio_publico_unidad;
 		private String precio_publico_unidad_medida;
 		
+
+		private Date fechaLote;
+		
 //		este será el identificador
-		private String fechaLote;
+		private String codigo;
 		
 		
-		public Lote(double cantidadOriginal, String fechaVencimiento, double costoTotal,
-				double precio_publico_unidad, String precio_publico_unidad_medida, String fechaLote)
+		public Lote(String codigoLote, double cantidadOriginal, Date fechaVencimiento, double costoTotal,
+				double precio_publico_unidad, String precio_publico_unidad_medida)
 		{
 			this.cantidadOriginal = cantidadOriginal;
 			this.cantidadActual = cantidadOriginal;
@@ -21,8 +27,43 @@ public class Lote {
 			this.costoTotal = costoTotal;
 			this.precio_publico_unidad = precio_publico_unidad;
 			this.precio_publico_unidad_medida = precio_publico_unidad_medida;
-			this.fechaLote = fechaLote;
+			
+			
+			//esta es la fecha del momento en el que se llama este metodo
+			this.fechaLote = new Date();
+			
+			
+			this.codigo = codigoLote;
+			
+			
 		}
+		
+		
+		
+		
+		/*
+		 * 
+		 *  import java.text.SimpleDateFormat;
+		    import java.util.Date;
+			import java.text.ParseException;
+			public class CurrentDateTimeExample2 
+			{
+				public static void main(String[] args) 
+				{
+					try{
+						SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+						Date date = new Date();
+			        	Date date2 = formatter.parse("14/10/2021");
+						System.out.println(formatter.format(date));
+				        System.out.println(formatter.format(date2));
+				        System.out.println(date.before(date2));
+			
+						}
+						catch (ParseException ex) {}
+				}
+			}
+
+		 */
 		
 		
 		public double getCostoLote() 
@@ -66,8 +107,16 @@ public class Lote {
 		public double getCantidadActual()
 		{return this.cantidadActual;}
 		
-		public String getFecha()
+		public Date getFecha()
 		{return this.fechaLote;}
+
+
+
+
+		public String getCodigo() 
+		{
+			return this.codigo;
+		}
 
 
 }

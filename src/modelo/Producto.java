@@ -1,19 +1,24 @@
 package modelo;
 
 import java.util.ArrayList;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public abstract class Producto {
-	public static double getGanaciaTotal;
+import java.util.Date;
+
+public abstract class Producto 
+{
+	
+	
 	private String nombre;
 	private String codigoBarras;
-	private String categoria;
-	private String subcategoria1;
-	private String subcategoria2;
+	
+	private ArrayList<String> categorias;
+	
 	private String tipoRefrigerado;
-	private int precioActual;
+	private double precioActual;
 	
 	private double gananciaTotal;
 
@@ -21,21 +26,18 @@ public abstract class Producto {
 	private LinkedHashMap<String, Lote> lotes;
 	
 	
-	public Producto(String nombre, String codigoBarras, String categoria, String subcategoria1, String subcategoria2, 
-			String tipoRefrigerado, int precioActual)
+	public Producto(String nombre, String codigoBarras, String tipoRefrigerado, double precioActual)
 	{
 		this.nombre = nombre;
 		this.codigoBarras = codigoBarras;
-		this.categoria = categoria;
-		this.subcategoria1 = subcategoria1;
-		this.subcategoria2 = subcategoria2;
+		this.categorias = new ArrayList<String>();
 		this.tipoRefrigerado = tipoRefrigerado;
 		this.precioActual = precioActual;
 		this.gananciaTotal = 0;
 		this.lotes = new LinkedHashMap<String, Lote>();
 	}
 	
-	public int getPrecioActual()
+	public double getPrecioActual()
 	{return this.precioActual;}
 	
 	public String getNombre()
@@ -73,7 +75,7 @@ public abstract class Producto {
 	
 	public void agregarLote(Lote lote)
 	{
-		lotes.put(lote.getFecha(), lote);
+		lotes.put(lote.getCodigo(), lote);
 	}
 	
 	public double cantidadTotal()
