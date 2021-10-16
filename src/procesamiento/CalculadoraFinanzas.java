@@ -2,13 +2,30 @@ package procesamiento;
 
 import modelo.Producto;
 
-public class CalculadoraFinanzas {
+public class CalculadoraFinanzas 
+{
+	private Supermercado supermercado;
 	
-	public double calcularRendimiento(String codigoBarras) {
-		double producto = Inventario.getCostoProducto(codigoBarras);
-		double gananciaTotalProducto = Producto.getGanaciaTotal;
+	public CalculadoraFinanzas(Supermercado supermercado)
+	{
+		this.supermercado = supermercado;
+	}
+	
+	public double calcularRendimiento(String codigoBarras) 
+	{
+		Inventario inventario = getSupermercado().getInventario();
+				
+				
+		double costoProducto = inventario.getCostoProducto(codigoBarras);
+		double gananciaTotalProducto = inventario.getGananciaProducto(codigoBarras);
 		
-		double neto = gananciaTotalProducto - producto;
+		double neto = gananciaTotalProducto - costoProducto;
+		
 		return neto;
+	}
+	
+	public Supermercado getSupermercado()
+	{
+		return this.supermercado;
 	}
 }

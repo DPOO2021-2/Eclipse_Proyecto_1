@@ -15,7 +15,6 @@ public class Cliente {
 		this.puntos = puntos;
 	}
 	
-	public void sumarPuntos(int Puntos)
 	public void sumarPuntos(double Puntos)
 	{
 	}

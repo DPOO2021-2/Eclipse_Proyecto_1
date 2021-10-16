@@ -27,6 +27,11 @@ public class Supermercado
 		
 	}
 	
+	public Inventario getInventario()
+	{
+		return this.inventario;
+	}
+	
 	
 	
 	public String registrarCompra(Map<String, Double> productosyCantidades, String nombre, String cedula) 
