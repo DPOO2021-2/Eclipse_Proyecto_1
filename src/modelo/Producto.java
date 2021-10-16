@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public abstract class Producto {
 	private String nombre;
@@ -16,7 +17,7 @@ public abstract class Producto {
 	private int gananciaTotal;
 
 	
-	private HashMap<String, Lote> lotes;
+	private LinkedHashMap<String, Lote> lotes;
 	
 	
 	public Producto(String nombre, String codigoBarras, String categoria, String subcategoria1, String subcategoria2, 
@@ -30,7 +31,7 @@ public abstract class Producto {
 		this.tipoRefrigerado = tipoRefrigerado;
 		this.precioActual = precioActual;
 		this.gananciaTotal = 0;
-		this.lotes = new HashMap<String, Lote>();
+		this.lotes = new LinkedHashMap<String, Lote>();
 	}
 	
 	public int getPrecioActual()
@@ -55,7 +56,7 @@ public abstract class Producto {
 	}
 	
 	
-	public HashMap<String, Lote> getLotes()
+	public LinkedHashMap<String, Lote> getLotes()
 	{
 		return this.lotes;
 	}
@@ -85,6 +86,11 @@ public abstract class Producto {
 	abstract public double calcularPrecio(double cantidad);
 	
 	abstract public void comprarProducto(double cantidad);
+
+	public boolean sePuedeComprar(double cantidad)
+	{
+		return cantidadTotal() > cantidad;
+	}
 	
 	
 

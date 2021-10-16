@@ -6,14 +6,14 @@ public class Lote {
 		private String fechaVencimiento;
 		private double costoTotal;
 		private double precio_publico_unidad;
-		private double precio_publico_unidad_medida;
+		private String precio_publico_unidad_medida;
 		
 //		este será el identificador
 		private String fechaLote;
 		
 		
 		public Lote(double cantidadOriginal, String fechaVencimiento, double costoTotal,
-				double precio_publico_unidad, double precio_publico_unidad_medida, String fechaLote)
+				double precio_publico_unidad, String precio_publico_unidad_medida, String fechaLote)
 		{
 			this.cantidadOriginal = cantidadOriginal;
 			this.cantidadActual = cantidadOriginal;

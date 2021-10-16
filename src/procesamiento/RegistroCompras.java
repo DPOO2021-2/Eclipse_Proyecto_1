@@ -1,18 +1,33 @@
 package procesamiento;
 
 import modelo.Compra;
+import modelo.Producto;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 
 
 public class RegistroCompras {
-
-	public void registrarCompra(Map productosyCantidades, String nombre, String cedula) {
-		
-	}
 	
-	public void guadarCompra(Compra compra) {
+	
+	private ArrayList<Compra> comprasRegistradas;
+	
+	
+	public RegistroCompras()
+	{
+		this.comprasRegistradas = new ArrayList<Compra>();
+	}
+
+	
+	
+	
+	
+
+
+
+	public void guadarCompra(Compra compra) 
+	{
 		
 	}
 	
