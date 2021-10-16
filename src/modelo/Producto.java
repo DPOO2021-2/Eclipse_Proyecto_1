@@ -15,7 +15,7 @@ public abstract class Producto {
 	private String tipoRefrigerado;
 	private int precioActual;
 	
-	private int gananciaTotal;
+	private double gananciaTotal;
 
 	
 	private LinkedHashMap<String, Lote> lotes;
@@ -65,6 +65,11 @@ public abstract class Producto {
 		return this.gananciaTotal;
 	}
 	
+	public void setGananciaTotal(double ganancia)
+	{
+		this.gananciaTotal = ganancia;
+	}
+	
 	
 	public void agregarLote(Lote lote)
 	{
@@ -82,14 +87,21 @@ public abstract class Producto {
 	}
 	
 
-	abstract public double calcularPrecio(double cantidad);
+	//antes de llamar este metodo asegurese de que 
+		//cantidad<cantidadTotal()
+	public double calcularPrecio(double cantidad)
+	{
+		return getPrecioActual()*cantidad;
+	}
 	
-	abstract public void comprarProducto(double cantidad);
+
 
 	public boolean sePuedeComprar(double cantidad)
 	{
 		return cantidadTotal() > cantidad;
 	}
+	
+	abstract public double comprarProducto(double cantidad);
 	
 	
 

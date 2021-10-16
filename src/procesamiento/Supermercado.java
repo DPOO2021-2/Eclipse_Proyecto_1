@@ -1,6 +1,10 @@
 package procesamiento;
 
 import java.util.Map;
+
+import modelo.Cliente;
+import modelo.Compra;
+
 import java.util.Date;
 
 public class Supermercado 
@@ -25,9 +29,10 @@ public class Supermercado
 	
 	
 	
-	public void registrarCompra(Map<String, Double> productosyCantidades, String nombre, String cedula) 
+	public String registrarCompra(Map<String, Double> productosyCantidades, String nombre, String cedula) 
 	{
 		boolean sePudieronComprar = true;
+		
 		for (String codigoBarras: productosyCantidades.keySet())
 		{
 			double cantidad = productosyCantidades.get(codigoBarras);
@@ -36,14 +41,27 @@ public class Supermercado
 		
 		if(sePudieronComprar) 
 		{
+			double precioTotalCompra = 0;
 		
-		for (String codigoBarras: productosyCantidades.keySet())
-		{
-			double cantidad = productosyCantidades.get(codigoBarras);
-			inventario.comprar(codigoBarras, cantidad);
+			for (String codigoBarras: productosyCantidades.keySet())
+			{
+				double cantidad = productosyCantidades.get(codigoBarras);
+				precioTotalCompra = precioTotalCompra + inventario.comprar(codigoBarras, cantidad);
+			}
+			
+			double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
+			Cliente cliente = sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
+			
+			Compra compra = new Compra(precioTotalCompra, cliente, 
+					productosyCantidades,  puntosCompra);
+			
+			registroCompras.guadarCompra(compra);
+			
+			String factura = compra.generarfactura();
+			
+			return factura;
 		}
-		
-		}
+		else { return "Las cantidades de estos productos no estaban disponibles";}
 	}
 
 }
