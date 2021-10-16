@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public abstract class Producto {
+	public static double getGanaciaTotal;
 	private String nombre;
 	private String codigoBarras;
 	private String categoria;
@@ -50,8 +51,6 @@ public abstract class Producto {
 		{
 			costoTotal = costoTotal + lote.getCostoLote();
 		}
-				
-				
 		return costoTotal;
 	}
 	

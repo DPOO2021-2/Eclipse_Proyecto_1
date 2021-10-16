@@ -2,6 +2,7 @@ package procesamiento;
 
 import java.util.HashMap;
 
+import modelo.Lote;
 import modelo.Producto;
 
 public class Inventario 
@@ -14,11 +15,15 @@ public class Inventario
 	}
 	
 	
-	public void getCostoProducto(String codigoBarras) 
+	public double getCostoProducto(String codigoBarras) 
 	{
-		
+		Producto producto = getProducto(codigoBarras);
+		double costoTotalProducto = producto.getCostoTotal();
+		return costoTotalProducto;
 	}
 	
+
+
 	public void comprar(String codigoBarras, double cantidad) 
 	{
 		// SEGUIR AQUI
