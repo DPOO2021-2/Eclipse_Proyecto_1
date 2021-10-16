@@ -13,16 +13,11 @@ public class ProductoKilos extends Producto
 	}
 	
 
-	//antes de llamar este metodo asegurese de que 
-	//cantidad<cantidadTotal()
-	public double calcularPrecio(double cantidad)
-	{
-		return getPrecioActual()*cantidad;
-	}
+	
 	
 	//antes de llamar este metodo asegurese de que 
 	//cantidad<cantidadTotal()
-	public void comprarProducto(double cantidad)
+	public double comprarProducto(double cantidad)
 	{
 		
 		 HashMap<String, Lote> lotes = getLotes();
@@ -41,7 +36,9 @@ public class ProductoKilos extends Producto
 			 
 		 }
 		
-		
+		 double costo = calcularPrecio(cantidad);
+		 setGananciaTotal(getGananciaTotal() + costo);
+		 return costo;
 	}
 	
 	

@@ -6,7 +6,7 @@ public class ClienteRegistrado extends Cliente
 	private String nombre;
 	private String cedula;
 	
-	private int puntos;
+	private double puntos;
 	private String sexo;
 	private int edad;
 	private String estadoCivil;
@@ -15,8 +15,7 @@ public class ClienteRegistrado extends Cliente
 	
 	public ClienteRegistrado(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
 	{
-		super(nombre, cedula);
-		this.puntos = 0;
+		super(nombre, cedula, 0);
 		this.sexo = sexo;
 		this.edad = edad;
 		this.estadoCivil = estadoCivil;
@@ -24,18 +23,18 @@ public class ClienteRegistrado extends Cliente
 	}
 	
 	@Override 
-	public void sumarPuntos(int puntos)
+	public void sumarPuntos(double puntos)
 	{
-		int puntos_originales = getPuntos();
+		double puntos_originales = getPuntos();
 		setPuntos(puntos_originales + puntos);
 	}
 	
-	public void setPuntos(int puntos)
+	public void setPuntos(double puntos)
 	{
 		this.puntos = puntos;
 	}
 	
-	public int getPuntos()
+	public double getPuntos()
 	{
 		return this.puntos;
 	}

@@ -13,30 +13,17 @@ public class ProductoUnidades extends Producto
 	}
 
 	
-	//antes de llamar este metodo asegurese de que 
-	//cantidad<cantidadTotal()
-	public double calcularPrecio(double cantidad)
-	{
-		
-		
-		double resultado = 0;
-		//aqui se está revisando que cantidad sea un entero
-		if(cantidad == (int) cantidad)
-		{
-			resultado = getPrecioActual()*cantidad;
-		}
-		
-		return resultado;
-	}
 	
 	
 	//antes de llamar este metodo asegurese de que 
 	//cantidad<cantidadTotal()
-	public void comprarProducto(double cantidad)
+	public double comprarProducto(double cantidad)
 	{
 		//aqui se está revisando que cantidad sea un entero
-		if (cantidad == (int) cantidad)
-		{
+		
+		// si no lo es: coge el entero más cercano
+		int cantidad_entera = (int) cantidad;
+		
 		 HashMap<String, Lote> lotes = getLotes();
 		 for (Lote lote: lotes.values())
 		 {
@@ -49,10 +36,15 @@ public class ProductoUnidades extends Producto
 			 //hay que revisar como se haria
 			 //podria ser ordenando aqui por fecha o pidiendole al mapa que 
 			 //se mantenga organizado aunque no creo que eso se pueda ya que es hashmap
-			 cantidad = lote.restarCantidad(cantidad);
+			 cantidad = lote.restarCantidad(cantidad_entera);
 		 }
 		 
+		 double costo = calcularPrecio(cantidad_entera);
+		 setGananciaTotal(getGananciaTotal() + costo);
+		 return costo;
+		 
+		 
 			 
-		 }
+		 
 	}
 }

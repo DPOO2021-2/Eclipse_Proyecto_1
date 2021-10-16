@@ -28,7 +28,7 @@ public class RegistroCompras {
 
 	public void guadarCompra(Compra compra) 
 	{
-		
+		comprasRegistradas.add(compra);
 	}
 	
 	public void crearArchivos() {

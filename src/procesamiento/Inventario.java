@@ -19,9 +19,12 @@ public class Inventario
 		
 	}
 	
-	public void comprar(String codigoBarras, double cantidad) 
+	public double comprar(String codigoBarras, double cantidad) 
 	{
-		// SEGUIR AQUI
+		
+		Producto producto = getProducto(codigoBarras);
+		double precioProd = producto.comprarProducto(cantidad);
+		return precioProd;
 	}
 	
 	public void registrarLote(String codigoBarras, int cantidadOriginal, int cantidadActual, String fecha_vencimiento,

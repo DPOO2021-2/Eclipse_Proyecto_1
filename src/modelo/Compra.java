@@ -1,26 +1,35 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 
 public class Compra {
 	
-	private Integer costoFinal;
+	private double costoFinal;
 	
 	private Cliente cliente;
 	
-	private ArrayList<Producto> productos;
+	private Map<String, Double> productos;
+	
+	private double puntos;
 	
 	
-	public Compra(Integer costoFinal, Cliente cliente, ArrayList<Producto> productos) 
+	public Compra(Double costoFinal, Cliente cliente, Map<String, Double> productos,
+			Double puntos) 
 	{
 		this.costoFinal = costoFinal;
 		this.cliente = cliente;
 		this.productos = productos;
+		this.puntos = puntos;
 	}
 	
 	
 	
-	public Integer getCostoFinal()
+	
+
+
+	public Double getCostoFinal()
 	{
 		return this.costoFinal;
 	}
@@ -28,11 +37,12 @@ public class Compra {
 	public String generarfactura()
 	{
 		String factura = "";
-		for (Producto producto:  productos)
+		for (String codigoBarras:  productos.keySet())
 		{
-			factura = factura + producto.getNombre() + "-" + producto.getCodigoBarras() + ",";
+			factura = factura + codigoBarras + ": " + 
+			productos.get(codigoBarras).toString() + ", ";
 		}
-		factura = factura + "costo total: "+ getCostoFinal().toString();
+		factura = factura + " costo total: "+ getCostoFinal().toString();
 		return factura;
 	}
 
