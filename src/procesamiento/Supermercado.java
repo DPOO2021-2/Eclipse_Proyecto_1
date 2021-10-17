@@ -44,6 +44,10 @@ public class Supermercado
 		
 		//aqui se debe ejecutar el metodo de cargar nuestros archivos
 		
+		leerInfoArchivos("inventario");
+		leerInfoArchivos("puntos");
+		leerInfoArchivos("compras");
+		
 	}
 	
 	public Inventario getInventario()
@@ -142,20 +146,27 @@ public class Supermercado
 	
 	
 	
-	
-	public void crearArchivos() 
+	public boolean existeArchivo(String nombreArchivo)
 	{
+		 return new File("archivos/"+nombreArchivo+".csv").exists();
 		
 	}
 	
-	public void leerInfoArchivos() 
+	
+	
+	public void leerInfoArchivos(String baseDatos) 
 	{
 		
+			//señalarlo
+			//leerlo
+	
 	}
 	
-	public void actualizarArchivos() 
+	public void actualizarArchivos(String baseDatos) 
 	{
 		
+		//señalarlo
+		//sobreescribirlo
 	}
 	
 	

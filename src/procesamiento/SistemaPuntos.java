@@ -7,7 +7,7 @@ import modelo.ClienteRegistrado;
 
 public class SistemaPuntos 
 {
-	
+	//llave, valor = cedula del cliente, clienteRegistrado
 	private HashMap<String, ClienteRegistrado> clientes;
 	
 	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
