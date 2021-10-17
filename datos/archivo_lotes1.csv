@@ -1,0 +1,10 @@
+﻿cantidadOriginal,fecha_vencimiento,costoTotal,precio_publico_unidad,precio_unidad_medida,nombre,codigoBarras,categoria,tipoRefrigerado,Empaque
+50,30_12_2021,900000,20000,3.3/ml,Leche Entera Colanta x 1100ml x 6u,100000-1,Lacteos,refrigeracion,Unidades
+25,25_11_2021,250000,14000,28/g,Queso Campesino Doña Leche x 500g,100001-1,Lacteos,refrigeracion,Unidades
+25,24_11_2021,240000,13000,26/g,Queso Holandes Doña Leche x 500g,100002-1,Lacteos,refrigeracion,Unidades
+100,05_04_2022,250000,3000,3/g,Arroz Diana x 1kg,100003-1,Despensa,null,Unidades
+100,05_04_2022,550000,5700,5.7/g,Arroz Diana Premium x 1kg,100004-1,Despensa,null,Unidades
+100,10_03_2022,150000,1750,3.5/g,Arveja Verde Cuisine x 500g,100005-1,Despensa,null,Unidades
+50,15_06_2022,600000,13000,8.02/ml,Cerveza Andina Lata x 6 x 270ml,100006-1,Vinos y licores,refrigeracion,Unidades
+50,15_06_2022,550000,12000,5.7/ml,Cerveza Heineken Lata x6 x 350ml,100007-1,Vinos y licores,refrigeracion,Unidades
+30,12_10_2022,225000,7900,52.56/ml,Crema Dental Colgate 150ml,100008-1,Aseo Personal,null,Unidades

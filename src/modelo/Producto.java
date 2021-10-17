@@ -77,6 +77,7 @@ public abstract class Producto
 	public void agregarLote(Lote lote)
 	{
 		lotes.put(lote.getCodigo(), lote);
+		//System.out.println("hola");
 	}
 	
 	public double cantidadTotal()

@@ -2,6 +2,7 @@ package consola;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 import procesamiento.CalculadoraFinanzas;
 import procesamiento.Supermercado;
@@ -12,7 +13,7 @@ public class SistemaINVENTARIO
 	private Supermercado supermercadoYumbo;
 	
 	
-	public static void main(String[] args) throws FileNotFoundException, IOException 
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException 
 	{
 		
 		
@@ -22,11 +23,13 @@ public class SistemaINVENTARIO
 	}
 	
 	
-	public void correr() throws FileNotFoundException, IOException
+	public void correr() throws FileNotFoundException, IOException, ParseException
 	{
 		this.supermercadoYumbo = new Supermercado("Yumbo");
-		//supermercadoYumbo.registrarLotes("archivo_lotes1");
+		supermercadoYumbo.registrarLotes("archivo_lotes1");
+		supermercadoYumbo.registrarLotes("archivo_lotes2");
 		//System.out.println(supermercadoYumbo.existeArchivoUsuarioLote("archivo_lotes1"));
+		System.out.println(supermercadoYumbo.getInventario().getProducto("100007").getLotes().size());
 	}
 
 }

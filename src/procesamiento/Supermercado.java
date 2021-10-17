@@ -8,6 +8,7 @@ import modelo.Compra;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 
 public class Supermercado 
@@ -68,7 +69,7 @@ public class Supermercado
 	}
 	
 	
-	public boolean registrarLotes(String nombreArchivo) throws FileNotFoundException, IOException
+	public boolean registrarLotes(String nombreArchivo) throws FileNotFoundException, IOException, ParseException
 	{
 		Inventario inventario = getInventario();
 		if (existeArchivoUsuarioLote(nombreArchivo))
@@ -86,7 +87,7 @@ public class Supermercado
 	
 	public boolean existeArchivoUsuarioLote(String nombreArchivo)
 	{
-		 return new File("datos/"+nombreArchivo+".xlsx").exists();
+		 return new File("datos/"+nombreArchivo+".csv").exists();
 		
 	}
 	
