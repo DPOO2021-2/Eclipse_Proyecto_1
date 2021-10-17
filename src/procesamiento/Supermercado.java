@@ -85,7 +85,7 @@ public class Supermercado
 		
 	}
 	
-	public boolean eliminarLote(String codigoBarras, String codigoLote) 
+	public boolean eliminarLoteVencido(String codigoBarras, String codigoLote) 
 	{
 		return getInventario().eliminarLote(codigoBarras, codigoLote);
 	}

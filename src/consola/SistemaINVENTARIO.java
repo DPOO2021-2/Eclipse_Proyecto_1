@@ -25,11 +25,22 @@ public class SistemaINVENTARIO
 	
 	public void correr() throws FileNotFoundException, IOException, ParseException
 	{
-		//this.supermercadoYumbo = new Supermercado("Yumbo");
-		//supermercadoYumbo.registrarLotes("archivo_lotes1");
-		//supermercadoYumbo.registrarLotes("archivo_lotes2");
-		//System.out.println(supermercadoYumbo.existeArchivoUsuarioLote("archivo_lotes1"));
-		//System.out.println(supermercadoYumbo.getInventario().getProducto("100007").getLotes().size());
+		this.supermercadoYumbo = new Supermercado("Yumbo");
+		
+		/*
+		supermercadoYumbo.registrarLotes("archivo_lotes1");
+		supermercadoYumbo.registrarLotes("archivo_lotes2");
+		System.out.println(supermercadoYumbo.existeArchivoUsuarioLote("archivo_lotes1"));
+		System.out.println(supermercadoYumbo.getInventario().getProducto("100007").getLotes().size());
+		System.out.println(supermercadoYumbo.eliminarLoteVencido("100007", "1"));
+		System.out.println(supermercadoYumbo.getInventario().getProducto("100007").getLotes().size());
+		System.out.println(supermercadoYumbo.eliminarLoteVencido("100007", "1"));
+		System.out.println(supermercadoYumbo.getInventario().getProducto("100007").getLotes().size());
+		System.out.println(supermercadoYumbo.eliminarLoteVencido("100007", "2"));
+		System.out.println(supermercadoYumbo.getInventario().getProducto("100007").getLotes().size());
+		
+		*/
+
 	}
 
 }

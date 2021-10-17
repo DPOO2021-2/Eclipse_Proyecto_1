@@ -160,9 +160,10 @@ public class Inventario
 	}
 	}
 	
-	public void eliminarLote(String codigoBarras, String fecha) 
+	public boolean eliminarLote(String codigoBarras, String codigoLote) 
 	{
-		
+		Producto producto = getProducto(codigoBarras);
+		return producto.eliminarLoteVencido(codigoLote);
 	}
 	
 	

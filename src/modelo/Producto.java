@@ -124,5 +124,28 @@ public abstract class Producto
 	}
 	
 	
+	public boolean eliminarLoteVencido(String codigoLote)
+	{
+		LinkedHashMap<String, Lote> lotes = getLotes();
+		
+		Date fechaHoy = new Date();
+		
+		if(lotes.containsKey(codigoLote))
+		{
+			Date fechaVenci = lotes.get(codigoLote).getFecha();
+			if (fechaVenci.before(fechaHoy))
+			{
+				lotes.remove(codigoLote);
+				return true;
+			}
+			return false;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
 
 }
