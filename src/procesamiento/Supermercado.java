@@ -85,6 +85,12 @@ public class Supermercado
 		
 	}
 	
+	public boolean eliminarLote(String codigoBarras, String codigoLote) 
+	{
+		return getInventario().eliminarLote(codigoBarras, codigoLote);
+	}
+	
+	
 	public boolean existeArchivoUsuarioLote(String nombreArchivo)
 	{
 		 return new File("datos/"+nombreArchivo+".csv").exists();
