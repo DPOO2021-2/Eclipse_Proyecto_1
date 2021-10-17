@@ -31,16 +31,6 @@ public class RegistroCompras {
 		comprasRegistradas.add(compra);
 	}
 	
-	public void crearArchivos() {
-		
-	}
-	
-	public void leerInfoArchivos() {
-		
-	}
-	
-	public void actualizarArchivos() {
-		
-	}
+
 	
 }

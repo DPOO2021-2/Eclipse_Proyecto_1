@@ -196,15 +196,7 @@ public class Inventario
 	}
 
 
-	public void crearArchivos() 
-	{
-		
-	}
 	
-	public void actualizarArchivos() 
-	{
-		
-	}
 
 
 	

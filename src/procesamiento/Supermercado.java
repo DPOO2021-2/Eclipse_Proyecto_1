@@ -138,7 +138,25 @@ public class Supermercado
 		}
 		else { return "Las cantidades de estos productos no estaban disponibles";}
 	}
-
+	
+	
+	
+	
+	
+	public void crearArchivos() 
+	{
+		
+	}
+	
+	public void leerInfoArchivos() 
+	{
+		
+	}
+	
+	public void actualizarArchivos() 
+	{
+		
+	}
 	
 	
 

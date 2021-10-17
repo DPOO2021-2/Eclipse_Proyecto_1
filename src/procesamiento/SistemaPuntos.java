@@ -62,21 +62,6 @@ public class SistemaPuntos
 	
 	
 	
-	
-	public void crearArchivos() 
-	{
-		
-	}
-	
-	public void leerInfoArchivos() 
-	{
-		
-	}
-	
-	public void actualizarArchivos() 
-	{
-		
-	}
 
 	
 
