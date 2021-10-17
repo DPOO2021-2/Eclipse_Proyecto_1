@@ -4,7 +4,8 @@ import java.util.Map;
 
 public class SistemaPOS {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		// TODO Auto-generated method stub
 
 	}
@@ -17,7 +18,8 @@ public class SistemaPOS {
 		
 	}
 	
-	public void salir() {
+	public void salir() 
+	{
 		
 	}
 

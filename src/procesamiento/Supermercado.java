@@ -5,6 +5,9 @@ import java.util.Map;
 import modelo.Cliente;
 import modelo.Compra;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 public class Supermercado 
@@ -38,6 +41,8 @@ public class Supermercado
 		this.registroCompras = new RegistroCompras();
 		this.sistemaPuntos = new SistemaPuntos();
 		
+		//aqui se debe ejecutar el metodo de cargar nuestros archivos
+		
 	}
 	
 	public Inventario getInventario()
@@ -63,10 +68,26 @@ public class Supermercado
 	}
 	
 	
-	public void registrarLotes(String nombreArchivo)
+	public boolean registrarLotes(String nombreArchivo) throws FileNotFoundException, IOException
 	{
 		Inventario inventario = getInventario();
-		inventario.leerArchivoLotes(nombreArchivo);
+		if (existeArchivoUsuarioLote(nombreArchivo))
+		{
+			inventario.leerArchivoLotes(nombreArchivo);
+			return true;
+		}
+		else
+		{
+			//archivo no existe
+			return false;
+		}
+		
+	}
+	
+	public boolean existeArchivoUsuarioLote(String nombreArchivo)
+	{
+		 return new File("datos/"+nombreArchivo+".xlsx").exists();
+		
 	}
 	
 	

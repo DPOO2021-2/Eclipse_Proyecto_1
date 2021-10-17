@@ -1,11 +1,20 @@
 package procesamiento;
 
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
+
 
 import modelo.Lote;
 import modelo.Producto;
 import modelo.ProductoKilos;
+import modelo.Producto;
 import modelo.ProductoUnidades;
+
+
 
 import java.util.Date;
 
@@ -89,11 +98,36 @@ public class Inventario
 		producto.agregarLote(lote);
 	}
 	
-	public void leerArchivoLotes(String nombreArchivo) 
+	public void leerArchivoLotes(String nombreArchivo) throws FileNotFoundException, IOException
+	{try 
 	{
-		//leer csv y configurar lectura para leer atributos:
-		//cada linea debe llamar a registrarProducto()
-		
+			boolean seCargoCorrectamente = false;
+			//leer csv y configurar lectura para leer atributos:
+			//cada linea debe llamar a registrarProducto()
+			BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo+".xlsx"));
+			
+			String linea = br.readLine();
+			while (linea != null) 
+			{
+				
+				String[] partes = linea.split(";");
+				
+				//System.out.println("estoy leyendo linea de csv");
+				
+				
+				//aqui debo llamar al metodo registrarProducto( con toda la info de la linea)
+				
+				
+				
+	
+				linea = br.readLine();
+			}
+			br.close();
+	}	
+	catch(FileNotFoundException ex)
+	{
+		System.out.println("Archivo no encontrado");
+	}
 	}
 	
 	public void eliminarLote(String codigoBarras, String fecha) 
