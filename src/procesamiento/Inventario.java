@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 import modelo.Lote;
 import modelo.Producto;
+import modelo.ProductoKilos;
+import modelo.ProductoUnidades;
+
 import java.util.Date;
 
 public class Inventario 
@@ -46,16 +49,50 @@ public class Inventario
 		return precioProd;
 	}
 	
-	public void registrarLote(String codigoBarras, double cantidadOriginal, String fecha_vencimiento,
-			double costoTotal, double precio_publico_unidad, double precio_unidad_medida, String nombre,
-			String categoria, String tipoRefrigerado) 
+	public void registrarProducto(String codigoBarras_lote, double cantidadOriginal, Date fecha_vencimiento,
+			double costoTotal, double precio_publico_unidad, String precio_publico_unidad_medida, String nombre,
+			String categoria, String tipoRefrigerado, String empaque) 
+	
 	{
+		String[] codigos =  codigoBarras_lote.split("-");
+		String codigoBarras = codigos[0];
+		String codigoLote = codigos[1];
+		
+		Producto producto = null;
+		
+		if (productoRegistrado(codigoBarras))
+		{
+			producto = getProducto(codigoBarras);
+			
+		}
+		else
+		{
+			if (empaque.equals("kilos"))
+			{
+				producto = new ProductoKilos(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad);
+			}
+			else if(empaque.equals("unidades"))
+			{
+				producto = new ProductoUnidades(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad);
+			}
+		}
+		
+		producto.agregarCategoria(categoria);
+		registrarLote(producto, codigoLote, cantidadOriginal, fecha_vencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
 		
 	}
 	
-	public void registrarProducto(String codigoBarras, double cantidadOriginal, String fecha_vencimiento,
-			double costoTotal, int precio_publico_unidad, int precio_unidad_medida) 
+	public void registrarLote(Producto producto, String codigoLote, double cantidadOriginal, Date fechaVencimiento, double costoTotal,
+			double precio_publico_unidad, String precio_publico_unidad_medida)
 	{
+		Lote lote = new Lote(codigoLote, cantidadOriginal, fechaVencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
+		producto.agregarLote(lote);
+	}
+	
+	public void leerArchivoLotes(String nombreArchivo) 
+	{
+		//leer csv y configurar lectura para leer atributos:
+		//cada linea debe llamar a registrarProducto()
 		
 	}
 	
@@ -68,16 +105,27 @@ public class Inventario
 
 	public boolean sePuedeComprar(String codigoBarras, double cantidad) 
 	{
-		Producto producto = getProducto(codigoBarras);
-		
-		return producto.sePuedeComprar(cantidad);
+		if (productoRegistrado(codigoBarras))
+		{
+			Producto producto = getProducto(codigoBarras);
+			
+			return producto.sePuedeComprar(cantidad);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	
 	
+	public boolean productoRegistrado(String codigoBarras)
+	{
+		return productos.containsKey(codigoBarras);
+	}
 	
 	
-	private Producto getProducto(String codigoBarras) 
+	public Producto getProducto(String codigoBarras) 
 	{
 		return productos.get(codigoBarras);
 	}
@@ -92,4 +140,7 @@ public class Inventario
 	{
 		
 	}
+
+
+	
 }

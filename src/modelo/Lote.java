@@ -102,13 +102,19 @@ public class Lote
 		}
 		
 		public void setCantidadActual(double cantidad)
-		{this.cantidadActual = cantidad;}
+		{
+			this.cantidadActual = cantidad;
+		}
 		
 		public double getCantidadActual()
-		{return this.cantidadActual;}
+		{
+			return this.cantidadActual;
+		}
 		
 		public Date getFecha()
-		{return this.fechaLote;}
+		{
+			return this.fechaLote;
+		}
 
 
 

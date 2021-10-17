@@ -22,7 +22,8 @@ public abstract class Producto
 	
 	private double gananciaTotal;
 
-	
+	//las llaves seran codigos que deberan venir en el archivo csv junto el codigo de barras del producto de la forma
+	//xxxx-c  donde xxxx es el cdoigo de barras del producto y c el codigo del lote
 	private LinkedHashMap<String, Lote> lotes;
 	
 	
@@ -89,8 +90,7 @@ public abstract class Producto
 	}
 	
 
-	//antes de llamar este metodo asegurese de que 
-		//cantidad<cantidadTotal()
+	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
 	public double calcularPrecio(double cantidad)
 	{
 		return getPrecioActual()*cantidad;
@@ -103,7 +103,24 @@ public abstract class Producto
 		return cantidadTotal() > cantidad;
 	}
 	
+	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
 	abstract public double comprarProducto(double cantidad);
+
+	public void agregarCategoria(String categoria)
+	{
+		ArrayList<String> categorias = getCategorias();
+		
+		if(!(categorias.contains(categoria)))
+		{
+			categorias.add(categoria);
+		}
+		
+	}
+
+	public ArrayList<String> getCategorias()
+	{
+		return this.categorias;
+	}
 	
 	
 

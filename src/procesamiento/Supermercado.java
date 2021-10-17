@@ -50,6 +50,12 @@ public class Supermercado
 		return this.sistemaPuntos;
 	}
 	
+	public RegistroCompras getRegistroCompras() 
+	{
+		
+		return this.registroCompras;
+	}
+	
 	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral)
 	{
 		return getSistemaPuntos().registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
@@ -57,10 +63,22 @@ public class Supermercado
 	}
 	
 	
+	public void registrarLotes(String nombreArchivo)
+	{
+		Inventario inventario = getInventario();
+		inventario.leerArchivoLotes(nombreArchivo);
+	}
+	
+	
 	
 	public String registrarCompra(Map<String, Double> productosyCantidades, String nombre, String cedula) 
 	{
+		Inventario inventario = getInventario();
+		RegistroCompras registroCompras = getRegistroCompras();
+		SistemaPuntos sistemaPuntos = getSistemaPuntos();
+		
 		boolean sePudieronComprar = true;
+		
 		
 		for (String codigoBarras: productosyCantidades.keySet())
 		{
@@ -92,6 +110,8 @@ public class Supermercado
 		}
 		else { return "Las cantidades de estos productos no estaban disponibles";}
 	}
+
+	
 	
 
 
