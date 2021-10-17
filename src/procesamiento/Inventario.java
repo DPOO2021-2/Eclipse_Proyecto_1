@@ -1,24 +1,11 @@
 package procesamiento;
 
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.text.ParseException;
-
 
 import modelo.Lote;
 import modelo.Producto;
 import modelo.ProductoKilos;
-import modelo.Producto;
 import modelo.ProductoUnidades;
-
-
 
 import java.util.Date;
 
@@ -29,11 +16,6 @@ public class Inventario
 	public Inventario()
 	{
 		this.productos = new HashMap<String, Producto>();
-	}
-	
-	public void guardarProducto(String codigoBarras, Producto producto)
-	{
-		productos.put(codigoBarras, producto);
 	}
 	
 	
@@ -54,11 +36,6 @@ public class Inventario
 	}
 	
 	
-	
-
-
-
-	
 	public double comprar(String codigoBarras, double cantidad) 
 	{
 		
@@ -70,7 +47,7 @@ public class Inventario
 	public void registrarProducto(String codigoBarras_lote, double cantidadOriginal, Date fecha_vencimiento,
 			double costoTotal, double precio_publico_unidad, String precio_publico_unidad_medida, String nombre,
 			String categoria, String tipoRefrigerado, String empaque) 
-	 
+	
 	{
 		String[] codigos =  codigoBarras_lote.split("-");
 		String codigoBarras = codigos[0];
@@ -85,17 +62,14 @@ public class Inventario
 		}
 		else
 		{
-			if (empaque.toLowerCase().equals("kilos"))
+			if (empaque.equals("kilos"))
 			{
 				producto = new ProductoKilos(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad);
-				
 			}
-			else if(empaque.toLowerCase().equals("unidades"))
+			else if(empaque.equals("unidades"))
 			{
 				producto = new ProductoUnidades(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad);
-				
 			}
-			guardarProducto(codigoBarras, producto);
 		}
 		
 		producto.agregarCategoria(categoria);
@@ -110,59 +84,17 @@ public class Inventario
 		producto.agregarLote(lote);
 	}
 	
-	public void leerArchivoLotes(String nombreArchivo) throws FileNotFoundException, IOException, ParseException
-	{try 
+	public void leerArchivoLotes(String nombreArchivo) 
 	{
-			
-			//leer csv y configurar lectura para leer atributos:
-			//cada linea debe llamar a registrarProducto()
-			BufferedReader br = new BufferedReader(new FileReader("datos/"+nombreArchivo+".csv"));
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
-			
-			String linea = br.readLine();
-			linea = br.readLine();
-			while (linea != null) 
-			{	
-				
-				//System.out.println(linea);
-				String[] partes = linea.split(",");
-				
-				String codigoBarras_lote = partes[6];
-				double cantidadOriginal = Double.parseDouble(partes[0]);
-				Date fecha_vencimiento = formatter.parse(partes[1]);
-				double costoTotal = Double.parseDouble(partes[2]);
-				double precio_publico_unidad = Double.parseDouble(partes[3]);
-				String precio_publico_unidad_medida = partes[4];
-				String nombre = partes[5];
-				String categoria = partes[7];
-				String tipoRefrigerado = partes[8];
-				String empaque = partes[9];
-				
-				//System.out.println("estoy leyendo linea de csv");
-				
-				
-				//aqui debo llamar al metodo registrarProducto( con toda la info de la linea)
-				registrarProducto(codigoBarras_lote, cantidadOriginal, fecha_vencimiento,
-					 costoTotal, precio_publico_unidad, precio_publico_unidad_medida, nombre,
-					 categoria, tipoRefrigerado, empaque);
-				
-				
-				
-				linea = br.readLine();
-				
-			}
-			br.close();
-	}	
-	catch(FileNotFoundException ex)
-	{
-		System.out.println("Archivo no encontrado");
-	}
+		//leer csv y configurar lectura para leer atributos:
+		//cada linea debe llamar a registrarProducto()
+		
 	}
 	
-	public void eliminarLote(String codigoBarras, String fecha) 
+	public boolean eliminarLote(String codigoBarras, String codigoLote) 
 	{
-		
+		Producto producto = getProducto(codigoBarras);
+		return producto.eliminarLote(codigoLote);
 	}
 	
 	

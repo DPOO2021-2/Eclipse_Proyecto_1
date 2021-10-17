@@ -90,6 +90,16 @@ public abstract class Producto
 		return cantidad;
 	}
 	
+	public boolean eliminarLote(String codigoLote) 
+	{
+		if (lotes.remove(codigoLote) != null);
+		{
+			return true;
+		}
+	}
+		
+
+	
 
 	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
 	public double calcularPrecio(double cantidad)

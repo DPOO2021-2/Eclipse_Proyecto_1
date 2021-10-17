@@ -132,6 +132,11 @@ public class Supermercado
 		}
 		else { return "Las cantidades de estos productos no estaban disponibles";}
 	}
+	
+	public boolean eliminarLotesVencidos(String codigoBarras, String codigoLote) 
+	{
+		return inventario.eliminarLote(codigoBarras, codigoLote);
+	}
 
 	
 	

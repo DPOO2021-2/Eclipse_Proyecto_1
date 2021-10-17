@@ -35,7 +35,6 @@ public class Lote
 			
 			this.codigo = codigoLote;
 			
-			
 		}
 		
 		
@@ -115,9 +114,6 @@ public class Lote
 		{
 			return this.fechaLote;
 		}
-
-
-
 
 		public String getCodigo() 
 		{
