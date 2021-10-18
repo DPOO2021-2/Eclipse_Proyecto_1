@@ -26,6 +26,7 @@ public class SistemaINVENTARIO
 	public void correr() throws FileNotFoundException, IOException, ParseException
 	{
 		this.supermercadoYumbo = new Supermercado("Yumbo");
+		this.calcFinzs = new CalculadoraFinanzas(supermercadoYumbo);
 		
 		/*
 		supermercadoYumbo.registrarLotes("archivo_lotes1");

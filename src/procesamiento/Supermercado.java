@@ -30,14 +30,16 @@ public class Supermercado
 		
 		/*nos falta:
 		 * 
-		 * 2. req func: registrar lotes y productos (se registran por un csv, input: String nombreArchivo)
-		 * 3. req func: eliminar lotes vencidos (inputs=[cdoigoBarras, codigoLote])
-		 * 
+		 * 1. req UsuarioInventario: input:producto(codigoBarras) Output: los codigos lotes que hay con sus cantidades actuales
 		 * 
 		 *  
-		 * 5. Hacer ambas consolas
+		 * 2.  consola inventario
 		 * 
-		 * 6. Hacer archivos: guardar y leer
+		 * 3. actualizar diagramas
+		 * 
+		 * 4.  Hacer archivos: guardar: todos, leer: productos
+		 * 
+		 * 5. organizar entrega
 		 * 
 		 */
 		this.nombre = nombre;
@@ -97,6 +99,12 @@ public class Supermercado
 	public boolean eliminarLoteVencido(String codigoBarras, String codigoLote) 
 	{
 		return getInventario().eliminarLote(codigoBarras, codigoLote);
+	}
+	
+	public 	Map<String, Double> lotesYcantidades(String codigoBarras)
+	{
+		//falta implementer
+		return null;
 	}
 	
 	
