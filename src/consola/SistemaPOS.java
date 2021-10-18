@@ -94,7 +94,6 @@ public class SistemaPOS {
 		
 	}
 	
-	
 
 	public void ejecutarAplicacion() throws IOException, ParseException
 	{
