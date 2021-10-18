@@ -1,6 +1,8 @@
 package procesamiento;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import modelo.Cliente;
 import modelo.ClienteRegistrado;
@@ -57,6 +59,12 @@ public class SistemaPuntos
 	public boolean clienteRegistrado(String cedula) 
 	{
 		return clientes.containsKey(cedula);
+	}
+
+	
+	public HashMap<String, ClienteRegistrado> getClientes()
+	{
+		return this.clientes;
 	}
 	
 	

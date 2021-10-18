@@ -11,6 +11,33 @@ public class ClienteRegistrado extends Cliente
 	private int edad;
 	private String estadoCivil;
 	private String situacionLaboral;
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public String getSituacionLaboral() {
+		return situacionLaboral;
+	}
+
+	
 		
 	
 	public ClienteRegistrado(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
@@ -34,7 +61,7 @@ public class ClienteRegistrado extends Cliente
 		this.puntos = puntos;
 	}
 	
-	public double getPuntos()
+	public Double getPuntos()
 	{
 		return this.puntos;
 	}

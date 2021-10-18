@@ -3,6 +3,7 @@ package procesamiento;
 import java.util.Map;
 
 import modelo.Cliente;
+import modelo.ClienteRegistrado;
 import modelo.Compra;
 import modelo.Lote;
 import modelo.Producto;
@@ -11,10 +12,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Supermercado 
 {
@@ -28,16 +32,17 @@ public class Supermercado
 	public Supermercado (String nombre) throws IOException, ParseException
 	{
 		
+		
 		/*nos falta:
 		 * 
 		 * 1. req UsuarioInventario: input:producto(codigoBarras) Output: los codigos lotes que hay con sus cantidades actuales
 		 * 
 		 *  
-		 * 2.  consola inventario
+		 * 
 		 * 
 		 * 3. actualizar diagramas
 		 * 
-		 * 4.  Hacer archivos: guardar: todos, leer: productos
+		 * 4.  Hacer archivos: guardar: todos,
 		 * 
 		 * 5. organizar entrega
 		 * 
@@ -309,11 +314,69 @@ public class Supermercado
 	
 	}
 	
-	public void actualizarArchivos(String baseDatos) 
+	public void actualizarArchivos(String baseDatos) throws IOException 
 	{
+		Inventario inventario = getInventario();
+		SistemaPuntos sistemaPuntos = getSistemaPuntos();
 		
-		//señalarlo
-		//sobreescribirlo
+		FileWriter csvWriter = new FileWriter("archivos/"+baseDatos+".csv");
+		List<List<String>> rows = null;
+		
+		if("puntos".equals(baseDatos))
+		{		
+				csvWriter.append("cedula");
+				csvWriter.append(",");
+				csvWriter.append("nombre");
+				csvWriter.append(",");
+				csvWriter.append("puntos");
+				csvWriter.append(",");
+				csvWriter.append("sexo");
+				csvWriter.append(",");
+				csvWriter.append("edad");
+				csvWriter.append(",");
+				csvWriter.append("estadoCivil");
+				csvWriter.append(",");
+				csvWriter.append("situacionLaboral");
+				csvWriter.append("\n");
+				
+				for (ClienteRegistrado cliente :sistemaPuntos.getClientes().values())
+				{
+					
+					String cedula = cliente.getCedula();
+					String nombre = cliente.getNombre();
+					String puntos = cliente.getPuntos().toString();
+					String sexo = cliente.getSexo();
+					String edad = cliente.getEdad().toString();
+					String estadoCivil = cliente.getEstadoCivil();
+					String situacionLaboral = cliente.getSituacionLaboral();
+					
+					
+					csvWriter.append(cedula);
+					csvWriter.append(",");
+					csvWriter.append(nombre);
+					csvWriter.append(",");
+					csvWriter.append(puntos);
+					csvWriter.append(",");
+					csvWriter.append(sexo);
+					csvWriter.append(",");
+					csvWriter.append(edad);
+					csvWriter.append(",");
+					csvWriter.append(estadoCivil);
+					csvWriter.append(",");
+					csvWriter.append(situacionLaboral);
+					csvWriter.append("\n");
+				}
+				
+				
+			
+		}
+		
+		
+			
+
+			csvWriter.flush();
+			csvWriter.close();
+		
 	}
 	
 	
