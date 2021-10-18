@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-
+import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
@@ -219,6 +219,16 @@ public class Inventario
 		}
 		
 	}
+
+	public Map<String, Producto> getProductos() {
+		// TODO Auto-generated method stub
+		return this.productos;
+	}
+	
+
+
+
+
 
 
 	

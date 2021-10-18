@@ -40,7 +40,7 @@ public abstract class Producto
 		this.lotes = new LinkedHashMap<String, Lote>();
 	}
 	
-	public double getPrecioActual()
+	public Double getPrecioActual()
 	{return this.precioActual;}
 	
 	public String getNombre()
@@ -65,7 +65,7 @@ public abstract class Producto
 		return this.lotes;
 	}
 
-	public double getGananciaTotal()
+	public Double getGananciaTotal()
 	{
 		return this.gananciaTotal;
 	}
@@ -168,6 +168,16 @@ public abstract class Producto
 	private void setPrecioActualMedida(String precio_publico_unidad_medida) 
 	{
 		this.precioActualMedida = precio_publico_unidad_medida;
+	}
+
+	public String getTipoRefrigerado() {
+		// TODO Auto-generated method stub
+		return this.tipoRefrigerado;
+	}
+
+	public String getPrecioActualMedida() {
+		// TODO Auto-generated method stub
+		return this.precioActualMedida;
 	}
 	
 	
