@@ -195,6 +195,13 @@ public class Inventario
 		return productos.get(codigoBarras);
 	}
 
+	public Lote getLote(String codigoBarras, String codigoLote) 
+	{
+		Producto producto = getProducto(codigoBarras);
+		
+		return producto.getLote(codigoLote);
+	}
+
 
 	
 

@@ -132,7 +132,7 @@ public abstract class Producto
 		
 		if(lotes.containsKey(codigoLote))
 		{
-			Date fechaVenci = lotes.get(codigoLote).getFecha();
+			Date fechaVenci = getLote(codigoLote).getFecha();
 			if (fechaVenci.before(fechaHoy))
 			{
 				lotes.remove(codigoLote);
@@ -144,6 +144,11 @@ public abstract class Producto
 		{
 			return false;
 		}
+	}
+
+	public Lote getLote(String codigoLote)
+	{
+		return getLotes().get(codigoLote);
 	}
 	
 	

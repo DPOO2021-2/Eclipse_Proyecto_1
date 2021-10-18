@@ -96,7 +96,7 @@ public class SistemaPOS {
 	
 	
 
-	public void ejecutarAplicacion()
+	public void ejecutarAplicacion() throws IOException, ParseException
 	{
 			System.out.println("Bienvenido al Supermercado Yumbo");
 							

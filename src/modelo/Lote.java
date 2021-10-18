@@ -106,6 +106,11 @@ public class Lote
 			this.cantidadActual = cantidad;
 		}
 		
+		public void setFechaLote(Date fecha)
+		{
+			this.fechaLote = fecha;
+		}
+		
 		public double getCantidadActual()
 		{
 			return this.cantidadActual;

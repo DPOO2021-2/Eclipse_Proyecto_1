@@ -4,6 +4,8 @@ import java.util.Map;
 
 import modelo.Cliente;
 import modelo.Compra;
+import modelo.Lote;
+import modelo.Producto;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -47,6 +49,7 @@ public class Supermercado
 		
 		//aqui se debe ejecutar el metodo de cargar nuestros archivos
 		
+		leerInfoArchivos("inventario_productos");
 		leerInfoArchivos("inventario_lotes");
 		leerInfoArchivos("puntos");
 		
@@ -162,9 +165,10 @@ public class Supermercado
 			
 		try 
 		{
-				
+				Inventario inventario = getInventario();
+				SistemaPuntos sistemaPuntos = getSistemaPuntos();
 				//leer csv y configurar lectura para leer atributos:
-			
+				
 			
 				BufferedReader br = new BufferedReader(new FileReader("datos/"+baseDatos+".csv"));
 				
@@ -194,8 +198,48 @@ public class Supermercado
 					
 					//darle los puntos
 					
-					getSistemaPuntos().getCliente(cedula).sumarPuntos(puntos);
+					sistemaPuntos.getCliente(cedula).sumarPuntos(puntos);
 					
+					//System.out.println("estoy leyendo linea de csv");
+					
+					
+					
+					
+					linea = br.readLine();
+					
+				}
+				}
+				else if("inventario_lotes".equals(baseDatos))
+				{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
+					
+				while (linea != null) 
+				{	
+					
+					
+					//System.out.println(linea);
+					String[] partes = linea.split(",");
+					
+					double cantidadOriginal = Double.parseDouble(partes[0]);
+					double cantidadActual = Double.parseDouble(partes[1]);
+					Date fechaVencimiento = formatter.parse(partes[2]);
+					double costoTotal = Double.parseDouble(partes[3]);
+					double precio_publico_unidad = Double.parseDouble(partes[4]);
+					String precio_publico_unidad_medida = partes[5];
+					Date fecha_lote = formatter.parse(partes[6]);
+					String codigo = partes[7];
+					String codigoProducto = partes[7];
+					
+					Producto producto = inventario.getProducto(codigoProducto);
+					
+					//registrar lote con metodo de registro
+					inventario.registrarLote(producto, codigo, cantidadOriginal, fechaVencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
+					Lote lote = inventario.getLote(codigoProducto, codigo);
+					
+					
+					//ponerle fecha y cantidad actual
+					lote.setCantidadActual(cantidadActual);
+					lote.setFechaLote(fecha_lote);
 					//System.out.println("estoy leyendo linea de csv");
 					
 					
