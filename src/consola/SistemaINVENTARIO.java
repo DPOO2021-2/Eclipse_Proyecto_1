@@ -151,9 +151,10 @@ public class SistemaINVENTARIO
 	}
 	
 	
-	public void salir() 
+	public void salir() throws IOException 
 	{
-		
+		supermercadoYumbo.actualizarArchivos("puntos");
+		supermercadoYumbo.actualizarArchivos("inventario_productos");
 	}
 	
 	
