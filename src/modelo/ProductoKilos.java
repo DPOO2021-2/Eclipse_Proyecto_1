@@ -6,9 +6,9 @@ import java.util.HashMap;
 public class ProductoKilos extends Producto
 {
 	
-	public ProductoKilos(String nombre, String codigoBarras, String tipoRefrigerado, double precioActual) 
+	public ProductoKilos(String nombre, String codigoBarras, String tipoRefrigerado, double precio_publico_unidad, String precio_publico_unidad_medida)
 	{
-		super(nombre, codigoBarras, tipoRefrigerado, precioActual);
+		super(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad, precio_publico_unidad_medida);
 	}
 	
 

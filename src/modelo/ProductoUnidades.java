@@ -6,9 +6,9 @@ public class ProductoUnidades extends Producto
 {
 	
 	
-	public ProductoUnidades(String nombre, String codigoBarras, String tipoRefrigerado, double precioActual) 
+	public ProductoUnidades(String nombre, String codigoBarras, String tipoRefrigerado, double precio_publico_unidad, String precio_publico_unidad_medida) 
 	{
-		super(nombre, codigoBarras, tipoRefrigerado, precioActual);
+		super(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad, precio_publico_unidad_medida);
 	}
 
 	

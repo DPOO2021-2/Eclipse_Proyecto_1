@@ -24,6 +24,8 @@ import java.util.Date;
 
 public class Inventario 
 {
+	
+	//llave, valor = string codigoBarras, objeto producto
 	private HashMap<String, Producto> productos;
 	
 	public Inventario()
@@ -67,39 +69,40 @@ public class Inventario
 		return precioProd;
 	}
 	
-	public void registrarProducto(String codigoBarras_lote, double cantidadOriginal, Date fecha_vencimiento,
-			double costoTotal, double precio_publico_unidad, String precio_publico_unidad_medida, String nombre,
+	public Producto registrarProducto(String codigoBarras, double precio_publico_unidad, String precio_publico_unidad_medida, String nombre,
 			String categoria, String tipoRefrigerado, String empaque) 
 	 
 	{
-		String[] codigos =  codigoBarras_lote.split("-");
-		String codigoBarras = codigos[0];
-		String codigoLote = codigos[1];
+		
 		
 		Producto producto = null;
 		
 		if (productoRegistrado(codigoBarras))
 		{
 			producto = getProducto(codigoBarras);
+			producto.actualizarPrecio(precio_publico_unidad, precio_publico_unidad_medida);
 			
 		}
 		else
 		{
 			if (empaque.toLowerCase().equals("kilos"))
 			{
-				producto = new ProductoKilos(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad);
+				producto = new ProductoKilos(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad, precio_publico_unidad_medida);
 				
 			}
 			else if(empaque.toLowerCase().equals("unidades"))
 			{
-				producto = new ProductoUnidades(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad);
+				producto = new ProductoUnidades(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad, precio_publico_unidad_medida);
 				
 			}
 			guardarProducto(codigoBarras, producto);
 		}
+		if(!(categoria.equals("null"))) 
+		{
+			producto.agregarCategoria(categoria);
+		}
 		
-		producto.agregarCategoria(categoria);
-		registrarLote(producto, codigoLote, cantidadOriginal, fecha_vencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
+		return producto;
 		
 	}
 	
@@ -141,11 +144,16 @@ public class Inventario
 				
 				//System.out.println("estoy leyendo linea de csv");
 				
+				String[] codigos =  codigoBarras_lote.split("-");
+				String codigoBarras = codigos[0];
+				String codigoLote = codigos[1];
+				
 				
 				//aqui debo llamar al metodo registrarProducto( con toda la info de la linea)
-				registrarProducto(codigoBarras_lote, cantidadOriginal, fecha_vencimiento,
-					 costoTotal, precio_publico_unidad, precio_publico_unidad_medida, nombre,
+				Producto producto = registrarProducto(codigoBarras, precio_publico_unidad, precio_publico_unidad_medida, nombre,
 					 categoria, tipoRefrigerado, empaque);
+				registrarLote(producto, codigoLote, cantidadOriginal, fecha_vencimiento, costoTotal,
+						precio_publico_unidad, precio_publico_unidad_medida);
 				
 				
 				
@@ -200,6 +208,16 @@ public class Inventario
 		Producto producto = getProducto(codigoBarras);
 		
 		return producto.getLote(codigoLote);
+	}
+
+	public void agregarCategoriasProducto(String codigoBarras, String[] categorias) 
+	{
+		Producto producto = getProducto(codigoBarras);
+		for (String categoria: categorias)
+		{
+			producto.agregarCategoria(categoria);
+		}
+		
 	}
 
 

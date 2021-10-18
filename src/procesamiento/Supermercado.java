@@ -257,14 +257,55 @@ public class Supermercado
 					
 				}
 				}
+				
+				
+				else if("inventario_productos".equals(baseDatos))
+				{
+					
+					
+				while (linea != null) 
+				{	
+					
+					
+					//System.out.println(linea);
+					String[] partes = linea.split(",");
+					
+					String nombre = partes[0];
+					String codigoBarras = partes[1];
+					String[] categorias = partes[2].split("-");
+					String tipoRefrigerado = partes[3];
+					double precioActual = Double.parseDouble(partes[4]);
+					String precioActualMedida = partes[5];
+					double gananciaTotal = Double.parseDouble(partes[6]);
+					String empaque = partes[5];
+					
+					
+					//registrar producto con metodo de registro
+					inventario.registrarProducto(codigoBarras, precioActual, precioActualMedida, nombre,
+							 "null", tipoRefrigerado, empaque);
+					Producto producto = inventario.getProducto(codigoBarras);
+					
+					producto.setGananciaTotal(gananciaTotal);
+					
+					inventario.agregarCategoriasProducto(codigoBarras, categorias);
+					
+					
+					
+					//System.out.println("estoy leyendo linea de csv");
+					
+					
+					
+					
+					linea = br.readLine();
+					
+				}
+				}
 				br.close();
 		}	
 		catch(FileNotFoundException ex)
 		{
 			System.out.println("Archivo no encontrado");
 		}
-			//señalarlo
-			//leerlo
 	
 	}
 	

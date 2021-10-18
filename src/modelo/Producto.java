@@ -19,6 +19,7 @@ public abstract class Producto
 	
 	private String tipoRefrigerado;
 	private double precioActual;
+	private String precioActualMedida;
 	
 	private double gananciaTotal;
 
@@ -27,13 +28,14 @@ public abstract class Producto
 	private LinkedHashMap<String, Lote> lotes;
 	
 	
-	public Producto(String nombre, String codigoBarras, String tipoRefrigerado, double precioActual)
+	public Producto(String nombre, String codigoBarras, String tipoRefrigerado, double precio_publico_unidad, String precio_publico_unidad_medida)
 	{
 		this.nombre = nombre;
 		this.codigoBarras = codigoBarras;
 		this.categorias = new ArrayList<String>();
 		this.tipoRefrigerado = tipoRefrigerado;
-		this.precioActual = precioActual;
+		this.precioActual = precio_publico_unidad;
+		this.precioActualMedida = precio_publico_unidad_medida;
 		this.gananciaTotal = 0;
 		this.lotes = new LinkedHashMap<String, Lote>();
 	}
@@ -149,6 +151,23 @@ public abstract class Producto
 	public Lote getLote(String codigoLote)
 	{
 		return getLotes().get(codigoLote);
+	}
+
+	public void actualizarPrecio(double precio_publico_unidad, String precio_publico_unidad_medida)
+	{
+		setPrecioActual(precio_publico_unidad);
+		setPrecioActualMedida(precio_publico_unidad_medida);
+	}
+
+
+	public  void setPrecioActual(double precio_publico_unidad) 
+	{
+		this.precioActual = precio_publico_unidad;
+	}
+	
+	private void setPrecioActualMedida(String precio_publico_unidad_medida) 
+	{
+		this.precioActualMedida = precio_publico_unidad_medida;
 	}
 	
 	
