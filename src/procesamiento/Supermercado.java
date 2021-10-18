@@ -5,10 +5,13 @@ import java.util.Map;
 import modelo.Cliente;
 import modelo.Compra;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Supermercado 
@@ -20,7 +23,7 @@ public class Supermercado
 	private String nombre;
 	private Date fecha;
 	
-	public Supermercado (String nombre)
+	public Supermercado (String nombre) throws IOException, ParseException
 	{
 		
 		/*nos falta:
@@ -44,9 +47,8 @@ public class Supermercado
 		
 		//aqui se debe ejecutar el metodo de cargar nuestros archivos
 		
-		leerInfoArchivos("inventario");
+		leerInfoArchivos("inventario_lotes");
 		leerInfoArchivos("puntos");
-		leerInfoArchivos("compras");
 		
 	}
 	
@@ -154,9 +156,61 @@ public class Supermercado
 	
 	
 	
-	public void leerInfoArchivos(String baseDatos) 
+	public void leerInfoArchivos(String baseDatos) throws IOException, ParseException 
 	{
 		
+			
+		try 
+		{
+				
+				//leer csv y configurar lectura para leer atributos:
+			
+			
+				BufferedReader br = new BufferedReader(new FileReader("datos/"+baseDatos+".csv"));
+				
+				
+				
+				String linea = br.readLine();
+				linea = br.readLine();
+				
+				if("puntos".equals(baseDatos))
+				{
+				while (linea != null) 
+				{	
+					
+					//System.out.println(linea);
+					String[] partes = linea.split(",");
+					
+					String cedula = partes[0];
+					String nombre = partes[1];
+					double puntos = Double.parseDouble(partes[2]);
+					String sexo = partes[3];
+					int edad = Integer.parseInt(partes[4]);
+					String estadoCivil = partes[5];
+					String situacionLaboral = partes[6];
+					
+					//registrarlo conm metodo de registro
+					registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
+					
+					//darle los puntos
+					
+					getSistemaPuntos().getCliente(cedula).sumarPuntos(puntos);
+					
+					//System.out.println("estoy leyendo linea de csv");
+					
+					
+					
+					
+					linea = br.readLine();
+					
+				}
+				}
+				br.close();
+		}	
+		catch(FileNotFoundException ex)
+		{
+			System.out.println("Archivo no encontrado");
+		}
 			//señalarlo
 			//leerlo
 	

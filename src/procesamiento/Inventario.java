@@ -110,7 +110,7 @@ public class Inventario
 		producto.agregarLote(lote);
 	}
 	
-	public void leerArchivoLotes(String nombreArchivo) throws FileNotFoundException, IOException, ParseException
+	public void leerArchivoLotes(String nombreArchivo) throws IOException, ParseException
 	{try 
 	{
 			
