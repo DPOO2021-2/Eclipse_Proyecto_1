@@ -320,7 +320,6 @@ public class Supermercado
 		SistemaPuntos sistemaPuntos = getSistemaPuntos();
 		
 		FileWriter csvWriter = new FileWriter("archivos/"+baseDatos+".csv");
-		List<List<String>> rows = null;
 		
 		if("puntos".equals(baseDatos))
 		{		
@@ -365,6 +364,60 @@ public class Supermercado
 					csvWriter.append(",");
 					csvWriter.append(situacionLaboral);
 					csvWriter.append("\n");
+				}
+				
+				
+			
+		}
+		else if("inventario_productos".equals(baseDatos))
+		{		
+				csvWriter.append("nombre");
+				csvWriter.append(",");
+				csvWriter.append("codigoBarras");
+				csvWriter.append(",");
+				csvWriter.append("categorias");
+				csvWriter.append(",");
+				csvWriter.append("tipoRefrigerado");
+				csvWriter.append(",");
+				csvWriter.append("precioActual");
+				csvWriter.append(",");
+				csvWriter.append("precioActualMedida");
+				csvWriter.append(",");
+				csvWriter.append("gananciaTotal");
+				csvWriter.append(",");
+				csvWriter.append("empaque");
+				csvWriter.append("\n");
+				
+				for (Producto producto :inventario.getProductos().values())
+				{
+					
+				
+					String nombre = producto.getNombre();
+					String codigoBarras = producto.getCodigoBarras();
+					String categorias = producto.getCategorias().toString();
+					//falta que separe con "-"
+					String tipoRefrigerado = producto.getTipoRefrigerado();
+					String precioActual = producto.getPrecioActual().toString();
+					String precioActualMedida = producto.getPrecioActualMedida();
+					String gananciaTotal = producto.getGananciaTotal().toString();
+					
+					
+					
+					csvWriter.append(nombre);
+					csvWriter.append(",");
+					csvWriter.append(codigoBarras);
+					csvWriter.append(",");
+					csvWriter.append(categorias);
+					csvWriter.append(",");
+					csvWriter.append(tipoRefrigerado);
+					csvWriter.append(",");
+					csvWriter.append(precioActual);
+					csvWriter.append(",");
+					csvWriter.append(precioActualMedida);
+					csvWriter.append(",");
+					csvWriter.append(gananciaTotal);
+					csvWriter.append(",");
+					
 				}
 				
 				
