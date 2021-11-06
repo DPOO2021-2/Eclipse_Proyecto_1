@@ -23,6 +23,8 @@ public class VentanaPOS extends JFrame {
 				try {
 					VentanaPOS frame = new VentanaPOS();
 					frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

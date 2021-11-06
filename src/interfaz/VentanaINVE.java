@@ -28,7 +28,7 @@ public class VentanaINVE extends JFrame {
 			public void run() {
 				try {
 					VentanaINVE frame = new VentanaINVE();
-					frame.setVisible(true);
+					frame.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,7 +66,7 @@ public class VentanaINVE extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		txtEscribaElNombre_1 = new JTextField();
-		txtEscribaElNombre_1.setText("Escriba el nombre del lote");
+		txtEscribaElNombre_1.setText("Escriba el codigo del producto-lote ");
 		contentPane.add(txtEscribaElNombre_1);
 		txtEscribaElNombre_1.setColumns(10);
 		
@@ -75,7 +75,7 @@ public class VentanaINVE extends JFrame {
 		contentPane.add(btnNewButton_2);
 		
 		txtEscribaElNombre_2 = new JTextField();
-		txtEscribaElNombre_2.setText("Escriba el nombre del producto");
+		txtEscribaElNombre_2.setText("Escriba el codigo del producto");
 		contentPane.add(txtEscribaElNombre_2);
 		txtEscribaElNombre_2.setColumns(10);
 		
@@ -84,7 +84,7 @@ public class VentanaINVE extends JFrame {
 		contentPane.add(btnNewButton_3);
 		
 		txtEscribaElNombre_3 = new JTextField();
-		txtEscribaElNombre_3.setText("Escriba el nombre del producto");
+		txtEscribaElNombre_3.setText("Escriba el codigo del producto");
 		contentPane.add(txtEscribaElNombre_3);
 		txtEscribaElNombre_3.setColumns(10);
 		
@@ -93,7 +93,7 @@ public class VentanaINVE extends JFrame {
 		contentPane.add(btnNewButton_4);
 		
 		txtEscribaElNombre_4 = new JTextField();
-		txtEscribaElNombre_4.setText("Escriba el nombre del producto");
+		txtEscribaElNombre_4.setText("Escriba el codigo del producto");
 		contentPane.add(txtEscribaElNombre_4);
 		txtEscribaElNombre_4.setColumns(10);
 	}
