@@ -85,12 +85,12 @@ public class SistemaINVENTARIO
 				
 		if(supermercadoYumbo.registrarLotes(nombreArchivo)) 
 		{
-			System.out.println("\nSe ha guardado el lote");
+			System.out.println("\nSe ha guardado el archivo de lotes");
 		}
 		
 		else
 		{
-			System.out.println("\nNo se ha guardado el lote");
+			System.out.println("\nNo se ha guardado el archivo de lotes");
 		}
 	}
 	

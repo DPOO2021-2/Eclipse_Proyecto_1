@@ -10,14 +10,11 @@ public class Categoria
 	
 	private Collection<String> subcategorias;
 	
-	public static HashMap<String, Categoria> categorias;
+	public static HashMap<String, Categoria> categorias = new HashMap<String, Categoria>();
 	
 	public Categoria(String nombre)
 	{
-		if(categorias.equals(null))
-		{
-			categorias = new HashMap<String, Categoria>();
-		}
+		
 		
 		this.nombre = nombre;
 		this.subcategorias = new ArrayList<String>();

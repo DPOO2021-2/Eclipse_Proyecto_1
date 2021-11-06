@@ -448,6 +448,8 @@ public class Supermercado
 					String precioActual = producto.getPrecioActual().toString();
 					String precioActualMedida = producto.getPrecioActualMedida();
 					String gananciaTotal = producto.getGananciaTotal().toString();
+					String empaque;
+					System.out.println(producto.getClass().toString());
 					
 					
 					
@@ -464,7 +466,9 @@ public class Supermercado
 					csvWriter.append(precioActualMedida);
 					csvWriter.append(",");
 					csvWriter.append(gananciaTotal);
-					csvWriter.append(",");
+			//		csvWriter.append(",");
+			//		csvWriter.append(empaque);
+					
 					csvWriter.append("\n");
 					
 				}

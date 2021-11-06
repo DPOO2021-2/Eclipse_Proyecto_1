@@ -97,7 +97,7 @@ public class Inventario
 			}
 			guardarProducto(codigoBarras, producto);
 		}
-		if(!(categorias.equals(null))) 
+		if(!(categorias==null)) 
 		{
 			producto.agregarCategorias(categorias);
 		}
