@@ -34,15 +34,49 @@ public class Compra {
 		return this.costoFinal;
 	}
 	
+	public Cliente getCliente() 
+	{
+		return cliente;
+	}
+
+
+
+	public Map<String, Double> getProductos() 
+	{
+		return productos;
+	}
+
+
+
+	public Double getPuntos() 
+	{
+		return puntos;
+	}
+
+
+
 	public String generarfactura()
 	{
 		String factura = "";
 		for (String codigoBarras:  productos.keySet())
 		{
-			factura = factura + codigoBarras + ": " + 
-			productos.get(codigoBarras).toString() + ", ";
+			factura = factura + codigoBarras + ":" + 
+			productos.get(codigoBarras).toString() + ",";
 		}
 		factura = factura + " costo total: "+ getCostoFinal().toString();
+		return factura;
+	}
+	
+	
+	public String facturaResumida_CSV()
+	{
+		String factura = "";
+		for (String codigoBarras:  productos.keySet())
+		{
+			factura = factura + codigoBarras + ":" + 
+			productos.get(codigoBarras).toString() + "-";
+		}
+
 		return factura;
 	}
 

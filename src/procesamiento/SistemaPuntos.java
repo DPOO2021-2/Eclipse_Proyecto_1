@@ -12,11 +12,21 @@ public class SistemaPuntos
 	//llave, valor = cedula del cliente, clienteRegistrado
 	private HashMap<String, ClienteRegistrado> clientes;
 	
+	
+	public SistemaPuntos()
+	{
+		this.clientes = new HashMap<String, ClienteRegistrado>();
+	}
+	
 	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
 	{
 		ClienteRegistrado cliente = new ClienteRegistrado(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
 		
-		if(clientes.containsKey(cedula))
+		
+//		if(clienteRegistrado(cedula))
+//dejar asi para que siempre registre (si ya estaba registrado lo sobreescribe)
+//osea ya no hace lo que dice el comentario de Supermercado.java linea 87
+		if(false)
 		{
 			return false;
 		}
@@ -25,6 +35,7 @@ public class SistemaPuntos
 			clientes.put(cedula, cliente);
 			return true;
 		}
+		
 	}
 	
 	public ClienteRegistrado getCliente(String cedula) 
@@ -65,6 +76,11 @@ public class SistemaPuntos
 	public HashMap<String, ClienteRegistrado> getClientes()
 	{
 		return this.clientes;
+	}
+
+	public boolean vacio() 
+	{
+		return this.clientes.isEmpty();
 	}
 	
 	

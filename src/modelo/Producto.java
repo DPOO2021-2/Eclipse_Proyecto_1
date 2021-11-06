@@ -15,7 +15,7 @@ public abstract class Producto
 	private String nombre;
 	private String codigoBarras;
 	
-	private ArrayList<String> categorias;
+	private ArrayList<Categoria> categorias;
 	
 	private String tipoRefrigerado;
 	private double precioActual;
@@ -32,7 +32,7 @@ public abstract class Producto
 	{
 		this.nombre = nombre;
 		this.codigoBarras = codigoBarras;
-		this.categorias = new ArrayList<String>();
+		this.categorias = new ArrayList<Categoria>();
 		this.tipoRefrigerado = tipoRefrigerado;
 		this.precioActual = precio_publico_unidad;
 		this.precioActualMedida = precio_publico_unidad_medida;
@@ -54,7 +54,7 @@ public abstract class Producto
 		double costoTotal = 0;
 		for (Lote lote: getLotes().values())
 		{
-			costoTotal = costoTotal + lote.getCostoLote();
+			costoTotal = costoTotal + lote.getCostoTotal();
 		}
 		return costoTotal;
 	}
@@ -109,18 +109,44 @@ public abstract class Producto
 	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
 	abstract public double comprarProducto(double cantidad);
 
-	public void agregarCategoria(String categoria)
+	
+
+	
+	public void agregarCategorias(String[] categorias_nuevas)
 	{
-		ArrayList<String> categorias = getCategorias();
-		
-		if(!(categorias.contains(categoria)))
+		int cantidad = categorias_nuevas.length;
+		ArrayList<Categoria> categorias_p = getCategorias();
+		if(cantidad > 0)
 		{
-			categorias.add(categoria);
+			categorias_p.removeAll(categorias_p);
+		
+		
+			for (int i=0; i< cantidad; i = i + 1)
+			{
+				Categoria cate;
+				String cateS = categorias_nuevas[i];
+				if (!(Categoria.categorias.containsKey(cateS)))
+				{
+					cate = new Categoria(cateS);
+					
+				}
+				else
+				{
+					cate = Categoria.categorias.get(cateS);
+				}
+				if(i+1<cantidad)
+				{
+					cate.agregarSubcategoria(categorias_nuevas[i+1]);
+				}
+				categorias_p.add(cate);
+				
+			}
+		
 		}
 		
 	}
 
-	public ArrayList<String> getCategorias()
+	public ArrayList<Categoria> getCategorias()
 	{
 		return this.categorias;
 	}
@@ -170,14 +196,60 @@ public abstract class Producto
 		this.precioActualMedida = precio_publico_unidad_medida;
 	}
 
-	public String getTipoRefrigerado() {
+	public String getTipoRefrigerado() 
+	{
 		// TODO Auto-generated method stub
 		return this.tipoRefrigerado;
 	}
 
-	public String getPrecioActualMedida() {
+	public String getPrecioActualMedida() 
+	{
 		// TODO Auto-generated method stub
 		return this.precioActualMedida;
+	}
+
+	public String getStringCategorias() 
+	{
+		String str = "";
+		for (Categoria c: getCategorias())
+		{
+			str = str + "-" + c.getNombre();
+		}
+		
+		return str;
+	}
+	
+	public boolean perteneceACategoria(String categoriaS)
+	{
+		
+		boolean categoriaExiste = Categoria.categorias.containsKey(categoriaS);
+		
+		boolean resultado = false;
+		
+		if(categoriaExiste)
+		{
+			Categoria categoria = Categoria.categorias.get(categoriaS);
+
+			ArrayList<Categoria> categorias_p = getCategorias();
+			int cantidad = categorias_p.size();
+			int i = 0;
+			
+			
+			resultado = categorias_p.contains(categoria);
+			
+			while( (!resultado) && (i<cantidad) )
+			{
+				
+				resultado = resultado || categoria.getSubcategorias().contains(categorias_p.get(i).getNombre());
+				
+				i = i + 1;
+			}
+			
+		}
+		
+		return resultado;
+		
+		
 	}
 	
 	

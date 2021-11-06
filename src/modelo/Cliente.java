@@ -19,5 +19,18 @@ public class Cliente {
 	{
 	}
 
+	public String getNombre() 
+	{
+		return this.nombre;
+	}
+
+	public String getCedula() 
+	{
+		return this.cedula;
+	}
+	
+	
+	
+
 }
 

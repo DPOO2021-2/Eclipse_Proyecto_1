@@ -66,10 +66,7 @@ public class Lote
 		 */
 		
 		
-		public double getCostoLote() 
-		{
-			return this.costoTotal;
-		}
+		
 		
 		
 		public double restarCantidad(double cantidad)
@@ -111,49 +108,52 @@ public class Lote
 			this.fechaLote = fecha;
 		}
 		
-		public double getCantidadOriginal() {
+		public Double getCantidadOriginal() 
+		{
 			return cantidadOriginal;
 		}
 
 
 
 
-		public Date getFechaVencimiento() {
+		public Date getFechaVencimiento() 
+		{
 			return fechaVencimiento;
 		}
 
 
 
 
-		public double getCostoTotal() {
+		public Double getCostoTotal() 
+		{
 			return costoTotal;
 		}
 
 
 
 
-		public double getPrecio_publico_unidad() {
+		public Double getPrecio_publico_unidad() 
+		{
 			return precio_publico_unidad;
 		}
 
 
 
 
-		public String getPrecio_publico_unidad_medida() {
+		public String getPrecio_publico_unidad_medida() 
+		{
 			return precio_publico_unidad_medida;
 		}
 
 
 
 
-		public Date getFechaLote() {
-			return fechaLote;
-		}
+		
 
 
 
 
-		public double getCantidadActual()
+		public Double getCantidadActual()
 		{
 			return this.cantidadActual;
 		}

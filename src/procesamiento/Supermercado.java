@@ -16,8 +16,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class Supermercado 
@@ -37,14 +39,7 @@ public class Supermercado
 		 * 
 		 * 1. req UsuarioInventario: input:producto(codigoBarras) Output: los codigos lotes que hay con sus cantidades actuales
 		 * 
-		 *  
 		 * 
-		 * 
-		 * 3. actualizar diagramas
-		 * 
-		 * 4.  Hacer archivos: guardar: todos,
-		 * 
-		 * 5. organizar entrega
 		 * 
 		 */
 		this.nombre = nombre;
@@ -59,6 +54,7 @@ public class Supermercado
 		leerInfoArchivos("inventario_productos");
 		leerInfoArchivos("inventario_lotes");
 		leerInfoArchivos("puntos");
+		leerInfoArchivos("compras");
 		
 	}
 	
@@ -152,13 +148,16 @@ public class Supermercado
 			Compra compra = new Compra(precioTotalCompra, cliente, 
 					productosyCantidades,  puntosCompra);
 			
-			registroCompras.guadarCompra(compra);
+			registroCompras.guadarCompra(cedula, compra);
 			
 			String factura = compra.generarfactura();
 			
 			return factura;
 		}
-		else { return "Las cantidades de estos productos no estaban disponibles";}
+		else 
+		{ 
+			return "no";
+		}
 	}
 	
 	
@@ -180,10 +179,13 @@ public class Supermercado
 		{
 				Inventario inventario = getInventario();
 				SistemaPuntos sistemaPuntos = getSistemaPuntos();
+
+				RegistroCompras registroCompras = getRegistroCompras();
+				
 				//leer csv y configurar lectura para leer atributos:
 				
 			
-				BufferedReader br = new BufferedReader(new FileReader("datos/"+baseDatos+".csv"));
+				BufferedReader br = new BufferedReader(new FileReader("archivos/"+baseDatos+".csv"));
 				
 				
 				
@@ -200,11 +202,12 @@ public class Supermercado
 					
 					String cedula = partes[0];
 					String nombre = partes[1];
-					double puntos = Double.parseDouble(partes[2]);
-					String sexo = partes[3];
-					int edad = Integer.parseInt(partes[4]);
-					String estadoCivil = partes[5];
-					String situacionLaboral = partes[6];
+//					double puntos = Double.parseDouble(partes[2]);
+					double puntos = 0;
+					String sexo = partes[2];
+					int edad = Integer.parseInt(partes[3]);
+					String estadoCivil = partes[4];
+					String situacionLaboral = partes[5];
 					
 					//registrarlo conm metodo de registro
 					registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
@@ -213,7 +216,7 @@ public class Supermercado
 					
 					sistemaPuntos.getCliente(cedula).sumarPuntos(puntos);
 					
-					//System.out.println("estoy leyendo linea de csv");
+//					System.out.println("acabo de registrar cliente");
 					
 					
 					
@@ -287,7 +290,7 @@ public class Supermercado
 					
 					//registrar producto con metodo de registro
 					inventario.registrarProducto(codigoBarras, precioActual, precioActualMedida, nombre,
-							 "null", tipoRefrigerado, empaque);
+							 null, tipoRefrigerado, empaque);
 					Producto producto = inventario.getProducto(codigoBarras);
 					
 					producto.setGananciaTotal(gananciaTotal);
@@ -305,6 +308,46 @@ public class Supermercado
 					
 				}
 				}
+				else if("compras".equals(baseDatos))
+				{
+					
+					
+					
+				while (linea != null) 
+				{	
+					
+					
+					//System.out.println(linea);
+					String[] partes = linea.split(",");
+					
+					double precioTotalCompra = Double.parseDouble(partes[0]);
+					String cedulaCliente = partes[1];
+					String nombreCliente = partes[2];
+					String[] productos = partes[3].split("-");
+					
+					Map<String, Double> productosyCantidades = new HashMap<String, Double>();
+					for (String str: productos)
+					{
+						String[] pareja = str.split(":");
+						productosyCantidades.put(pareja[0], Double.parseDouble(pareja[1]));
+					}
+					
+					double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
+					Cliente cliente = sistemaPuntos.registrarPuntos(cedulaCliente, nombreCliente, puntosCompra);
+					
+					Compra compra = new Compra(precioTotalCompra, cliente, 
+							productosyCantidades,  puntosCompra);
+					
+					registroCompras.guadarCompra(cedulaCliente, compra);
+					
+					
+					
+					
+					linea = br.readLine();
+					
+				}
+				
+				}
 				br.close();
 		}	
 		catch(FileNotFoundException ex)
@@ -318,17 +361,20 @@ public class Supermercado
 	{
 		Inventario inventario = getInventario();
 		SistemaPuntos sistemaPuntos = getSistemaPuntos();
+		RegistroCompras registroCompras = getRegistroCompras();
 		
 		FileWriter csvWriter = new FileWriter("archivos/"+baseDatos+".csv");
 		
-		if("puntos".equals(baseDatos))
+		if("puntos".equals(baseDatos) && (!sistemaPuntos.vacio()))
 		{		
 				csvWriter.append("cedula");
 				csvWriter.append(",");
 				csvWriter.append("nombre");
 				csvWriter.append(",");
+				/*
 				csvWriter.append("puntos");
 				csvWriter.append(",");
+				*/
 				csvWriter.append("sexo");
 				csvWriter.append(",");
 				csvWriter.append("edad");
@@ -343,7 +389,7 @@ public class Supermercado
 					
 					String cedula = cliente.getCedula();
 					String nombre = cliente.getNombre();
-					String puntos = cliente.getPuntos().toString();
+	//				String puntos = cliente.getPuntos().toString();
 					String sexo = cliente.getSexo();
 					String edad = cliente.getEdad().toString();
 					String estadoCivil = cliente.getEstadoCivil();
@@ -354,8 +400,10 @@ public class Supermercado
 					csvWriter.append(",");
 					csvWriter.append(nombre);
 					csvWriter.append(",");
+					/*
 					csvWriter.append(puntos);
 					csvWriter.append(",");
+					*/
 					csvWriter.append(sexo);
 					csvWriter.append(",");
 					csvWriter.append(edad);
@@ -369,7 +417,7 @@ public class Supermercado
 				
 			
 		}
-		else if("inventario_productos".equals(baseDatos))
+		else if("inventario_productos".equals(baseDatos) && (!inventario.vacio()))
 		{		
 				csvWriter.append("nombre");
 				csvWriter.append(",");
@@ -394,8 +442,8 @@ public class Supermercado
 				
 					String nombre = producto.getNombre();
 					String codigoBarras = producto.getCodigoBarras();
-					String categorias = producto.getCategorias().toString();
-					//falta que separe con "-"
+					String categorias = producto.getStringCategorias();
+					
 					String tipoRefrigerado = producto.getTipoRefrigerado();
 					String precioActual = producto.getPrecioActual().toString();
 					String precioActualMedida = producto.getPrecioActualMedida();
@@ -417,13 +465,119 @@ public class Supermercado
 					csvWriter.append(",");
 					csvWriter.append(gananciaTotal);
 					csvWriter.append(",");
+					csvWriter.append("\n");
 					
 				}
 				
 				
 			
 		}
-		
+		else if("inventario_lotes".equals(baseDatos) && (!inventario.vacio()))
+		{		
+				csvWriter.append("cantidadOriginal");
+				csvWriter.append(",");
+				csvWriter.append("cantidadActual");
+				csvWriter.append(",");
+				csvWriter.append("FechaVencimiento");
+				csvWriter.append(",");
+				csvWriter.append("costoTotal");
+				csvWriter.append(",");
+				csvWriter.append("precio_publico_unidad");
+				csvWriter.append(",");
+				csvWriter.append("precio_publico_unidad_medida");
+				csvWriter.append(",");
+				csvWriter.append("fechaLote");
+				csvWriter.append(",");
+				csvWriter.append("codigo");
+				csvWriter.append(",");
+				csvWriter.append("codigoProducto");
+				csvWriter.append("\n");
+				
+				for (Producto producto :inventario.getProductos().values())
+				{
+					
+				
+					for (Lote lote: producto.getLotes().values())
+					{
+						String cantidadOriginal = lote.getCantidadOriginal().toString();
+						String cantidadActual = lote.getCantidadActual().toString();
+						
+						String FechaVencimiento = lote.getFechaVencimiento().toString();
+						String costoTotal = lote.getCostoTotal().toString();
+						String precio_publico_unidad = lote.getPrecio_publico_unidad().toString();
+						String precio_publico_unidad_medida = lote.getPrecio_publico_unidad_medida();
+						String fechaLote = lote.getFecha().toString();
+						String codigo = lote.getCodigo();
+						String codigoProducto = producto.getCodigoBarras();
+						
+						
+						
+						csvWriter.append(cantidadOriginal);
+						csvWriter.append(",");
+						csvWriter.append(cantidadActual);
+						csvWriter.append(",");
+						csvWriter.append(FechaVencimiento);
+						csvWriter.append(",");
+						csvWriter.append(costoTotal);
+						csvWriter.append(",");
+						csvWriter.append(precio_publico_unidad);
+						csvWriter.append(",");
+						csvWriter.append(precio_publico_unidad_medida);
+						csvWriter.append(",");
+						csvWriter.append(fechaLote);
+						csvWriter.append(",");
+						csvWriter.append(codigo);
+						csvWriter.append(",");
+						csvWriter.append(codigoProducto);
+						csvWriter.append("\n");
+					}
+					
+				}
+				
+				
+			
+		}
+		else if("compras".equals(baseDatos) && (!registroCompras.vacio()) )
+		{
+			
+				csvWriter.append("costoFinal");
+				csvWriter.append(",");
+				csvWriter.append("cedulaCliente");
+				csvWriter.append(",");
+				csvWriter.append("nombreCliente");
+				csvWriter.append(",");
+				csvWriter.append("productos");
+				csvWriter.append("\n");
+				
+				for (ArrayList<Compra> lista: registroCompras.getCompras().values())
+				{	
+					for (Compra compra: lista)
+					{
+						String costoFinal = compra.getCostoFinal().toString();
+						
+						Cliente cliente = compra.getCliente();
+						
+						String cedulaCliente = cliente.getCedula();
+						String nombreCliente = cliente.getNombre();
+						
+						String productos = compra.facturaResumida_CSV();
+
+						csvWriter.append(costoFinal);
+						csvWriter.append(",");
+						csvWriter.append(cedulaCliente);
+						csvWriter.append(",");
+						csvWriter.append(nombreCliente);
+						csvWriter.append(",");
+						csvWriter.append(productos);
+						csvWriter.append("\n");
+					}
+					
+				}	
+				
+				
+				
+			
+		}
 		
 			
 

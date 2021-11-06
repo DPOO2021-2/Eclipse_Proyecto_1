@@ -13,15 +13,18 @@ public class ClienteRegistrado extends Cliente
 	private String situacionLaboral;
 	
 	
-	public String getNombre() {
+	public String getNombre() 
+	{
 		return nombre;
 	}
 
-	public String getCedula() {
+	public String getCedula() 
+	{
 		return cedula;
 	}
 
-	public String getSexo() {
+	public String getSexo() 
+	{
 		return sexo;
 	}
 
@@ -43,6 +46,8 @@ public class ClienteRegistrado extends Cliente
 	public ClienteRegistrado(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
 	{
 		super(nombre, cedula, 0);
+		this.cedula = cedula;
+		this.nombre = nombre;
 		this.sexo = sexo;
 		this.edad = edad;
 		this.estadoCivil = estadoCivil;

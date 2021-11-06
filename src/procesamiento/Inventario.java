@@ -70,7 +70,7 @@ public class Inventario
 	}
 	
 	public Producto registrarProducto(String codigoBarras, double precio_publico_unidad, String precio_publico_unidad_medida, String nombre,
-			String categoria, String tipoRefrigerado, String empaque) 
+			String[] categorias, String tipoRefrigerado, String empaque) 
 	 
 	{
 		
@@ -97,9 +97,9 @@ public class Inventario
 			}
 			guardarProducto(codigoBarras, producto);
 		}
-		if(!(categoria.equals("null"))) 
+		if(!(categorias.equals(null))) 
 		{
-			producto.agregarCategoria(categoria);
+			producto.agregarCategorias(categorias);
 		}
 		
 		return producto;
@@ -138,7 +138,7 @@ public class Inventario
 				double precio_publico_unidad = Double.parseDouble(partes[3]);
 				String precio_publico_unidad_medida = partes[4];
 				String nombre = partes[5];
-				String categoria = partes[7];
+				String[] categorias = partes[7].split("-");
 				String tipoRefrigerado = partes[8];
 				String empaque = partes[9];
 				
@@ -151,7 +151,7 @@ public class Inventario
 				
 				//aqui debo llamar al metodo registrarProducto( con toda la info de la linea)
 				Producto producto = registrarProducto(codigoBarras, precio_publico_unidad, precio_publico_unidad_medida, nombre,
-					 categoria, tipoRefrigerado, empaque);
+					 categorias, tipoRefrigerado, empaque);
 				registrarLote(producto, codigoLote, cantidadOriginal, fecha_vencimiento, costoTotal,
 						precio_publico_unidad, precio_publico_unidad_medida);
 				
@@ -210,19 +210,23 @@ public class Inventario
 		return producto.getLote(codigoLote);
 	}
 
+	
+	
 	public void agregarCategoriasProducto(String codigoBarras, String[] categorias) 
 	{
 		Producto producto = getProducto(codigoBarras);
-		for (String categoria: categorias)
-		{
-			producto.agregarCategoria(categoria);
-		}
+		producto.agregarCategorias(categorias);
 		
 	}
 
 	public Map<String, Producto> getProductos() {
 		// TODO Auto-generated method stub
 		return this.productos;
+	}
+
+	public boolean vacio() 
+	{
+		return this.productos.isEmpty();
 	}
 	
 

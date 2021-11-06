@@ -33,7 +33,7 @@ public class SistemaPOS {
 		
 		int edad = Integer.parseInt(input("Por favor escriba la edad del cliente"));
 		
-		String estado_civil = input("Por favor escriba el estado laboral del cliente");
+		String estado_civil = input("Por favor escriba el estado civil del cliente");
 		
 		String situacion_laboral = input("Por favor escriba la situacion laboral del cliente");
 		
@@ -89,8 +89,12 @@ public class SistemaPOS {
 		}
 	}
 	
-	public void salir() 
+	public void salir() throws IOException 
 	{
+		supermercadoYumbo.actualizarArchivos("puntos");
+		supermercadoYumbo.actualizarArchivos("inventario_productos");
+		supermercadoYumbo.actualizarArchivos("inventario_lotes");
+		supermercadoYumbo.actualizarArchivos("compras");
 		
 	}
 	

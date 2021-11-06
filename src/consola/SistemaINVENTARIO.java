@@ -155,6 +155,9 @@ public class SistemaINVENTARIO
 	{
 		supermercadoYumbo.actualizarArchivos("puntos");
 		supermercadoYumbo.actualizarArchivos("inventario_productos");
+		supermercadoYumbo.actualizarArchivos("inventario_lotes");
+		supermercadoYumbo.actualizarArchivos("compras");
+		
 	}
 	
 	
