@@ -3,27 +3,40 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
 
-public class VentanaINVE extends JFrame {
+//import procesamiento.Supermercado;
+
+public class VentanaINVE extends JFrame implements ActionListener
+{
 	private JPanel contentPane;
 	private JTextField txtEscribaElNombre;
 	private JTextField txtEscribaElNombre_1;
 	private JTextField txtEscribaElNombre_2;
 	private JTextField txtEscribaElNombre_3;
 	private JTextField txtEscribaElNombre_4;
+	
+	
+	//private Supermercado superM;
+	private VentanaIMAGEN vImagen;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -36,10 +49,14 @@ public class VentanaINVE extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public VentanaINVE() {
+	public VentanaINVE() throws IOException, ParseException 
+	{
+		//superM = new Supermercado("");
+		
+		vImagen = new VentanaIMAGEN();
+		
+		
+		
 		setBackground(new Color(255, 255, 255));
 		setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
 		setTitle("Sistema INVENTARIO");
@@ -52,16 +69,22 @@ public class VentanaINVE extends JFrame {
 		contentPane.setLayout(new GridLayout(5, 2, 0, 0));
 		
 		JButton btnNewButton = new JButton("Registrar Archivos Lotes");
+		btnNewButton.setActionCommand("registrar_archivo");
+		btnNewButton.addActionListener(this);
 		btnNewButton.setBackground(Color.ORANGE);
 		contentPane.add(btnNewButton);
 		
 		txtEscribaElNombre = new JTextField();
 		txtEscribaElNombre.setBackground(Color.WHITE);
 		txtEscribaElNombre.setText("Escriba el nombre del archivo de los lotes");
+		txtEscribaElNombre.setActionCommand("registrar_archivoR");
+		txtEscribaElNombre.addActionListener(this);
 		contentPane.add(txtEscribaElNombre);
 		txtEscribaElNombre.setColumns(10);
 		
 		JButton btnNewButton_1 = new JButton("Eliminar Lote");
+		btnNewButton_1.setActionCommand("eliminar_lote");
+		btnNewButton_1.addActionListener(this);
 		btnNewButton_1.setBackground(Color.ORANGE);
 		contentPane.add(btnNewButton_1);
 		
@@ -97,5 +120,28 @@ public class VentanaINVE extends JFrame {
 		contentPane.add(txtEscribaElNombre_4);
 		txtEscribaElNombre_4.setColumns(10);
 	}
-
+	
+	public void actionPerformed(ActionEvent e) 
+	{
+		// TODO Auto-generated method stub
+		String comando = e.getActionCommand();
+		if("registrar_archivo".equals(comando))
+		{
+			if (txtEscribaElNombre.g == null)
+			{
+				JOptionPane.showMessageDialog(this, "Debes escribir primero el nombre del archivo.","Error",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			else;
+			{
+				JOptionPane.showMessageDialog(this, "¡Se ha guardado el archivo!","Archivos",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		else if("eliminar_lote".equals(comando))
+		{
+			JOptionPane.showMessageDialog(this, "¡Se ha eliminado el lote!","Lotes",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
 }
