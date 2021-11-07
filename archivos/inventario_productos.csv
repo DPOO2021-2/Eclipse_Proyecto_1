@@ -1,10 +1,10 @@
 nombre,codigoBarras,categorias,tipoRefrigerado,precioActual,precioActualMedida,gananciaTotal,empaque
-Leche Entera Colanta x 1100ml x 6u,100000,-Lacteos-leches,refrigeracion,20000.0,3.3/ml,0.0,
-Queso Campesino Doña Leche x 500g,100001,-Lacteos-quesos,refrigeracion,14000.0,28/g,0.0,
-Queso Holandes Doña Leche x 500g,100002,-Lacteos-quesos,refrigeracion,13000.0,26/g,0.0,
-Arroz Diana x 1kg,100003,-Despensa,null,3000.0,3/g,0.0,
-Arroz Diana Premium x 1kg,100004,-Despensa,null,5700.0,5.7/g,0.0,
-Arveja Verde Cuisine x 500g,100005,-Despensa,null,1750.0,3.5/g,0.0,
-Cerveza Andina Lata x 6 x 270ml,100006,-Vinos y licores-cerveza,refrigeracion,13000.0,8.02/ml,0.0,
-Cerveza Heineken Lata x6 x 350ml,100007,-Vinos y licores,refrigeracion,12000.0,5.7/ml,0.0,
-Crema Dental Colgate 150ml,100008,-Higiene-Aseo Personal,null,7900.0,52.56/ml,0.0,
+Leche Entera Colanta x 1100ml x 6u,100000,--#NAME?,refrigeracion,20000.0,3.3/ml,0.0,Unidades
+Queso Campesino Doña Leche x 500g,100001,--#NAME?,refrigeracion,14000.0,28/g,0.0,Unidades
+Queso Holandes Doña Leche x 500g,100002,--#NAME?,refrigeracion,13000.0,26/g,0.0,Unidades
+Arroz Diana x 1kg,100003,--#NAME?,null,3000.0,3/g,0.0,Unidades
+Arroz Diana Premium x 1kg,100004,--#NAME?,null,5700.0,5.7/g,0.0,Unidades
+Arveja Verde Cuisine x 500g,100005,--#NAME?,null,1750.0,3.5/g,0.0,Unidades
+Cerveza Andina Lata x 6 x 270ml,100006,--#NAME?,refrigeracion,13000.0,8.02/ml,0.0,Unidades
+Cerveza Heineken Lata x6 x 350ml,100007,--#NAME?,refrigeracion,12000.0,5.7/ml,0.0,Unidades
+Crema Dental Colgate 150ml,100008,--#NAME?,null,7900.0,52.56/ml,0.0,Unidades

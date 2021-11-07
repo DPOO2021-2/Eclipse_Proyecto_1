@@ -8,6 +8,8 @@ import modelo.Compra;
 import modelo.Lote;
 import modelo.Producto;
 
+import modelo.TransformadorFechas;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +23,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 
 public class Supermercado 
 {
@@ -45,6 +48,8 @@ public class Supermercado
 		this.nombre = nombre;
 		this.fecha = new Date();
 		
+		
+		
 		this.inventario = new Inventario();
 		this.registroCompras = new RegistroCompras();
 		this.sistemaPuntos = new SistemaPuntos();
@@ -52,7 +57,7 @@ public class Supermercado
 		//aqui se debe ejecutar el metodo de cargar nuestros archivos
 		
 		leerInfoArchivos("inventario_productos");
-		leerInfoArchivos("inventario_lotes");
+//		leerInfoArchivos("inventario_lotes");
 		leerInfoArchivos("puntos");
 		leerInfoArchivos("compras");
 		
@@ -252,7 +257,6 @@ public class Supermercado
 					inventario.registrarLote(producto, codigo, cantidadOriginal, fechaVencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
 					Lote lote = inventario.getLote(codigoProducto, codigo);
 					
-					
 					//ponerle fecha y cantidad actual
 					lote.setCantidadActual(cantidadActual);
 					lote.setFechaLote(fecha_lote);
@@ -285,13 +289,13 @@ public class Supermercado
 					double precioActual = Double.parseDouble(partes[4]);
 					String precioActualMedida = partes[5];
 					double gananciaTotal = Double.parseDouble(partes[6]);
-					String empaque = partes[5];
+					String empaque = partes[7];
 					
 					
 					//registrar producto con metodo de registro
-					inventario.registrarProducto(codigoBarras, precioActual, precioActualMedida, nombre,
+					Producto producto = inventario.registrarProducto(codigoBarras, precioActual, precioActualMedida, nombre,
 							 null, tipoRefrigerado, empaque);
-					Producto producto = inventario.getProducto(codigoBarras);
+					
 					
 					producto.setGananciaTotal(gananciaTotal);
 					
@@ -448,8 +452,8 @@ public class Supermercado
 					String precioActual = producto.getPrecioActual().toString();
 					String precioActualMedida = producto.getPrecioActualMedida();
 					String gananciaTotal = producto.getGananciaTotal().toString();
-					String empaque;
-					System.out.println(producto.getClass().toString());
+					String empaque = producto.getClass().toString().split("Producto")[1];
+//					System.out.println(empaque);
 					
 					
 					
@@ -466,8 +470,8 @@ public class Supermercado
 					csvWriter.append(precioActualMedida);
 					csvWriter.append(",");
 					csvWriter.append(gananciaTotal);
-			//		csvWriter.append(",");
-			//		csvWriter.append(empaque);
+					csvWriter.append(",");
+					csvWriter.append(empaque);
 					
 					csvWriter.append("\n");
 					
@@ -506,11 +510,11 @@ public class Supermercado
 						String cantidadOriginal = lote.getCantidadOriginal().toString();
 						String cantidadActual = lote.getCantidadActual().toString();
 						
-						String FechaVencimiento = lote.getFechaVencimiento().toString();
+						String FechaVencimiento = TransformadorFechas.fechaTransf(lote.getFechaVencimiento());
 						String costoTotal = lote.getCostoTotal().toString();
 						String precio_publico_unidad = lote.getPrecio_publico_unidad().toString();
 						String precio_publico_unidad_medida = lote.getPrecio_publico_unidad_medida();
-						String fechaLote = lote.getFecha().toString();
+						String fechaLote = TransformadorFechas.fechaTransf(lote.getFecha());
 						String codigo = lote.getCodigo();
 						String codigoProducto = producto.getCodigoBarras();
 						

@@ -17,8 +17,7 @@ import modelo.Producto;
 import modelo.ProductoKilos;
 import modelo.Producto;
 import modelo.ProductoUnidades;
-
-
+import modelo.TransformadorFechas;
 
 import java.util.Date;
 
@@ -85,6 +84,7 @@ public class Inventario
 		}
 		else
 		{
+			//System.out.println(empaque);
 			if (empaque.toLowerCase().equals("kilos"))
 			{
 				producto = new ProductoKilos(nombre, codigoBarras, tipoRefrigerado, precio_publico_unidad, precio_publico_unidad_medida);
@@ -134,6 +134,7 @@ public class Inventario
 				String codigoBarras_lote = partes[6];
 				double cantidadOriginal = Double.parseDouble(partes[0]);
 				Date fecha_vencimiento = formatter.parse(partes[1]);
+//				System.out.println(TransformadorFechas.fechaTransf(fecha_vencimiento).equals(partes[1]));
 				double costoTotal = Double.parseDouble(partes[2]);
 				double precio_publico_unidad = Double.parseDouble(partes[3]);
 				String precio_publico_unidad_medida = partes[4];
