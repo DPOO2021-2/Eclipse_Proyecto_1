@@ -10,9 +10,14 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class VentanaPOS extends JFrame {
-
+public class VentanaPOS extends JFrame 
+{
 	private JPanel contentPane;
+	
+	private VentanaCLIENTE vCliente;
+	private VentanaCOMPRA vCompra;
+
+	
 
 	/**
 	 * Launch the application.
@@ -35,7 +40,11 @@ public class VentanaPOS extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaPOS() {
+	public VentanaPOS() 
+	{
+		vCliente = new VentanaCLIENTE();
+		vCompra = new VentanaCOMPRA();
+		
 		setTitle("Sistema POS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 150);
