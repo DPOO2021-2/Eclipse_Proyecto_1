@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,6 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import procesamiento.CalculadoraFinanzas;
+import procesamiento.Supermercado;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -31,6 +36,8 @@ public class VentanaINVE extends JFrame implements ActionListener
 	
 	//private Supermercado superM;
 	private VentanaIMAGEN vImagen;
+	private Supermercado supermercadoYumbo;
+	private CalculadoraFinanzas calcFinzs;
 
 	/**
 	 * Launch the application.
@@ -54,7 +61,8 @@ public class VentanaINVE extends JFrame implements ActionListener
 		//superM = new Supermercado("");
 		
 		vImagen = new VentanaIMAGEN();
-		
+		this.supermercadoYumbo = new Supermercado("Yumbo");
+		this.calcFinzs = new CalculadoraFinanzas(supermercadoYumbo);
 		
 		
 		setBackground(new Color(255, 255, 255));
@@ -127,16 +135,32 @@ public class VentanaINVE extends JFrame implements ActionListener
 		String comando = e.getActionCommand();
 		if("registrar_archivo".equals(comando))
 		{
-			if (txtEscribaElNombre.g == null)
+			String nombre_archivo = txtEscribaElNombre.getText();
+			
+			
+			try {
+				if(supermercadoYumbo.registrarLotes(nombre_archivo)) 
+				{
+					JOptionPane.showMessageDialog(this, "¡Se ha guardado el archivo!","Archivos",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				else
+				{
+					JOptionPane.showMessageDialog(this, "No se ha encontrado el archivo.","Error",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			} catch (HeadlessException | IOException | ParseException e1) 
 			{
-				JOptionPane.showMessageDialog(this, "Debes escribir primero el nombre del archivo.","Error",
-						JOptionPane.INFORMATION_MESSAGE);
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			else;
-			{
-				JOptionPane.showMessageDialog(this, "¡Se ha guardado el archivo!","Archivos",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
+			
+			
+			
+			
+			
+		
 		}
 		else if("eliminar_lote".equals(comando))
 		{
