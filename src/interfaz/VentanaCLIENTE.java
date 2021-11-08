@@ -6,43 +6,60 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
+
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import procesamiento.Supermercado;
+
 import java.awt.Color;
 
-public class VentanaCLIENTE extends JDialog {
+public class VentanaCLIENTE extends JDialog implements ActionListener
+{
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_5;
 	private JTextField textField_6;
+	
+	private Supermercado supermercadoYumbo;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
+	public void main(String[] args) 
+	{
+		try 
+		{
 			VentanaCLIENTE dialog = new VentanaCLIENTE();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} catch (Exception e) {
+		} catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public VentanaCLIENTE() {
+
+	public VentanaCLIENTE() throws IOException, ParseException 
+	{
+		this.supermercadoYumbo = new Supermercado("Yumbo");
+		
 		setBackground(Color.WHITE);
 		setTitle("Registrar un Cliente");
 		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new GridLayout(7, 2, 0, 0));
+		
 		{
 			JTextPane txtpnIngreseLaCedula = new JTextPane();
 			txtpnIngreseLaCedula.setBackground(Color.LIGHT_GRAY);
@@ -127,17 +144,45 @@ public class VentanaCLIENTE extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setBackground(Color.GREEN);
-				okButton.setActionCommand("OK");
+				okButton.setActionCommand("Ok");
+				okButton.addActionListener(this);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		String comando = e.getActionCommand();
+		
+		if("Ok".equals(comando))
+		{
+			String txtCedula = textField.getText();
+			int txtEdad = Integer.parseInt(textField_1.getText());
+			String txtEstadoCivil = textField_2.getText();
+			String txtNombre = textField_3.getText();
+			String txtSexo = textField_5.getText();
+			String txtSituacionLab = textField_6.getText();
+			
+			
+			if(supermercadoYumbo.registrarCliente(txtNombre, txtCedula, txtSexo, txtEdad, txtEstadoCivil, txtSituacionLab))
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setBackground(Color.RED);
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+					JOptionPane.showMessageDialog(this, "¡Se ha guardado el cliente!","Registro Clientes",
+							JOptionPane.INFORMATION_MESSAGE);
 			}
+			else
+			{
+				JOptionPane.showMessageDialog(this, "¡No se ha guardado el cliente!","Registro Clientes",
+						JOptionPane.INFORMATION_MESSAGE);
+			}		
 		}
 	}
 
+
+	private String setText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
