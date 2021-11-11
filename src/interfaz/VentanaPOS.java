@@ -7,9 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import procesamiento.Supermercado;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -39,10 +44,8 @@ public class VentanaPOS extends JFrame implements ActionListener
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public VentanaPOS() 
+
+	public VentanaPOS() throws IOException, ParseException 
 	{
 		vCliente = new VentanaCLIENTE();
 		vCompra = new VentanaCOMPRA();
