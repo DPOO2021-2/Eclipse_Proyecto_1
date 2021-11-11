@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,19 +39,36 @@ public class Inventario
 	}
 	
 	
-	public double getCostoProducto(String codigoBarras) 
+	public double getCostoProducto(String codigoBarras) throws NullPointerException
 	{
+		try 
+		{
 		Producto producto = getProducto(codigoBarras);
 		double costoTotalProducto = producto.getCostoTotal();
 		return costoTotalProducto;
-		
+		}
+		catch(NullPointerException ne)
+		{
+			throw ne;
+		}
 	}
 	
-	public double getGananciaProducto(String codigoBarras) 
+	public double getGananciaProducto(String codigoBarras) throws NullPointerException
 	{
+		
 		Producto producto = getProducto(codigoBarras);
-		double gananciaTotalProducto = producto.getGananciaTotal();
-		return gananciaTotalProducto;
+		try 
+		{
+			double gananciaTotalProducto = producto.getGananciaTotal();
+			return gananciaTotalProducto;
+		}
+		
+		catch(NullPointerException ne)
+		{
+			throw ne;
+		}
+		
+		
 		
 	}
 	
@@ -172,7 +190,15 @@ public class Inventario
 	public boolean eliminarLote(String codigoBarras, String codigoLote) 
 	{
 		Producto producto = getProducto(codigoBarras);
-		return producto.eliminarLoteVencido(codigoLote);
+		if(producto==null)
+		{
+			return false;
+		}
+		else 
+		{
+			return producto.eliminarLoteVencido(codigoLote);
+		}
+		
 	}
 	
 	
@@ -228,6 +254,26 @@ public class Inventario
 	public boolean vacio() 
 	{
 		return this.productos.isEmpty();
+	}
+
+	public Map<String, Double> lotesYcantidades(String codigoBarras) throws NullPointerException
+	{
+		
+		try
+		{
+			Producto producto = getProducto(codigoBarras);
+			LinkedHashMap<String, Double> resultado = new LinkedHashMap<String, Double>();
+			LinkedHashMap<String, Lote> lotes = producto.getLotes();
+			for (String codigoLote: lotes.keySet())
+			{
+				resultado.put(codigoLote, lotes.get(codigoLote).getCantidadActual());
+			}
+			return resultado;
+		}
+		catch(NullPointerException ne)
+		{
+			throw ne;
+		}
 	}
 	
 

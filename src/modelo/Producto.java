@@ -28,6 +28,11 @@ public abstract class Producto
 	private LinkedHashMap<String, Lote> lotes;
 	
 	
+	
+	
+	private String imagen;
+	
+	
 	public Producto(String nombre, String codigoBarras, String tipoRefrigerado, double precio_publico_unidad, String precio_publico_unidad_medida)
 	{
 		this.nombre = nombre;
@@ -38,6 +43,7 @@ public abstract class Producto
 		this.precioActualMedida = precio_publico_unidad_medida;
 		this.gananciaTotal = 0;
 		this.lotes = new LinkedHashMap<String, Lote>();
+		this.imagen = null;
 	}
 	
 	public Double getPrecioActual()
@@ -250,6 +256,12 @@ public abstract class Producto
 		return resultado;
 		
 		
+	}
+
+	public void setImagen(String nombreImagen) 
+	{
+		
+		this.imagen = nombreImagen;
 	}
 	
 	

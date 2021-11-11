@@ -107,10 +107,32 @@ public class Supermercado
 		return getInventario().eliminarLote(codigoBarras, codigoLote);
 	}
 	
-	public 	Map<String, Double> lotesYcantidades(String codigoBarras)
+	public 	Map<String, Double> lotesYcantidades(String codigoBarras) throws NullPointerException
 	{
-		//falta implementer
-		return null;
+	
+		
+		try
+		{
+			return getInventario().lotesYcantidades(codigoBarras);
+		}
+		catch(NullPointerException ne)
+		{
+			throw ne;
+		}
+	}
+	
+	public boolean setImagenProducto(String codigoBarras, String nombreImagen)
+	{
+		Producto producto = inventario.getProducto(codigoBarras);
+		if (producto==null)
+		{
+			return false;
+		}
+		else
+		{
+			producto.setImagen(nombreImagen);
+			return true;
+		}
 	}
 	
 	

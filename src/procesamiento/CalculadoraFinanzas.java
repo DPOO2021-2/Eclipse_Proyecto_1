@@ -11,17 +11,26 @@ public class CalculadoraFinanzas
 		this.supermercado = supermercado;
 	}
 	
-	public double calcularRendimiento(String codigoBarras) 
+	public Double calcularRendimiento(String codigoBarras) throws NullPointerException
 	{
 		Inventario inventario = getSupermercado().getInventario();
 				
-				
-		double costoProducto = inventario.getCostoProducto(codigoBarras);
-		double gananciaTotalProducto = inventario.getGananciaProducto(codigoBarras);
+		try
+		{
+		Double costoProducto = inventario.getCostoProducto(codigoBarras);
+		Double gananciaTotalProducto = inventario.getGananciaProducto(codigoBarras);
+//		System.out.println("ganancia:"+gananciaTotalProducto.toString());
+//		System.out.println("costo:"+costoProducto.toString());
 		
-		double neto = gananciaTotalProducto - costoProducto;
+		Double neto = gananciaTotalProducto - costoProducto;
 		
 		return neto;
+		}
+		catch(NullPointerException ne)
+		{
+			throw ne;
+		}
+
 	}
 	
 	public Supermercado getSupermercado()

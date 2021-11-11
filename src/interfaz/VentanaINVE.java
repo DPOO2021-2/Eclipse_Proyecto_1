@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -49,7 +50,8 @@ public class VentanaINVE extends JFrame implements ActionListener
 				try {
 					VentanaINVE frame = new VentanaINVE();
 					frame.setVisible(true);					
-				} catch (Exception e) {
+				} catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -60,7 +62,8 @@ public class VentanaINVE extends JFrame implements ActionListener
 	{
 		//superM = new Supermercado("");
 		
-		vImagen = new VentanaIMAGEN();
+		vImagen = new VentanaIMAGEN(this);
+		vImagen.setVisible(false);
 		this.supermercadoYumbo = new Supermercado("Yumbo");
 		this.calcFinzs = new CalculadoraFinanzas(supermercadoYumbo);
 		
@@ -102,6 +105,8 @@ public class VentanaINVE extends JFrame implements ActionListener
 		txtEscribaElNombre_1.setColumns(10);
 		
 		JButton btnNewButton_2 = new JButton("Calcular Rendimiento");
+		btnNewButton_2.setActionCommand("calc_rend");
+		btnNewButton_2.addActionListener(this);
 		btnNewButton_2.setBackground(Color.ORANGE);
 		contentPane.add(btnNewButton_2);
 		
@@ -112,6 +117,8 @@ public class VentanaINVE extends JFrame implements ActionListener
 		
 		JButton btnNewButton_3 = new JButton("Lotes y Cantidades");
 		btnNewButton_3.setBackground(Color.ORANGE);
+		btnNewButton_3.setActionCommand("lotesCantidades");
+		btnNewButton_3.addActionListener(this);
 		contentPane.add(btnNewButton_3);
 		
 		txtEscribaElNombre_3 = new JTextField();
@@ -119,8 +126,10 @@ public class VentanaINVE extends JFrame implements ActionListener
 		contentPane.add(txtEscribaElNombre_3);
 		txtEscribaElNombre_3.setColumns(10);
 		
-		JButton btnNewButton_4 = new JButton("Agregar imagen a un producto");
+		JButton btnNewButton_4 = new JButton("Establecer imagen a un producto");
 		btnNewButton_4.setBackground(Color.ORANGE);
+		btnNewButton_4.setActionCommand("setImagen");
+		btnNewButton_4.addActionListener(this);
 		contentPane.add(btnNewButton_4);
 		
 		txtEscribaElNombre_4 = new JTextField();
@@ -135,37 +144,133 @@ public class VentanaINVE extends JFrame implements ActionListener
 		String comando = e.getActionCommand();
 		if("registrar_archivo".equals(comando))
 		{
-			String nombre_archivo = txtEscribaElNombre.getText();
-			
-			
-			try {
-				if(supermercadoYumbo.registrarLotes(nombre_archivo)) 
-				{
-					JOptionPane.showMessageDialog(this, "¡Se ha guardado el archivo!","Archivos",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-				
-				else
-				{
-					JOptionPane.showMessageDialog(this, "No se ha encontrado el archivo.","Error",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-			} catch (HeadlessException | IOException | ParseException e1) 
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			
-			
-			
-			
+			ejecutarRegistrarArchivo();
 		
 		}
 		else if("eliminar_lote".equals(comando))
 		{
-			JOptionPane.showMessageDialog(this, "¡Se ha eliminado el lote!","Lotes",
-					JOptionPane.INFORMATION_MESSAGE);
+			ejecutarEliminarLote();
+			
 		}
+		else if("calc_rend".equals(comando))
+		{
+			ejecutarCalcularRend();
+			
+		}
+		else if("lotesCantidades".equals(comando))
+		{
+			ejecutarLotesyCant();
+		}
+		else if("setImagen".equals(comando))
+		{
+			vImagen.setVisible(true);
+			
+
+		}
+	}
+
+	public void ejecutarSetImagen(String nombreImagen) 
+	{
+		String codigoproducto = txtEscribaElNombre_4.getText();
+		
+		
+		if(supermercadoYumbo.setImagenProducto(codigoproducto, nombreImagen))
+		{
+			JOptionPane.showMessageDialog(this, "Imagen establecida para el producto: "+ codigoproducto,
+					"Tarea Cumplida", JOptionPane.INFORMATION_MESSAGE, null);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "No se ha encontrado el producto: " + codigoproducto,
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void ejecutarLotesyCant() 
+	{
+		String codigoproducto = txtEscribaElNombre_3.getText();
+		try
+		{
+			Map<String, Double> lyc = supermercadoYumbo.lotesYcantidades(codigoproducto);
+		
+		}
+		catch(NullPointerException ne)
+		{
+			JOptionPane.showMessageDialog(this, "No se ha encontrado el producto: " + codigoproducto,
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void ejecutarCalcularRend() 
+	{
+		String codigoproducto = txtEscribaElNombre_2.getText();
+		try
+		{
+		Double rend = calcFinzs.calcularRendimiento(codigoproducto);
+		String rendStr = rend.toString();
+		JOptionPane.showMessageDialog(this, "Las ganancias netas del producto ||"+codigoproducto+"|| son: "+rendStr,"Finanzas",
+				JOptionPane.INFORMATION_MESSAGE);
+		}
+		catch(NullPointerException ne)
+		{
+			JOptionPane.showMessageDialog(this, "No se ha encontrado el producto: " + codigoproducto,
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void ejecutarEliminarLote() 
+	{
+
+		String codigoproducto_lote = txtEscribaElNombre_1.getText();
+		String[] partes = codigoproducto_lote.split("-");
+		if (partes.length==2)
+		{
+			String codigoBarras = partes[0];
+			String codigoLote = partes[1];
+			if(supermercadoYumbo.eliminarLoteVencido(codigoBarras, codigoLote))
+			{
+				JOptionPane.showMessageDialog(this, "¡Se ha eliminado el lote!","Lotes",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else
+			{
+				JOptionPane.showMessageDialog(this, "No se ha eliminado el lote, puede ser que no exista o no está vencido.","Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "La notación requerida es CODIGOPRODUCTO-CODIGOLOTE","Alerta",
+					JOptionPane.WHEN_IN_FOCUSED_WINDOW);
+		}
+		
+		
+		
+	}
+
+	private void ejecutarRegistrarArchivo() 
+	{
+		String nombre_archivo = txtEscribaElNombre.getText();
+		
+		
+		try {
+			if(supermercadoYumbo.registrarLotes(nombre_archivo)) 
+			{
+				JOptionPane.showMessageDialog(this, "¡Se ha guardado el archivo!","Archivos",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else
+			{
+				JOptionPane.showMessageDialog(this, "No se ha encontrado el archivo.","Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (HeadlessException | IOException | ParseException e1) 
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 }
