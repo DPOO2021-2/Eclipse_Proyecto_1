@@ -60,8 +60,8 @@ public class Compra {
 		String factura = "";
 		for (String codigoBarras:  productos.keySet())
 		{
-			factura = factura + codigoBarras + ":" + 
-			productos.get(codigoBarras).toString() + ",";
+			factura = factura + codigoBarras + ": " + 
+			productos.get(codigoBarras).toString() + ", ";
 		}
 		factura = factura + " costo total: "+ getCostoFinal().toString();
 		return factura;

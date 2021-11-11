@@ -18,22 +18,34 @@ public class SistemaPuntos
 		this.clientes = new HashMap<String, ClienteRegistrado>();
 	}
 	
-	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral) 
+	public boolean registrarCliente(String nombre, String cedula, String sexo, String edad, String estadoCivil, String situacionLaboral)
 	{
-		ClienteRegistrado cliente = new ClienteRegistrado(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
+		
+		try 
+		{
+			
+		int edadInt = Integer.parseInt(edad);
+		ClienteRegistrado cliente = new ClienteRegistrado(nombre, cedula, sexo, edadInt, estadoCivil, situacionLaboral);
 		
 		
 //		if(clienteRegistrado(cedula))
+		
 //dejar asi para que siempre registre (si ya estaba registrado lo sobreescribe)
 //osea ya no hace lo que dice el comentario de Supermercado.java linea 87
-		if(false)
+			if(false)
+			{
+				return false;
+			}
+			else
+			{
+				clientes.put(cedula, cliente);
+				return true;
+			}
+		
+		}
+		catch(NumberFormatException nfe)
 		{
 			return false;
-		}
-		else
-		{
-			clientes.put(cedula, cliente);
-			return true;
 		}
 		
 	}

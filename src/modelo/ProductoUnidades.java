@@ -45,4 +45,15 @@ public class ProductoUnidades extends Producto
 			 
 		 
 	}
+
+
+
+
+	@Override
+	public boolean sePuedeComprar(double cantidad) 
+	{
+		int cantidad_entera = (int) cantidad;
+		
+		return (cantidadTotal() > cantidad_entera) && (cantidad_entera==cantidad);
+	}
 }

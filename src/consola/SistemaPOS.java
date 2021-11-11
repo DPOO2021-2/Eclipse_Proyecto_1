@@ -31,7 +31,7 @@ public class SistemaPOS {
 		
 		String sexo = input("Por favor escriba el sexo del cliente");
 		
-		int edad = Integer.parseInt(input("Por favor escriba la edad del cliente"));
+		String edad = input("Por favor escriba la edad del cliente");
 		
 		String estado_civil = input("Por favor escriba el estado civil del cliente");
 		

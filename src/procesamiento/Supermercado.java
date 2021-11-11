@@ -57,7 +57,7 @@ public class Supermercado
 		//aqui se debe ejecutar el metodo de cargar nuestros archivos
 		
 		leerInfoArchivos("inventario_productos");
-//		leerInfoArchivos("inventario_lotes");
+		leerInfoArchivos("inventario_lotes");
 		leerInfoArchivos("puntos");
 		leerInfoArchivos("compras");
 		
@@ -79,10 +79,15 @@ public class Supermercado
 		return this.registroCompras;
 	}
 	
-	public boolean registrarCliente(String nombre, String cedula, String sexo, int edad, String estadoCivil, String situacionLaboral)
+	public boolean registrarCliente(String nombre, String cedula, String sexo, String edad, String estadoCivil, String situacionLaboral)
 	{
+		
+		
 		return getSistemaPuntos().registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
 		//retorna false si el cliente ya estaba registrado (no lo registra de nuevo)
+		//ignorar el comentario arriba de este
+		
+		
 	}
 	
 	
@@ -232,7 +237,7 @@ public class Supermercado
 //					double puntos = Double.parseDouble(partes[2]);
 					double puntos = 0;
 					String sexo = partes[2];
-					int edad = Integer.parseInt(partes[3]);
+					String edad = partes[3];
 					String estadoCivil = partes[4];
 					String situacionLaboral = partes[5];
 					
@@ -271,7 +276,8 @@ public class Supermercado
 					String precio_publico_unidad_medida = partes[5];
 					Date fecha_lote = formatter.parse(partes[6]);
 					String codigo = partes[7];
-					String codigoProducto = partes[7];
+					String codigoProducto = partes[8];
+					
 					
 					Producto producto = inventario.getProducto(codigoProducto);
 					
@@ -306,7 +312,7 @@ public class Supermercado
 					
 					String nombre = partes[0];
 					String codigoBarras = partes[1];
-					String[] categorias = partes[2].split("-");
+					String[] categorias = partes[2].split("|");
 					String tipoRefrigerado = partes[3];
 					double precioActual = Double.parseDouble(partes[4]);
 					String precioActualMedida = partes[5];

@@ -17,14 +17,17 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Color;
 
 public class VentanaPOS extends JFrame implements ActionListener
 {
 	private JPanel contentPane;
 	
-	private VentanaCLIENTE vCliente;
-	private VentanaCOMPRA vCompra;
+	private Supermercado supermercadoYumbo;
+	
+	
 
 	
 
@@ -47,8 +50,10 @@ public class VentanaPOS extends JFrame implements ActionListener
 
 	public VentanaPOS() throws IOException, ParseException 
 	{
-		vCliente = new VentanaCLIENTE();
-		vCompra = new VentanaCOMPRA();
+//		vCliente = new VentanaCLIENTE();
+//		vCompra = new VentanaCOMPRA();
+		
+		supermercadoYumbo = new Supermercado("Yumbo");
 		
 		setTitle("Sistema POS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,13 +84,38 @@ public class VentanaPOS extends JFrame implements ActionListener
 		String comando = e.getActionCommand();
 		if("registrar_cliente".equals(comando))
 		{
-			vCliente.main(null);
+			
+			
+			VentanaCLIENTE vCliente = new VentanaCLIENTE(supermercadoYumbo);
+			vCliente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			vCliente.setVisible(true);
 		}
 		else if("registrar_compra".equals(comando))
 		{
 			String nombre = JOptionPane.showInputDialog(null, "Introduce el nombre del cliente:");
 			String cedula = JOptionPane.showInputDialog(null, "Introduce la cedula del cliente:");
-			vCompra.main(null);
+//			System.out.println(nombre+".");
+//			System.out.println(cedula);
+			if(nombre==null || cedula==null )
+			{
+				JOptionPane.showMessageDialog(this, "¡Debes ingresar una cedula y nombre para registrar una compra!",
+						"Error", JOptionPane.ERROR_MESSAGE);
+				
+			}
+			else if ("".equals(nombre) || "".equals(cedula))
+			{
+				JOptionPane.showMessageDialog(this, "¡Debes ingresar una cedula y nombre para registrar una compra!",
+						"Error", JOptionPane.ERROR_MESSAGE);
+			}
+			else
+			{
+				
+				VentanaCOMPRA vCompra = new VentanaCOMPRA(supermercadoYumbo, nombre, cedula);
+				vCompra.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				vCompra.setVisible(true);
+			}
+			
+			
 		}
 	}
 }

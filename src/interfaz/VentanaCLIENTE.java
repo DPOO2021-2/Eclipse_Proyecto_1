@@ -36,23 +36,12 @@ public class VentanaCLIENTE extends JDialog implements ActionListener
 	/**
 	 * Launch the application.
 	 */
-	public void main(String[] args) 
-	{
-		try 
-		{
-			VentanaCLIENTE dialog = new VentanaCLIENTE();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
-	}
+	
 
 
-	public VentanaCLIENTE() throws IOException, ParseException 
+	public VentanaCLIENTE(Supermercado supermercado)
 	{
-		this.supermercadoYumbo = new Supermercado("Yumbo");
+		this.supermercadoYumbo = supermercado;
 		
 		setBackground(Color.WHITE);
 		setTitle("Registrar un Cliente");
@@ -160,28 +149,34 @@ public class VentanaCLIENTE extends JDialog implements ActionListener
 		if("Ok".equals(comando))
 		{
 			String txtCedula = textField.getText();
-			int txtEdad = Integer.parseInt(textField_1.getText());
+			String txtEdad = textField_1.getText();
 			String txtEstadoCivil = textField_2.getText();
 			String txtNombre = textField_3.getText();
 			String txtSexo = textField_5.getText();
 			String txtSituacionLab = textField_6.getText();
 			
 			
-			if(supermercadoYumbo.registrarCliente(txtNombre, txtCedula, txtSexo, txtEdad, txtEstadoCivil, txtSituacionLab))
+			if(supermercadoYumbo.registrarCliente(txtNombre, txtCedula, txtSexo, txtEdad, txtEstadoCivil, txtSituacionLab)
+					&& !("".equals(txtCedula))   && !("".equals(txtNombre)) )
 			{
-					JOptionPane.showMessageDialog(this, "¡Se ha guardado el cliente!","Registro Clientes",
+					JOptionPane.showMessageDialog(this, "¡Se ha guardado el cliente!","Tarea Cumplida",
 							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(this, "¡No se ha guardado el cliente!","Registro Clientes",
-						JOptionPane.INFORMATION_MESSAGE);
-			}		
+				JOptionPane.showMessageDialog(this, "¡No se ha guardado el cliente! Asegurate de registrar"
+						+ " la información correcta.","Error",
+						JOptionPane.ERROR_MESSAGE);
+			}	
+			
+			
 		}
 	}
 
 
-	private String setText() {
+	private String setText() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

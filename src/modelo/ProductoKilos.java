@@ -38,6 +38,15 @@ public class ProductoKilos extends Producto
 		 setGananciaTotal(getGananciaTotal() + costo);
 		 return costo;
 	}
+
+
+
+
+	@Override
+	public boolean sePuedeComprar(double cantidad) 
+	{
+		return cantidadTotal() > cantidad;
+	}
 	
 	
 	

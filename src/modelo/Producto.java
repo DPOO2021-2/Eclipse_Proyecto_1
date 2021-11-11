@@ -107,10 +107,8 @@ public abstract class Producto
 	
 
 
-	public boolean sePuedeComprar(double cantidad)
-	{
-		return cantidadTotal() > cantidad;
-	}
+	abstract public boolean sePuedeComprar(double cantidad);
+	
 	
 	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
 	abstract public double comprarProducto(double cantidad);
@@ -219,7 +217,7 @@ public abstract class Producto
 		String str = "";
 		for (Categoria c: getCategorias())
 		{
-			str = str + "-" + c.getNombre();
+			str = str + "|" + c.getNombre();
 		}
 		
 		return str;
