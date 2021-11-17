@@ -16,8 +16,10 @@ import procesamiento.Supermercado;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
@@ -117,15 +119,17 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 								String categoriaSelecc = comboBoxCategoria.getSelectedItem().toString();
 								Map<String, Producto> productos = supermercado.getInventario().getProductos();
 								
+								
+//	esto no se usara	setCategoria(comboBoxCategoria.getSelectedItem().toString());
+								 //filtrar los items del combobox 
+								/*
 								for(String key: productos.keySet())
 								{
 									if(categoriaSelecc == key.getCategorias())
 									{
 										
 									}
-								}
-//	esto no se usara	setCategoria(comboBoxCategoria.getSelectedItem().toString());
-								 //filtrar los items del combobox 
+								}*/
 							}
 
 				});
@@ -133,9 +137,13 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 				
 //---------------------------------------------------------------------------------------------------------------		
 				
-				
 				comboBoxProducto = new JComboBox<String>();
-				comboBoxProducto.addItem("100000");
+				//comboBoxProducto.addItem("100000");
+				Set<String> productos = supermercado.getInventario().getProductos().keySet();
+				for (String codigoBarras: productos)
+				{
+					comboBoxProducto.addItem(codigoBarras);
+				}
 				comboBoxProducto.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) 
@@ -144,7 +152,9 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 						
 						if (supermercado.getImagenProducto(codigoBarras) != null)
 						{
+							
 							ImageIcon iconoProducto = new ImageIcon(supermercado.getImagenProducto(codigoBarras));
+							
 							lblNewLabel.setIcon(iconoProducto);
 						}
 					}
