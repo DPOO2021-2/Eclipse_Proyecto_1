@@ -21,7 +21,7 @@ public class VentanaGRAFICA extends JFrame
 	{
         XYSeries series = new XYSeries("Puntos de cada compra");
         
-        ArrayList<String> puntos = supermercado.puntosComprasCliente( cedula);
+        ArrayList<Double> puntos = supermercado.puntosComprasCliente(cedula);
         // Introduccion de datos
         for(int i = 0; i<puntos.size(); i = i+1)
         {

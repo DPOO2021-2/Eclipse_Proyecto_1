@@ -258,7 +258,7 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 		
 		else if("grafica".equals(comando))
 		{
-			VentanaGRAFICA vGrafica = new VentanaGRAFICA(nombre, cedula);
+			VentanaGRAFICA vGrafica = new VentanaGRAFICA(nombre, cedula, supermercado);
 			vGrafica.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			vGrafica.setVisible(true);
 		}
