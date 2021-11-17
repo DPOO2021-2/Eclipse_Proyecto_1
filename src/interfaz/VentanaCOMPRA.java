@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Producto;
 import procesamiento.Supermercado;
 
 import java.awt.GridLayout;
@@ -108,11 +109,21 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 				comboBoxCategoria = new JComboBox<String>();
 				
 				// Accion a realizar cuando el JComboBox cambia de item seleccionado.
-				comboBoxCategoria.addActionListener(new ActionListener() {
+				comboBoxCategoria.addActionListener(new ActionListener() 
+				{
 							@Override
 							public void actionPerformed(ActionEvent e) 
 							{
+								String categoriaSelecc = comboBoxCategoria.getSelectedItem().toString();
+								Map<String, Producto> productos = supermercado.getInventario().getProductos();
 								
+								for(String key: productos.keySet())
+								{
+									if(categoriaSelecc == key.getCategorias())
+									{
+										
+									}
+								}
 //	esto no se usara	setCategoria(comboBoxCategoria.getSelectedItem().toString());
 								 //filtrar los items del combobox 
 							}
@@ -130,7 +141,12 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 					public void actionPerformed(ActionEvent e) 
 					{
 						String codigoBarras = comboBoxProducto.getSelectedItem().toString();
-//					mostrar imagen de producto
+						
+						if (supermercado.getImagenProducto(codigoBarras) != null)
+						{
+							ImageIcon iconoProducto = new ImageIcon(supermercado.getImagenProducto(codigoBarras));
+							lblNewLabel.setIcon(iconoProducto);
+						}
 					}
 
 		});
@@ -207,17 +223,6 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 			}
 				
 				
-		}
-		
-		else if(comboBoxProducto.getSelectedItem().toString() != null)
-		{
-			if (supermercado.getImagenProducto(comboBoxProducto.getSelectedItem().toString()) != null)
-			{
-				ImageIcon iconoProducto = new ImageIcon(supermercado.getImagenProducto(comboBoxProducto.getSelectedItem().toString()));
-				lblNewLabel.setIcon(iconoProducto);
-			}
-			
-
 		}
 		
 		else if("confirmar".equals(comando))
