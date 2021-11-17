@@ -140,6 +140,12 @@ public class Supermercado
 		}
 	}
 	
+	public String getImagenProducto(String codigoBarras)
+	{
+		Producto producto = inventario.getProducto(codigoBarras);
+		return producto.getImagen();
+	}
+	
 	
 	public boolean existeArchivoUsuarioLote(String nombreArchivo)
 	{

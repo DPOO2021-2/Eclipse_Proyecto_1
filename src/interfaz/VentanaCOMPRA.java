@@ -3,6 +3,8 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -30,6 +32,7 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 	private JTextField textFieldCantidad;
 	private JComboBox<String> comboBoxCategoria;
 	private JComboBox<String> comboBoxProducto;
+	private JLabel lblNewLabel;
 	private String nombre;
 	private String cedula;
 //	private String categoria;
@@ -135,9 +138,6 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 //---------------------------------------------------------------------------------------------------------------				
 				
 				
-				
-			
-			
 				textFieldCantidad = new JTextField();
 				textFieldCantidad.setBackground(Color.WHITE);
 				panel.add(textFieldCantidad);
@@ -209,6 +209,17 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 				
 		}
 		
+		else if(comboBoxProducto.getSelectedItem().toString() != null)
+		{
+			if (supermercado.getImagenProducto(comboBoxProducto.getSelectedItem().toString()) != null)
+			{
+				ImageIcon iconoProducto = new ImageIcon(supermercado.getImagenProducto(comboBoxProducto.getSelectedItem().toString()));
+				lblNewLabel.setIcon(iconoProducto);
+			}
+			
+
+		}
+		
 		else if("confirmar".equals(comando))
 		{
 			String factura = supermercado.registrarCompra(productosyCantidades, nombre, cedula);
@@ -232,14 +243,9 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 		
 		else if("grafica".equals(comando))
 		{
-			//TODO
+			VentanaGRAFICA vGrafica = new VentanaGRAFICA(nombre, cedula);
+			vGrafica.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			vGrafica.setVisible(true);
 		}
-		
-		
-		
-		
-		
-		
 	}
-
 }

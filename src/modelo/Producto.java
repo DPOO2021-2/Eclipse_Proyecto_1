@@ -55,6 +55,9 @@ public abstract class Producto
 	public String getCodigoBarras()
 	{return this.codigoBarras;}
 	
+	public String getImagen()
+	{return this.imagen;}
+	
 	public double getCostoTotal()
 	{
 		double costoTotal = 0;
