@@ -20,11 +20,12 @@ public class DialogLotesYCantidades extends JDialog
 {
 
 
-	public DialogLotesYCantidades(Map<String, Double> lotes_y_cantidades) 
+	public DialogLotesYCantidades(Map<String, Double> lotes_y_cantidades, String codigoProd) 
 	{
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(true);
+		setTitle("Producto "+codigoProd);
 //		setSize(250, 400);
 	
 		
@@ -32,8 +33,7 @@ public class DialogLotesYCantidades extends JDialog
 	
 		
 		ArrayList<String> lycLista= new ArrayList<String>();
-		//TODO
-		//llenar lyc:
+		
 		for (String codigo_lote:lotes_y_cantidades.keySet())
 		{
 			String loteYcantidad = "Lote "+codigo_lote +": "+ lotes_y_cantidades.get(codigo_lote);

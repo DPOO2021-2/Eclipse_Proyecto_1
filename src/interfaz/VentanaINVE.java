@@ -6,7 +6,11 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Map;
 
@@ -136,6 +140,37 @@ public class VentanaINVE extends JFrame implements ActionListener
 		txtEscribaElNombre_4.setText("Escriba el codigo del producto");
 		contentPane.add(txtEscribaElNombre_4);
 		txtEscribaElNombre_4.setColumns(10);
+		
+		
+		
+		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				try 
+				{
+				//	salvarTop10();
+					supermercadoYumbo.actualizarArchivos("puntos");
+					supermercadoYumbo.actualizarArchivos("inventario_productos");
+					supermercadoYumbo.actualizarArchivos("inventario_lotes");
+					supermercadoYumbo.actualizarArchivos("compras");
+					JOptionPane.showMessageDialog(esto(), "Se guardaron correctamente los archivos",
+							"Hasta Pronto", JOptionPane.INFORMATION_MESSAGE);
+					
+				} 
+				 catch (IOException e1) 
+				{
+					 JOptionPane.showMessageDialog(esto(), "No se pudieron guardar los archivos, asegurate de no estar usandolos en otra parte.",
+								"Error", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
+	public VentanaINVE esto()
+	{
+		return this;
 	}
 	
 	public void actionPerformed(ActionEvent e) 
@@ -196,7 +231,7 @@ public class VentanaINVE extends JFrame implements ActionListener
 			
 			//sacar una nueva ventana que muestre el top10
 			
-			DialogLotesYCantidades ventana_lyc = new DialogLotesYCantidades(lyc);
+			DialogLotesYCantidades ventana_lyc = new DialogLotesYCantidades(lyc, codigoproducto);
 			ventana_lyc.setVisible(true);
 		
 		}
