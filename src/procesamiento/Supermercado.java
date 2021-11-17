@@ -629,14 +629,21 @@ public class Supermercado
 	}
 	
 	
-	public ArrayList<Double> puntosComprasCliente(String cedula)
+	public ArrayList<Double> puntosComprasCliente(String cedula) throws NullPointerException
 	{
+		try 
+		{
 		ArrayList<Double> retorno = new ArrayList<Double>();
 		for (Compra compra: getRegistroCompras().getCompras().get(cedula))
 		{
 			retorno.add(compra.getPuntos());
 		}
 		return retorno;
+		}
+		catch(NullPointerException npe)
+		{
+			throw npe;
+		}
 	}
 	
 
