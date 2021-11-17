@@ -13,6 +13,8 @@ import procesamiento.Supermercado;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -75,6 +77,34 @@ public class VentanaPOS extends JFrame implements ActionListener
 		btnNewButton_1.addActionListener(this);
 		btnNewButton_1.setBackground(Color.ORANGE);
 		contentPane.add(btnNewButton_1);
+		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				try 
+				{
+				//	salvarTop10();
+					supermercadoYumbo.actualizarArchivos("puntos");
+					supermercadoYumbo.actualizarArchivos("inventario_productos");
+					supermercadoYumbo.actualizarArchivos("inventario_lotes");
+					supermercadoYumbo.actualizarArchivos("compras");
+					JOptionPane.showMessageDialog(esto(), "Se guardaron correctamente los archivos",
+							"Hasta Pronto", JOptionPane.INFORMATION_MESSAGE);
+					
+				} 
+				 catch (IOException e1) 
+				{
+					 JOptionPane.showMessageDialog(esto(), "No se pudieron guardar los archivos, asegurate de no estar usandolos en otra parte.",
+								"Error", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
+	public VentanaPOS esto()
+	{
+		return this;
 	}
 	
 	
