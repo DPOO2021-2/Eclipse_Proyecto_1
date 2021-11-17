@@ -1,5 +1,7 @@
 package interfaz;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 import org.jfree.chart.ChartFactory;
@@ -9,17 +11,23 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import procesamiento.Supermercado;
+
 public class VentanaGRAFICA extends JFrame
 {
-	public VentanaGRAFICA(String nombre, String cedula)
+	
+	
+	public VentanaGRAFICA(String nombre, String cedula, Supermercado supermercado)
 	{
         XYSeries series = new XYSeries("Puntos de cada compra");
-
+        
+        ArrayList<String> puntos = supermercado.puntosComprasCliente( cedula);
         // Introduccion de datos
-        series.add(1, 1);
-        series.add(2, 6);
-        series.add(3, 3);
-        series.add(4, 10);
+        for(int i = 0; i<puntos.size(); i = i+1)
+        {
+        	series.add(i,puntos.get(i));
+        }
+        
 
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
