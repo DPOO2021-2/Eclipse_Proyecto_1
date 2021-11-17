@@ -192,6 +192,12 @@ public class VentanaINVE extends JFrame implements ActionListener
 		try
 		{
 			Map<String, Double> lyc = supermercadoYumbo.lotesYcantidades(codigoproducto);
+			
+			
+			//sacar una nueva ventana que muestre el top10
+			
+			DialogLotesYCantidades ventana_lyc = new DialogLotesYCantidades(lyc);
+			ventana_lyc.setVisible(true);
 		
 		}
 		catch(NullPointerException ne)
