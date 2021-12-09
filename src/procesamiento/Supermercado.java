@@ -639,12 +639,12 @@ public class Supermercado
 	{
 		try 
 		{
-		ArrayList<Double> retorno = new ArrayList<Double>();
-		for (Compra compra: getRegistroCompras().getCompras().get(cedula))
-		{
-			retorno.add(compra.getPuntos());
-		}
-		return retorno;
+			ArrayList<Double> retorno = new ArrayList<Double>();
+			for (Compra compra: getRegistroCompras().getCompras().get(cedula))
+			{
+				retorno.add(compra.getPuntos());
+			}
+			return retorno;
 		}
 		catch(NullPointerException npe)
 		{
