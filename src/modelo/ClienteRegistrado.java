@@ -59,6 +59,8 @@ public class ClienteRegistrado extends Cliente
 	{
 		double puntos_originales = getPuntos();
 		setPuntos(puntos_originales + puntos);
+		Double i = puntos_originales + puntos;
+//		System.out.println("qbo pues"+i.toString());
 	}
 	
 	public void setPuntos(double puntos)

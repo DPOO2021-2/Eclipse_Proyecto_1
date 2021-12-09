@@ -83,7 +83,9 @@ public class Supermercado
 	{
 		
 		
-		return getSistemaPuntos().registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
+		boolean resultado = getSistemaPuntos().registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
+		//System.out.println(resultado);
+		return resultado;
 		//retorna false si el cliente ya estaba registrado (no lo registra de nuevo)
 		//ignorar el comentario arriba de este
 		
@@ -181,6 +183,7 @@ public class Supermercado
 			}
 			
 			double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
+//			System.out.println(puntosCompra);
 			Cliente cliente = sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
 			
 			Compra compra = new Compra(precioTotalCompra, cliente, 
@@ -240,12 +243,12 @@ public class Supermercado
 					
 					String cedula = partes[0];
 					String nombre = partes[1];
-//					double puntos = Double.parseDouble(partes[2]);
-					double puntos = 0;
-					String sexo = partes[2];
-					String edad = partes[3];
-					String estadoCivil = partes[4];
-					String situacionLaboral = partes[5];
+					double puntos = Double.parseDouble(partes[2]);
+//					double puntos = 0;
+					String sexo = partes[3];
+					String edad = partes[4];
+					String estadoCivil = partes[5];
+					String situacionLaboral = partes[6];
 					
 					//registrarlo conm metodo de registro
 					registrarCliente(nombre, cedula, sexo, edad, estadoCivil, situacionLaboral);
@@ -253,6 +256,7 @@ public class Supermercado
 					//darle los puntos
 					
 					sistemaPuntos.getCliente(cedula).sumarPuntos(puntos);
+					
 					
 //					System.out.println("acabo de registrar cliente");
 					
@@ -371,8 +375,10 @@ public class Supermercado
 					}
 					
 					double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
-					Cliente cliente = sistemaPuntos.registrarPuntos(cedulaCliente, nombreCliente, puntosCompra);
-					
+					//Cliente cliente = sistemaPuntos.registrarPuntos(cedulaCliente, nombreCliente, puntosCompra);
+					//debo remplazar el  metodo que acabo de comentar arriba
+					Cliente cliente = sistemaPuntos.getClienteSiempre(cedulaCliente, nombreCliente, puntosCompra);
+					//listo
 					Compra compra = new Compra(precioTotalCompra, cliente, 
 							productosyCantidades,  puntosCompra);
 					
@@ -409,10 +415,10 @@ public class Supermercado
 				csvWriter.append(",");
 				csvWriter.append("nombre");
 				csvWriter.append(",");
-				/*
+				
 				csvWriter.append("puntos");
 				csvWriter.append(",");
-				*/
+				
 				csvWriter.append("sexo");
 				csvWriter.append(",");
 				csvWriter.append("edad");
@@ -427,7 +433,7 @@ public class Supermercado
 					
 					String cedula = cliente.getCedula();
 					String nombre = cliente.getNombre();
-	//				String puntos = cliente.getPuntos().toString();
+					String puntos = cliente.getPuntos().toString();
 					String sexo = cliente.getSexo();
 					String edad = cliente.getEdad().toString();
 					String estadoCivil = cliente.getEstadoCivil();
@@ -438,10 +444,10 @@ public class Supermercado
 					csvWriter.append(",");
 					csvWriter.append(nombre);
 					csvWriter.append(",");
-					/*
+					
 					csvWriter.append(puntos);
 					csvWriter.append(",");
-					*/
+					
 					csvWriter.append(sexo);
 					csvWriter.append(",");
 					csvWriter.append(edad);

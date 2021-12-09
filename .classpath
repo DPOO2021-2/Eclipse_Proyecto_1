@@ -6,7 +6,15 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/soray/OneDrive/Documents/JJ/MATERIAS 3/DPOO/proyecto1b_s.arangoa_j.sierraa/Eclipse_Proyecto_1/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/soray/OneDrive/Documents/JJ/MATERIAS 3/DPOO/proyecto1b_s.arangoa_j.sierraa/Eclipse_Proyecto_1/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sergio/Desktop/java_u2/jfreechart-1.0.19/lib/jcommon-1.0.23.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Sergio/Desktop/java_u2/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

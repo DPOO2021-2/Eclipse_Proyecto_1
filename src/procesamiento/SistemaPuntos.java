@@ -23,8 +23,8 @@ public class SistemaPuntos
 		
 		try 
 		{
-			
-		int edadInt = Integer.parseInt(edad);
+		//System.out.println(edad);
+		Integer edadInt = Integer.parseInt(edad);
 		ClienteRegistrado cliente = new ClienteRegistrado(nombre, cedula, sexo, edadInt, estadoCivil, situacionLaboral);
 		
 		
@@ -45,6 +45,7 @@ public class SistemaPuntos
 		}
 		catch(NumberFormatException nfe)
 		{
+//			System.out.println("numero raro");
 			return false;
 		}
 		
@@ -55,10 +56,26 @@ public class SistemaPuntos
 		return clientes.get(cedula);
 	}
 	
+	public Cliente getClienteSiempre(String cedula , String nombreCliente, double puntosCompra)
+	{
+		if (clientes.containsKey(cedula))
+		{
+			return getCliente(cedula);
+		}
+		else
+		{
+			Cliente cliente = new Cliente(nombreCliente, cedula, puntosCompra);
+			return cliente;
+		}
+	}
+	
 	public double calcularPuntos(double precioTotal) 
 	{
 		//tasa = 1 punto / 1000 pesos
-		double tasa = 1/1000;
+		double tasa = 0.001;
+//		System.out.println(tasa);
+//		System.out.println(precioTotal);
+//		System.out.println(precioTotal*tasa);
 		return precioTotal*tasa;
 	}
 	

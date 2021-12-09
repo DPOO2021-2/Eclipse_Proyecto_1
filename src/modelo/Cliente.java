@@ -17,6 +17,7 @@ public class Cliente {
 	
 	public void sumarPuntos(double Puntos)
 	{
+		//System.out.println("HOLA");
 	}
 
 	public String getNombre() 
