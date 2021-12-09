@@ -34,8 +34,8 @@ public class VentanaGRAFICA extends JFrame
              }
              
              //series.add(1,4);
-             series.add(2,3);
-             series.add(10,42);
+             //series.add(2,3);
+             //series.add(10,42);
              
 
              XYSeriesCollection dataset = new XYSeriesCollection();
@@ -59,6 +59,7 @@ public class VentanaGRAFICA extends JFrame
              frame.pack();
              frame.setVisible(true);
         }
+        
         catch(NullPointerException npe)
         {
         	JOptionPane.showMessageDialog(this, "No se encuentran compras de este cliente.",
