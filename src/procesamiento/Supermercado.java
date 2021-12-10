@@ -167,46 +167,53 @@ public class Supermercado
 	
 	public String registrarCompra(Map<String, Double> productosyCantidades, String nombre, String cedula) 
 	{
-		Inventario inventario = getInventario();
-		RegistroCompras registroCompras = getRegistroCompras();
-		SistemaPuntos sistemaPuntos = getSistemaPuntos();
-		
-		boolean sePudieronComprar = true;
-		
-		
-		for (String codigoBarras: productosyCantidades.keySet())
+		if(!productosyCantidades.isEmpty())
 		{
-			double cantidad = productosyCantidades.get(codigoBarras);
-			sePudieronComprar = sePudieronComprar && inventario.sePuedeComprar(codigoBarras, cantidad);
-		} 
-		
-		if(sePudieronComprar) 
-		{
-			double precioTotalCompra = 0;
-		
+			Inventario inventario = getInventario();
+			RegistroCompras registroCompras = getRegistroCompras();
+			SistemaPuntos sistemaPuntos = getSistemaPuntos();
+			
+			boolean sePudieronComprar = true;
+			
+			
 			for (String codigoBarras: productosyCantidades.keySet())
 			{
 				double cantidad = productosyCantidades.get(codigoBarras);
-				precioTotalCompra = precioTotalCompra + inventario.comprar(codigoBarras, cantidad);
+				sePudieronComprar = sePudieronComprar && inventario.sePuedeComprar(codigoBarras, cantidad);
+			} 
+			
+			if(sePudieronComprar) 
+			{
+				double precioTotalCompra = 0;
+			
+				for (String codigoBarras: productosyCantidades.keySet())
+				{
+					double cantidad = productosyCantidades.get(codigoBarras);
+					precioTotalCompra = precioTotalCompra + inventario.comprar(codigoBarras, cantidad);
+				}
+				
+				double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
+	//			System.out.println(puntosCompra);
+				Cliente cliente = sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
+				
+				Compra compra = new Compra(precioTotalCompra, cliente, 
+						productosyCantidades,  puntosCompra);
+				
+				registroCompras.guadarCompra(cedula, compra);
+				
+	
+				String factura = compra.generarfactura();
+				
+				return factura;
 			}
-			
-			double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
-//			System.out.println(puntosCompra);
-			Cliente cliente = sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
-			
-			Compra compra = new Compra(precioTotalCompra, cliente, 
-					productosyCantidades,  puntosCompra);
-			
-			registroCompras.guadarCompra(cedula, compra);
-			
-
-			String factura = compra.generarfactura();
-			
-			return factura;
+			else 
+			{ 
+				return "no";
+			}
 		}
 		else 
 		{ 
-			return "no";
+			return "vacia";
 		}
 	}
 	
@@ -349,7 +356,7 @@ public class Supermercado
 					Producto producto = inventario.getProducto(codigoProducto);
 					
 					//registrar lote con metodo de registro
-					inventario.registrarLote(producto, codigo, cantidadOriginal, fechaVencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
+					inventario.registrarLote2(producto, codigo, cantidadOriginal, fechaVencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
 					Lote lote = inventario.getLote(codigoProducto, codigo);
 					
 					//ponerle fecha y cantidad actual
@@ -387,6 +394,7 @@ public class Supermercado
 					double gananciaTotal = Double.parseDouble(partes[6]);
 					String empaque = partes[7];
 					String imagen = partes[8];
+					String actividad = partes[9];
 			//		System.out.println(categoriasSTRING);
 					/*
 					for(String categoria : categorias)
@@ -403,6 +411,7 @@ public class Supermercado
 					
 					producto.setGananciaTotal(gananciaTotal);
 					producto.setImagen(imagen);
+					producto.cargarActividad(actividad);
 					
 					inventario.agregarCategoriasProducto(codigoBarras, categorias);
 					
@@ -547,6 +556,8 @@ public class Supermercado
 				csvWriter.append("empaque");
 				csvWriter.append(",");
 				csvWriter.append("imagen");
+				csvWriter.append(",");
+				csvWriter.append("registroActividad");
 				csvWriter.append("\n");
 				
 				for (Producto producto :inventario.getProductos().values())
@@ -564,6 +575,7 @@ public class Supermercado
 					String empaque = producto.getClass().toString().split("Producto")[1];
 //					System.out.println(empaque);
 					String imagen = producto.getImagen();
+					String registroActividad = producto.actividadString();
 					
 					
 					
@@ -585,7 +597,8 @@ public class Supermercado
 					csvWriter.append(empaque);
 					csvWriter.append(",");
 					csvWriter.append(imagen);
-					
+					csvWriter.append(",");
+					csvWriter.append(registroActividad);
 					csvWriter.append("\n");
 					
 				}

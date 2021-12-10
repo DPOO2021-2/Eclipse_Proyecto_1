@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,7 +45,7 @@ public class VentanaINVE extends JFrame implements ActionListener
 	private Supermercado supermercadoYumbo;
 	private CalculadoraFinanzas calcFinzs;
 	private JPanel contentPane;
-	private JButton btnNewButton_5;
+
 	private JTextField txtEscribaElNombre_5;
 
 	/**
@@ -144,9 +145,10 @@ public class VentanaINVE extends JFrame implements ActionListener
 		contentPane.add(txtEscribaElNombre_4);
 		txtEscribaElNombre_4.setColumns(10);
 		
-		btnNewButton_5 = new JButton("Mostrar actividad de un producto");
+		JButton btnNewButton_5 = new JButton("Mostrar actividad de un producto");
 		btnNewButton_5.setBackground(Color.ORANGE);
-		btnNewButton_5.setActionCommand("setImagen");
+		btnNewButton_5.setActionCommand("graficaProducto");
+		btnNewButton_5.addActionListener(this);
 		contentPane.add(btnNewButton_5);
 		
 		txtEscribaElNombre_5 = new JTextField();
@@ -213,8 +215,32 @@ public class VentanaINVE extends JFrame implements ActionListener
 		{
 			vImagen.setVisible(true);
 			
-
 		}
+		
+		else if("graficaProducto".equals(comando))
+		{
+			ejecutarGraficaProducto();
+		}
+		
+	}
+
+	private void ejecutarGraficaProducto() 
+	{
+		
+		
+		String codigoBarras = txtEscribaElNombre_5.getText();
+		
+		String fecha1 = JOptionPane.showInputDialog(null, "Ingresa la primera fecha. El formato debe ser dd_MM_yyyy. Por ejemplo "
+				+ "el 24 de diciembre del 2021 es : 24_12_2021.");
+		
+		String fecha2 = JOptionPane.showInputDialog(null, "Ingresa la segunda fecha. Recuerda que el formato debe ser dd_MM_yyyy. Por ejemplo "
+				+ "el 24 de diciembre del 2021 es : 24_12_2021.");
+		
+		
+		VentanaGraficaPRODUCTO vGraficaP = new VentanaGraficaPRODUCTO(codigoBarras, fecha1, fecha2, supermercadoYumbo);
+		vGraficaP.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		vGraficaP.setVisible(true);
+		
 	}
 
 	public void ejecutarSetImagen(String nombreImagen) 

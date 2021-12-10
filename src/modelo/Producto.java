@@ -48,6 +48,9 @@ public abstract class Producto
 		this.gananciaTotal = 0;
 		this.lotes = new LinkedHashMap<String, Lote>();
 		this.imagen = "NOIMAGE";
+		
+		this.registroActividad = new LinkedHashMap<Date, Double>();
+		
 	}
 	
 	public Double getPrecioActual()
@@ -93,6 +96,13 @@ public abstract class Producto
 	{
 		lotes.put(lote.getCodigo(), lote);
 		this.actualizarActividad();
+		//System.out.println("hola");
+	}
+	
+	public void agregarLote2(Lote lote)
+	{
+		lotes.put(lote.getCodigo(), lote);
+
 		//System.out.println("hola");
 	}
 	
@@ -303,7 +313,7 @@ public abstract class Producto
 			if (fecha.before(fecha2) && fecha.after(fecha1))
 			{
 				Double valorCantidad = actividadTotal.get(fecha);
-				retorno.put(fecha1, valorCantidad);
+				retorno.put(fecha, valorCantidad);
 			}
 			
 		}
@@ -329,9 +339,24 @@ public abstract class Producto
 		return retorno;
 	}
 	
-	public void cargarActividad(String actividadString)
+	public void cargarActividad(String actividadString) throws ParseException
 	{
-		//TODO
+		SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
+		
+		
+		String[] arreglo = actividadString.split("-");
+		for (String parejaStr: arreglo)
+		{
+			String[] pareja = parejaStr.split(":");
+			
+			Date fecha = formatter.parse(pareja[0]);
+			
+			Double cantidad = Double.parseDouble(pareja[1]);
+			
+			this.registroActividad.put(fecha, cantidad);
+			
+			
+		}
 	}
 
 }

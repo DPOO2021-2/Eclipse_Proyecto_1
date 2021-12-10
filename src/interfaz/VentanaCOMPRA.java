@@ -262,6 +262,12 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 						+ " requerida de algún producto no está disponible o no es valida.",
 						"Error", JOptionPane.ERROR_MESSAGE);	
 			}
+			else if("vacia".equals(factura))
+			{
+
+				JOptionPane.showMessageDialog(this, "Adios",
+						"Error", JOptionPane.ERROR_MESSAGE);	
+			}
 			
 			else
 			{

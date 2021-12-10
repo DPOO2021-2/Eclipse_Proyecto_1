@@ -132,6 +132,14 @@ public class Inventario
 		
 	}
 	
+	public void registrarLote2(Producto producto, String codigoLote, double cantidadOriginal, Date fechaVencimiento, double costoTotal,
+			double precio_publico_unidad, String precio_publico_unidad_medida)
+	{
+		Lote lote = new Lote(codigoLote, cantidadOriginal, fechaVencimiento, costoTotal, precio_publico_unidad, precio_publico_unidad_medida);
+		producto.agregarLote2(lote);
+		
+	}
+	
 	public void leerArchivoLotes(String nombreArchivo) throws IOException, ParseException
 	{try 
 	{
