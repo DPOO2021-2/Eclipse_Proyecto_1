@@ -39,11 +39,11 @@ public class ProductoUnidades extends Producto
 		 
 		 double costo = calcularPrecio(cantidad_entera);
 		 setGananciaTotal(getGananciaTotal() + costo);
+		 
+		 actualizarActividad();
+		 
 		 return costo;
-		 
-		 
-			 
-		 
+		
 	}
 
 

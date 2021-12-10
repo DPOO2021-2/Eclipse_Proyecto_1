@@ -36,6 +36,9 @@ public class ProductoKilos extends Producto
 		
 		 double costo = calcularPrecio(cantidad);
 		 setGananciaTotal(getGananciaTotal() + costo);
+		 
+		 actualizarActividad();
+		 
 		 return costo;
 	}
 

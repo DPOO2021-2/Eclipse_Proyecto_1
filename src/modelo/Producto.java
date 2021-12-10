@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.Map;
@@ -90,6 +92,7 @@ public abstract class Producto
 	public void agregarLote(Lote lote)
 	{
 		lotes.put(lote.getCodigo(), lote);
+		this.actualizarActividad();
 		//System.out.println("hola");
 	}
 	
@@ -269,6 +272,27 @@ public abstract class Producto
 		this.imagen = nombreImagen;
 	}
 	
+	public void actualizarActividad(Date fecha)
+	{
+		this.registroActividad.put(fecha, cantidadTotal());
+	}
 	
+	public void actualizarActividad()
+	{
+		Date fecha = new Date();
+			
+		actualizarActividad(fecha);
+				
+	}
+	
+	public HashMap<Date, Double> getActividad(String fecha1Str, String fecha2Str) throws ParseException
+	{
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
+		
+		Date fecha1 = formatter.parse(fecha1Str);
+		
+		Date fecha2 = formatter.parse(fecha2Str);
+	}
 
 }
