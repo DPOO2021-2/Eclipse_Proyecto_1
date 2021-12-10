@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.ClienteRegistrado;
 import modelo.Producto;
 import procesamiento.Supermercado;
 
@@ -144,22 +145,8 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 				{
 					comboBoxProducto.addItem(codigoBarras);
 				}
-				comboBoxProducto.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) 
-					{
-						String codigoBarras = comboBoxProducto.getSelectedItem().toString();
-						
-						if (supermercado.getImagenProducto(codigoBarras) != null)
-						{
-							
-							ImageIcon iconoProducto = new ImageIcon(supermercado.getImagenProducto(codigoBarras));
-							
-							lblNewLabel.setIcon(iconoProducto);
-						}
-					}
-
-		});
+				comboBoxProducto.addActionListener(this);
+				comboBoxProducto.setActionCommand("CambiarImagen");
 				panel.add(comboBoxProducto);
 //---------------------------------------------------------------------------------------------------------------				
 				
@@ -177,7 +164,9 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 			btnNewButton.setBackground(Color.ORANGE);
 			getContentPane().add(btnNewButton, BorderLayout.WEST);
 		
-			JLabel lblNewLabel = new JLabel("Imagen");
+			lblNewLabel = new JLabel();
+			ImageIcon icono = new ImageIcon("ImagenesProductos/NOIMAGE.png");
+			lblNewLabel.setIcon(icono);
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			getContentPane().add(lblNewLabel, BorderLayout.CENTER);
 		
@@ -237,6 +226,19 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 		
 		else if("confirmar".equals(comando))
 		{
+			
+			if(supermercado.clienteRegistrado(cedula))
+			{
+				
+				ClienteRegistrado cliente = supermercado.getClienteRegistrado(cedula);
+				String puntosAUSAR = JOptionPane.showInputDialog(null, "Eres un clientre registardo tienes x puntos");
+			}
+			
+			
+			else
+			{
+			
+			
 			String factura = supermercado.registrarCompra(productosyCantidades, nombre, cedula);
 			
 			
@@ -253,7 +255,10 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 				JOptionPane.showMessageDialog(this, "Tu factura es: "+factura,
 						"Tarea Cumplida", JOptionPane.INFORMATION_MESSAGE);
 			}
+			
+			}
 			dispose();
+			
 		}
 		
 		else if("grafica".equals(comando))
@@ -262,5 +267,28 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 			vGrafica.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			vGrafica.setVisible(true);
 		}
+		else if("CambiarImagen".equals(comando))
+		{
+				String codigoBarras = comboBoxProducto.getSelectedItem().toString();
+			    String nombreImagen = supermercado.getImagenProducto(codigoBarras);
+			//	String nombreImagen = "libro";
+				if (nombreImagen != null)
+				{
+					
+					ImageIcon iconoProducto = new ImageIcon("ImagenesProductos/"+nombreImagen+".png");
+					
+					lblNewLabel.setIcon(iconoProducto);
+				//	lblNewLabel.setText("");
+				}
+				else
+				{
+					ImageIcon icono = new ImageIcon("ImagenesProductos/NOIMAGE.png");
+					lblNewLabel.setIcon(icono);
+				}
+				
+		}
+		
 	}
 }
+
+

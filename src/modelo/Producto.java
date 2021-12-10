@@ -43,7 +43,7 @@ public abstract class Producto
 		this.precioActualMedida = precio_publico_unidad_medida;
 		this.gananciaTotal = 0;
 		this.lotes = new LinkedHashMap<String, Lote>();
-		this.imagen = null;
+		this.imagen = "NOIMAGE";
 	}
 	
 	public Double getPrecioActual()
@@ -220,8 +220,10 @@ public abstract class Producto
 		String str = "";
 		for (Categoria c: getCategorias())
 		{
-			str = str + "|" + c.getNombre();
+			str = str  + c.getNombre() + "-";
+			
 		}
+		str = str.substring(0, str.length() - 1);
 		
 		return str;
 	}

@@ -37,7 +37,7 @@ public class VentanaIMAGEN extends JDialog implements ActionListener {
 		
 			txtEscribaElNombre = new JTextField();
 			txtEscribaElNombre.setBackground(Color.WHITE);
-			txtEscribaElNombre.setText("Escriba aqui el nombre de la imangen");
+			txtEscribaElNombre.setText("Escriba aqui el nombre de la imagen");
 			txtEscribaElNombre.setColumns(10);
 			getContentPane().add(txtEscribaElNombre, BorderLayout.NORTH);
 		

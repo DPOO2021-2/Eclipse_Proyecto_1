@@ -72,4 +72,11 @@ public class ClienteRegistrado extends Cliente
 	{
 		return this.puntos;
 	}
+	
+	@Override
+	public void restarPuntos(Integer puntosRestar)
+	{
+		this.puntos = getPuntos() -puntosRestar;
+	}
+	
 }

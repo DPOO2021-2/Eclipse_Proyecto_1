@@ -67,6 +67,20 @@ public class Compra {
 		return factura;
 	}
 	
+	public String generarFacturaConPuntos(Integer puntos)
+	{
+		String factura = "";
+		for (String codigoBarras:  productos.keySet())
+		{
+			factura = factura + codigoBarras + ": " + 
+			productos.get(codigoBarras).toString() + ", ";
+		}
+		factura = factura + " subtotal: "+ getCostoFinal().toString();
+		Double costoFinalVERDADERO = (getCostoFinal() - puntos);
+		
+		return factura+"-"+puntos+"="+costoFinalVERDADERO.toString();
+	}
+	
 	
 	public String facturaResumida_CSV()
 	{

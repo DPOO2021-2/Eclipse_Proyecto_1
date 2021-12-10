@@ -29,6 +29,11 @@ public class Cliente {
 	{
 		return this.cedula;
 	}
+
+	public void restarPuntos(Integer puntosRestar) 
+	{
+		
+	}
 	
 	
 	

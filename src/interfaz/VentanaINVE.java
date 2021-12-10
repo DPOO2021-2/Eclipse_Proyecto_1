@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Excepciones.NombreReservadoException;
 import procesamiento.CalculadoraFinanzas;
 import procesamiento.Supermercado;
 
@@ -209,14 +210,27 @@ public class VentanaINVE extends JFrame implements ActionListener
 		String codigoproducto = txtEscribaElNombre_4.getText();
 		
 		
-		if(supermercadoYumbo.setImagenProducto(codigoproducto, nombreImagen))
+		try 
 		{
-			JOptionPane.showMessageDialog(this, "Imagen establecida para el producto: "+ codigoproducto,
-					"Tarea Cumplida", JOptionPane.INFORMATION_MESSAGE, null);
-		}
-		else
+			if(supermercadoYumbo.setImagenProducto(codigoproducto, nombreImagen))
+			{
+				JOptionPane.showMessageDialog(this, "Imagen establecida para el producto: "+ codigoproducto,
+						"Tarea Cumplida", JOptionPane.INFORMATION_MESSAGE, null);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(this, "No se ha encontrado el producto: " + codigoproducto,
+						"Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} 
+		catch (HeadlessException e) 
 		{
-			JOptionPane.showMessageDialog(this, "No se ha encontrado el producto: " + codigoproducto,
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (NombreReservadoException e) 
+		{
+			JOptionPane.showMessageDialog(this, "Este nombre de imagen está reservado.",
 					"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

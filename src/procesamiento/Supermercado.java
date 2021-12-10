@@ -2,6 +2,9 @@ package procesamiento;
 
 import java.util.Map;
 
+import javax.swing.ImageIcon;
+
+import Excepciones.NombreReservadoException;
 import modelo.Cliente;
 import modelo.ClienteRegistrado;
 import modelo.Compra;
@@ -128,9 +131,14 @@ public class Supermercado
 		}
 	}
 	
-	public boolean setImagenProducto(String codigoBarras, String nombreImagen)
+	public boolean setImagenProducto(String codigoBarras, String nombreImagen) throws NombreReservadoException
 	{
 		Producto producto = inventario.getProducto(codigoBarras);
+		if ( "NOIMAGE".equals(nombreImagen))
+		{
+			NombreReservadoException nre = new NombreReservadoException();
+			throw nre;
+		}
 		if (producto==null)
 		{
 			return false;
@@ -191,6 +199,7 @@ public class Supermercado
 			
 			registroCompras.guadarCompra(cedula, compra);
 			
+
 			String factura = compra.generarfactura();
 			
 			return factura;
@@ -201,6 +210,51 @@ public class Supermercado
 		}
 	}
 	
+	public String registrarCompraCONPUNTOS(Map<String, Double> productosyCantidades, String nombre, String cedula, Integer puntos) 
+	{
+		Inventario inventario = getInventario();
+		RegistroCompras registroCompras = getRegistroCompras();
+		SistemaPuntos sistemaPuntos = getSistemaPuntos();
+		
+		boolean sePudieronComprar = true;
+		
+		
+		for (String codigoBarras: productosyCantidades.keySet())
+		{
+			double cantidad = productosyCantidades.get(codigoBarras);
+			sePudieronComprar = sePudieronComprar && inventario.sePuedeComprar(codigoBarras, cantidad);
+		} 
+		
+		if(sePudieronComprar) 
+		{
+			double precioTotalCompra = 0;
+		
+			for (String codigoBarras: productosyCantidades.keySet())
+			{
+				double cantidad = productosyCantidades.get(codigoBarras);
+				precioTotalCompra = precioTotalCompra + inventario.comprar(codigoBarras, cantidad);
+			}
+			
+			double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
+//			System.out.println(puntosCompra);
+			Cliente cliente = sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
+			cliente.restarPuntos(puntos);
+			
+			Compra compra = new Compra(precioTotalCompra, cliente, 
+					productosyCantidades,  puntosCompra);
+			
+			registroCompras.guadarCompra(cedula, compra);
+			
+
+			String factura = compra.generarFacturaConPuntos(puntos);
+			
+			return factura;
+		}
+		else 
+		{ 
+			return "no";
+		}
+	}
 	
 	
 	
@@ -322,12 +376,21 @@ public class Supermercado
 					
 					String nombre = partes[0];
 					String codigoBarras = partes[1];
-					String[] categorias = partes[2].split("|");
+					String[] categorias = partes[2].split("-");
+			//		String categoriasSTRING = partes[2];
 					String tipoRefrigerado = partes[3];
 					double precioActual = Double.parseDouble(partes[4]);
 					String precioActualMedida = partes[5];
 					double gananciaTotal = Double.parseDouble(partes[6]);
 					String empaque = partes[7];
+					String imagen = partes[8];
+			//		System.out.println(categoriasSTRING);
+					/*
+					for(String categoria : categorias)
+					{
+						System.out.println(categoria);	
+					}
+					*/
 					
 					
 					//registrar producto con metodo de registro
@@ -336,6 +399,7 @@ public class Supermercado
 					
 					
 					producto.setGananciaTotal(gananciaTotal);
+					producto.setImagen(imagen);
 					
 					inventario.agregarCategoriasProducto(codigoBarras, categorias);
 					
@@ -478,6 +542,8 @@ public class Supermercado
 				csvWriter.append("gananciaTotal");
 				csvWriter.append(",");
 				csvWriter.append("empaque");
+				csvWriter.append(",");
+				csvWriter.append("imagen");
 				csvWriter.append("\n");
 				
 				for (Producto producto :inventario.getProductos().values())
@@ -494,6 +560,8 @@ public class Supermercado
 					String gananciaTotal = producto.getGananciaTotal().toString();
 					String empaque = producto.getClass().toString().split("Producto")[1];
 //					System.out.println(empaque);
+					String imagen = producto.getImagen();
+					
 					
 					
 					
@@ -512,6 +580,8 @@ public class Supermercado
 					csvWriter.append(gananciaTotal);
 					csvWriter.append(",");
 					csvWriter.append(empaque);
+					csvWriter.append(",");
+					csvWriter.append(imagen);
 					
 					csvWriter.append("\n");
 					
@@ -651,7 +721,16 @@ public class Supermercado
 			throw npe;
 		}
 	}
-	
+
+	public boolean clienteRegistrado(String cedula) 
+	{
+		return sistemaPuntos.clienteRegistrado(cedula);
+		
+	}
+	 public ClienteRegistrado getClienteRegistrado(String cedula)
+	 {
+		 return sistemaPuntos.getCliente(cedula);
+	 }
 
 
 }
