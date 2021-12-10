@@ -293,6 +293,45 @@ public abstract class Producto
 		Date fecha1 = formatter.parse(fecha1Str);
 		
 		Date fecha2 = formatter.parse(fecha2Str);
+		
+		HashMap<Date, Double> retorno = new HashMap<Date, Double>();
+		
+		HashMap<Date, Double> actividadTotal = this.registroActividad;
+		
+		for (Date fecha: actividadTotal.keySet())
+		{
+			if (fecha.before(fecha2) && fecha.after(fecha1))
+			{
+				Double valorCantidad = actividadTotal.get(fecha);
+				retorno.put(fecha1, valorCantidad);
+			}
+			
+		}
+		
+		
+		
+		return retorno;
+	}
+	
+	
+	public String actividadString()
+	{
+		String retorno = "";
+		HashMap<Date, Double> actividad = this.registroActividad;
+		for(Date fecha: actividad.keySet())
+		{
+			retorno = retorno + TransformadorFechas.fechaTransf(fecha)+":"+actividad.get(fecha).toString()+"-";
+			
+			
+		}
+		retorno = retorno.substring(0, retorno.length() - 1);
+		
+		return retorno;
+	}
+	
+	public void cargarActividad(String actividadString)
+	{
+		//TODO
 	}
 
 }

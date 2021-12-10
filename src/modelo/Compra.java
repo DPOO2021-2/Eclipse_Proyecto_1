@@ -93,6 +93,8 @@ public class Compra {
 			factura = factura + codigoBarras + ":" + 
 			productos.get(codigoBarras).toString() + "-";
 		}
+		
+		factura = factura.substring(0, factura.length() - 1);
 
 		return factura;
 	}
