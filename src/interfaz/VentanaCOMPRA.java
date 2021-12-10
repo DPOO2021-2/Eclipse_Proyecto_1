@@ -226,39 +226,50 @@ public class VentanaCOMPRA extends JDialog implements ActionListener
 		
 		else if("confirmar".equals(comando))
 		{
+			String factura;
 			
-			if(supermercado.clienteRegistrado(cedula))
+			if(supermercado.clienteRegistrado(cedula) && !(supermercado.getClienteRegistrado(cedula).getPuntos().equals(0.0)))
 			{
 				
 				ClienteRegistrado cliente = supermercado.getClienteRegistrado(cedula);
-				String puntosAUSAR = JOptionPane.showInputDialog(null, "Eres un clientre registardo tienes x puntos");
+				Double puntosTotal = cliente.getPuntos();
+				
+				String puntosAUSAR = JOptionPane.showInputDialog(null, "Eres un clientre registrado, tienes "+ puntosTotal.toString() +" puntos. "
+						+ "Cuantos puntos deseas usar para tu compra?");
+				
+				if(puntosAUSAR == null)
+				{
+					factura = supermercado.registrarCompra(productosyCantidades, nombre, cedula);
+				}
+				
+				else
+				{
+					Integer puntosUsarFinal = Integer.parseInt(puntosAUSAR);
+					
+					factura = supermercado.registrarCompraCONPUNTOS(productosyCantidades, nombre, cedula, puntosUsarFinal);
+				}
 			}
 			
 			
 			else
 			{
-			
-			
-			String factura = supermercado.registrarCompra(productosyCantidades, nombre, cedula);
-			
-			
+				factura = supermercado.registrarCompra(productosyCantidades, nombre, cedula);
+			}
 			
 			if("no".equals(factura))
 			{
 				JOptionPane.showMessageDialog(this, "Esta compra no se puede realizar. Puede ser porque la cantidad"
 						+ " requerida de algún producto no está disponible o no es valida.",
-						"Error", JOptionPane.ERROR_MESSAGE);
-				
+						"Error", JOptionPane.ERROR_MESSAGE);	
 			}
+			
 			else
 			{
 				JOptionPane.showMessageDialog(this, "Tu factura es: "+factura,
 						"Tarea Cumplida", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
-			}
 			dispose();
-			
 		}
 		
 		else if("grafica".equals(comando))

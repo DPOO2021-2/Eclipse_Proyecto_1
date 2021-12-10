@@ -67,7 +67,7 @@ public class Compra {
 		return factura;
 	}
 	
-	public String generarFacturaConPuntos(Integer puntos)
+	public String generarFacturaConPuntos(Integer puntos, Double puntosAntiguos)
 	{
 		String factura = "";
 		for (String codigoBarras:  productos.keySet())
@@ -76,9 +76,12 @@ public class Compra {
 			productos.get(codigoBarras).toString() + ", ";
 		}
 		factura = factura + " subtotal: "+ getCostoFinal().toString();
-		Double costoFinalVERDADERO = (getCostoFinal() - puntos);
+		Double costoFinalVERDADERO = (getCostoFinal() - (puntos * 15));
 		
-		return factura+"-"+puntos+"="+costoFinalVERDADERO.toString();
+		Double puntosNuevos = puntosAntiguos - puntos;
+		
+		return factura+" - "+(puntos * 15)+" = "+costoFinalVERDADERO.toString()+
+				"Antes tenias: "+puntosAntiguos.toString()+" y ahora te quedan: "+puntosNuevos.toString();
 	}
 	
 	

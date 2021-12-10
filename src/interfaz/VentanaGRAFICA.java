@@ -31,12 +31,7 @@ public class VentanaGRAFICA extends JFrame
              	series.add(i,puntos.get(i));
              	System.out.println(i);
              	System.out.println(puntos.get(i));
-             }
-             
-             //series.add(1,4);
-             //series.add(2,3);
-             //series.add(10,42);
-             
+             }             
 
              XYSeriesCollection dataset = new XYSeriesCollection();
              dataset.addSeries(series);

@@ -59,7 +59,7 @@ public class ClienteRegistrado extends Cliente
 	{
 		double puntos_originales = getPuntos();
 		setPuntos(puntos_originales + puntos);
-		Double i = puntos_originales + puntos;
+		//Double i = puntos_originales + puntos;
 //		System.out.println("qbo pues"+i.toString());
 	}
 	
@@ -74,9 +74,20 @@ public class ClienteRegistrado extends Cliente
 	}
 	
 	@Override
-	public void restarPuntos(Integer puntosRestar)
-	{
-		this.puntos = getPuntos() -puntosRestar;
+	public boolean restarPuntos(Integer puntosRestar)
+	{ 
+		if(getPuntos() >= puntosRestar)
+		{
+			this.puntos = getPuntos() -puntosRestar;
+			return true;
+		}
+		
+		else
+		{
+			return false;
+		}
+		
+		
 	}
 	
 }

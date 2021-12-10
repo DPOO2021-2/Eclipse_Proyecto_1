@@ -30,9 +30,9 @@ public class Cliente {
 		return this.cedula;
 	}
 
-	public void restarPuntos(Integer puntosRestar) 
+	public boolean restarPuntos(Integer puntosRestar) 
 	{
-		
+		return false;
 	}
 	
 	

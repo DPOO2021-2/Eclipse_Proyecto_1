@@ -237,7 +237,8 @@ public class Supermercado
 			
 			double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
 //			System.out.println(puntosCompra);
-			Cliente cliente = sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
+			ClienteRegistrado cliente = (ClienteRegistrado) sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
+			Double puntosAntiguos = cliente.getPuntos();
 			cliente.restarPuntos(puntos);
 			
 			Compra compra = new Compra(precioTotalCompra, cliente, 
@@ -246,7 +247,9 @@ public class Supermercado
 			registroCompras.guadarCompra(cedula, compra);
 			
 
-			String factura = compra.generarFacturaConPuntos(puntos);
+			String factura = compra.generarFacturaConPuntos(puntos, puntosAntiguos - puntosCompra);
+			
+			
 			
 			return factura;
 		}
