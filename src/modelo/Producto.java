@@ -22,6 +22,8 @@ public abstract class Producto
 	private String precioActualMedida;
 	
 	private double gananciaTotal;
+	
+	private HashMap<Date, Double> registroActividad;
 
 	//las llaves seran codigos que deberan venir en el archivo csv junto el codigo de barras del producto de la forma
 	//xxxx-c  donde xxxx es el cdoigo de barras del producto y c el codigo del lote
