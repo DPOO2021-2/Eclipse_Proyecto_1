@@ -32,7 +32,6 @@ import java.awt.Font;
 
 public class VentanaINVE extends JFrame implements ActionListener
 {
-	private JPanel contentPane;
 	private JTextField txtEscribaElNombre;
 	private JTextField txtEscribaElNombre_1;
 	private JTextField txtEscribaElNombre_2;
@@ -44,6 +43,9 @@ public class VentanaINVE extends JFrame implements ActionListener
 	private VentanaIMAGEN vImagen;
 	private Supermercado supermercadoYumbo;
 	private CalculadoraFinanzas calcFinzs;
+	private JPanel contentPane;
+	private JButton btnNewButton_5;
+	private JTextField txtEscribaElNombre_5;
 
 	/**
 	 * Launch the application.
@@ -82,7 +84,7 @@ public class VentanaINVE extends JFrame implements ActionListener
 		contentPane.setBackground(Color.GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(5, 2, 0, 0));
+		contentPane.setLayout(new GridLayout(6, 2, 0, 0));
 		
 		JButton btnNewButton = new JButton("Registrar Archivos Lotes");
 		btnNewButton.setActionCommand("registrar_archivo");
@@ -141,6 +143,16 @@ public class VentanaINVE extends JFrame implements ActionListener
 		txtEscribaElNombre_4.setText("Escriba el codigo del producto");
 		contentPane.add(txtEscribaElNombre_4);
 		txtEscribaElNombre_4.setColumns(10);
+		
+		btnNewButton_5 = new JButton("Mostrar actividad de un producto");
+		btnNewButton_5.setBackground(Color.ORANGE);
+		btnNewButton_5.setActionCommand("setImagen");
+		contentPane.add(btnNewButton_5);
+		
+		txtEscribaElNombre_5 = new JTextField();
+		txtEscribaElNombre_5.setText("Escriba el codigo del producto");
+		txtEscribaElNombre_5.setColumns(10);
+		contentPane.add(txtEscribaElNombre_5);
 		
 		
 		
