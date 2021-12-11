@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import procesamiento.Inventario;
+import procesamiento.Supermercado;
 
 public class PromocionDescuento extends Promocion
 {
 	private Double descuento;
 
 	public PromocionDescuento(Date fechaInicio, Date fechaFinal, String productoAplicado, Double descuento
-			, Inventario inventario) 
+			, Supermercado supermercado) 
 	{
-		super(fechaInicio, fechaFinal, productoAplicado, inventario);
+		super(fechaInicio, fechaFinal, productoAplicado, supermercado);
 		this.descuento = descuento;
 
 	}
@@ -26,7 +27,7 @@ public class PromocionDescuento extends Promocion
 			
 			if(codigoBarras.equals(this.productoAplicado))
 			{
-				Double precioProd = inventario.getCostoProducto(codigoBarras);
+				Double precioProd =  supermercado.getInventario().getCostoProducto(codigoBarras);
 				Double descuentoRealizado = precioProd*descuento;
 				Double costoFinal = compra.getCostoFinal() - descuentoRealizado;
 				

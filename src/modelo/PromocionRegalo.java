@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import procesamiento.Inventario;
+import procesamiento.Supermercado;
 
 public class PromocionRegalo extends Promocion
 {
@@ -11,9 +12,9 @@ public class PromocionRegalo extends Promocion
 	//private Double descuento;
 
 	public PromocionRegalo(Date fechaInicio, Date fechaFinal, String productoAplicado, Double descuento
-			, Inventario inventario) 
+			, Supermercado supermercado) 
 	{
-		super(fechaInicio, fechaFinal, productoAplicado, inventario);
+		super(fechaInicio, fechaFinal, productoAplicado, supermercado);
 	//	this.descuento = descuento;
 
 	}

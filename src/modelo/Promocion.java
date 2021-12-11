@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import procesamiento.Inventario;
+import procesamiento.Supermercado;
 
 
 
@@ -12,14 +13,14 @@ public abstract class Promocion
 	private Date fechaInicio;
 	private Date fechaFinal;
 	protected String productoAplicado;
-	protected Inventario inventario;
+	protected Supermercado supermercado;
 	
-	public Promocion(Date fechaInicio, Date fechaFinal, String productoAplicado, Inventario inventario)
+	public Promocion(Date fechaInicio, Date fechaFinal, String productoAplicado, Supermercado supermercado)
 	{
 		this.fechaFinal = fechaFinal;
 		this.fechaInicio = fechaInicio;
 		this.productoAplicado =  productoAplicado;
-		this.inventario = inventario;
+		this.supermercado = supermercado;
 	}
 	
 	public boolean aplicable()
