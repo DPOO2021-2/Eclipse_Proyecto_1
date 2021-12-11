@@ -85,10 +85,13 @@ public class Compra {
 		}
 		factura = factura + " subtotal : "+ getSubtotal().toString();
 		
-		factura = factura + " promociones aplicadas: ";
-		for (Promocion promocion: promociones)
+		factura = factura + "\n"+"promociones aplicadas: ";
+		
+		Integer contador = 0;
+		for (Promocion promocion: promocionesAplicadas)
 		{
-			
+			contador = contador+1;
+			factura = factura + "\n"+contador.toString()+promocion.toString();
 		}
 		return factura;
 	}
@@ -106,8 +109,18 @@ public class Compra {
 		
 		Double puntosNuevos = puntosAntiguos - puntos;
 		
-		return factura+" - "+(puntos * 15)+" = "+costoFinalVERDADERO.toString()+
+		factura = factura+" - "+(puntos * 15)+" = "+costoFinalVERDADERO.toString()+
 				"Antes tenias: "+puntosAntiguos.toString()+" y ahora te quedan: "+puntosNuevos.toString();
+
+		factura = factura + "\n"+" promociones aplicadas: ";
+		
+		Integer contador = 0;
+		for (Promocion promocion: promocionesAplicadas)
+		{
+			contador = contador+1;
+			factura = factura + "\n"+contador.toString()+promocion.toString();
+		}
+		return factura;
 	}
 	
 	
