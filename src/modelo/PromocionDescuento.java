@@ -20,21 +20,25 @@ public class PromocionDescuento extends Promocion
 	@Override
 	public void aplicarPromocion(Compra compra) 
 	{
+		boolean aplicada = false;
 		for (String codigoBarras : compra.getProductos().keySet())
 		{
+			
 			if(codigoBarras.equals(this.productoAplicado))
 			{
+				Double precioProd = inventario.getCostoProducto(codigoBarras);
+				Double descuentoRealizado = precioProd*descuento;
+				Double costoFinal = compra.getCostoFinal() - descuentoRealizado;
 				
-			
-				
-				
+				compra.setCostoFinal(costoFinal);
+				aplicada = true;
 			}
 			
 			
 		}
 
-
 		
+		compra.registrarPromocion(this);
 		
 		
 	}

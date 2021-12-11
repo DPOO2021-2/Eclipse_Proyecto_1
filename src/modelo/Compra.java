@@ -14,18 +14,26 @@ public class Compra {
 	
 	private double puntos;
 	
+	private ArrayList<Promocion> promocionesAplicadas;
+	
 	
 	public Compra(Double costoFinal, Cliente cliente, Map<String, Double> productos,
 			Double puntos) 
 	{
+		
 		this.costoFinal = costoFinal;
 		this.cliente = cliente;
 		this.productos = productos;
 		this.puntos = puntos;
+		this.promocionesAplicadas = new ArrayList<Promocion>();
+		
 	}
 	
 	
-	
+	public void setCostoFinal(Double costo)
+	{
+		this.costoFinal = costo;
+	}
 	
 
 
@@ -97,6 +105,11 @@ public class Compra {
 		factura = factura.substring(0, factura.length() - 1);
 
 		return factura;
+	}
+	
+	public void registrarPromocion(Promocion promocion)
+	{
+		this.promocionesAplicadas.add(promocion);
 	}
 
 }
