@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import procesamiento.Inventario;
 import procesamiento.Supermercado;
@@ -25,13 +26,33 @@ public class PromocionRegalo extends Promocion
 	{
 		
 		boolean aplicada = false;
-		for (String codigoBarras : compra.getProductos().keySet())
+		Map<String, Double> prodsComprados = compra.getProductos();
+		for (String codigoBarras : prodsComprados.keySet())
 		{
 			if(codigoBarras.equals(this.productoAplicado))
 			{
 				aplicada = true;
 
+				Double vecesAplicada = 0.0;
+				Double cantidadComprada = prodsComprados.get(codigoBarras);
+				while (cantidadComprada-cantidadAplicable > 0)
+				{
+					vecesAplicada = vecesAplicada + 1;
+					
+					
+					cantidadComprada = cantidadComprada-cantidadAplicable;
+				}
 				
+				Double cantidadRegalar = vecesAplicada*cantidadOferta;
+				
+				Producto producto = supermercado.getInventario().getProducto(codigoBarras);
+				
+				if(producto.sePuedeComprar(cantidadRegalar))
+				{
+					producto.entregarProducto(cantidadRegalar);
+				}
+				
+				prodsComprados.put(codigoBarras, prodsComprados.get(codigoBarras) + cantidadRegalar);
 				
 			}
 		}
@@ -39,5 +60,16 @@ public class PromocionRegalo extends Promocion
 		{
 			compra.registrarPromocion(this);	
 		}
+	}
+
+	@Override
+	public String toString() 
+	{
+		String resultado = this.getClass().toString();
+		Double lleve = cantidadAplicable+cantidadOferta;
+		resultado = resultado + ":"+productoAplicado;
+		resultado = resultado + "(pague "+cantidadAplicable.toString()+" lleve " +lleve.toString()+")";
+				
+		return null;
 	}
 }
