@@ -27,20 +27,12 @@ public class PromocionPuntos extends Promocion
 		{
 			if(codigoBarras.equals(this.productoAplicado))
 			{
-				Producto producto = supermercado.getInventario().getProducto(codigoBarras);
-				
-				Double costoProducto = producto.calcularPrecio(compra.getProductos().get(codigoBarras));
-				
-				Double puntosProducto = supermercado.getSistemaPuntos().calcularPuntos(costoProducto);
-
-				Double aumentoPuntos = puntosProducto * (multiplicadorPuntos-1);
-				
-				
-				compra.setPuntosFinal(aumentoPuntos + compra.getPuntos());
-				
-				compra.getCliente().sumarPuntos(aumentoPuntos);
-				
 				aplicada = true;
+				
+				
+				
+				
+				
 			}
 		}
 		if(aplicada)
@@ -48,5 +40,17 @@ public class PromocionPuntos extends Promocion
 			compra.registrarPromocion(this);	
 		}
 	}
+	
+	
+	@Override
+	public String toString() 
+	{
+		String resultado = this.getClass().toString();
+		resultado = resultado + ":"+productoAplicado;
+		resultado = resultado + "("+multiplicadorPuntos.toString()+")";
+				
+		return null;
+	}
+	
 
 }
