@@ -35,11 +35,6 @@ public class Compra {
 		this.costoFinal = costo;
 	}
 	
-	
-	public void setPuntosFinal(Double puntosF)
-	{
-		this.puntos = puntosF;
-	}	
 
 
 	public Double getCostoFinal()
