@@ -34,8 +34,5 @@ public abstract class Promocion
 	}
 	
 	abstract public void aplicarPromocion(Compra compra);
-	
-	abstract public String toString();
-	
 
 }

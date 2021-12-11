@@ -133,10 +133,6 @@ public abstract class Producto
 	abstract public double comprarProducto(double cantidad);
 
 	
-	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
-	abstract public void entregarProducto(double cantidad);
-
-	
 
 	
 	public void agregarCategorias(String[] categorias_nuevas)

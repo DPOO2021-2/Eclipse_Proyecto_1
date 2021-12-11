@@ -44,17 +44,5 @@ public class PromocionDescuento extends Promocion
 		}
 		
 	}
-	
-	@Override
-	public String toString() 
-	{
-		String resultado = this.getClass().toString();
-		resultado = resultado + ":"+productoAplicado;
-		resultado = resultado + "("+descuento.toString()+"%)";
-				
-		return null;
-	}
-	
-	
 
 }

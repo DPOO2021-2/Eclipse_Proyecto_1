@@ -16,15 +16,12 @@ public class Compra {
 	
 	private ArrayList<Promocion> promocionesAplicadas;
 	
-	private double subTotal;
 	
-	
-	public Compra(Double subTotal, Cliente cliente, Map<String, Double> productos,
+	public Compra(Double costoFinal, Cliente cliente, Map<String, Double> productos,
 			Double puntos) 
 	{
 		
-		this.costoFinal = subTotal;
-		this.subTotal = subTotal;
+		this.costoFinal = costoFinal;
 		this.cliente = cliente;
 		this.productos = productos;
 		this.puntos = puntos;
@@ -43,11 +40,6 @@ public class Compra {
 	public Double getCostoFinal()
 	{
 		return this.costoFinal;
-	}
-	
-	public Double getSubtotal()
-	{
-		return this.subTotal;
 	}
 	
 	public Cliente getCliente() 
@@ -69,10 +61,6 @@ public class Compra {
 		return puntos;
 	}
 
-	public void setPuntosFinal(Double puntos)
-	{
-		this.puntos=puntos;
-	}
 
 
 	public String generarfactura()
@@ -83,13 +71,7 @@ public class Compra {
 			factura = factura + codigoBarras + ": " + 
 			productos.get(codigoBarras).toString() + ", ";
 		}
-		factura = factura + " subtotal : "+ getSubtotal().toString();
-		
-		factura = factura + " promociones aplicadas: ";
-		for (Promocion promocion: promociones)
-		{
-			
-		}
+		factura = factura + " costo total: "+ getCostoFinal().toString();
 		return factura;
 	}
 	
@@ -102,7 +84,7 @@ public class Compra {
 			productos.get(codigoBarras).toString() + ", ";
 		}
 		factura = factura + " subtotal: "+ getCostoFinal().toString();
-		Double costoFinalVERDADERO = (getSubtotal() - (puntos * 15));
+		Double costoFinalVERDADERO = (getCostoFinal() - (puntos * 15));
 		
 		Double puntosNuevos = puntosAntiguos - puntos;
 		

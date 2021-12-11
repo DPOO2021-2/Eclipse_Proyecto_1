@@ -48,17 +48,5 @@ public class PromocionPuntos extends Promocion
 			compra.registrarPromocion(this);	
 		}
 	}
-	
-	
-	@Override
-	public String toString() 
-	{
-		String resultado = this.getClass().toString();
-		resultado = resultado + ":"+productoAplicado;
-		resultado = resultado + "("+multiplicadorPuntos.toString()+")";
-				
-		return null;
-	}
-	
 
 }
