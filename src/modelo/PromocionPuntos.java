@@ -62,5 +62,15 @@ public class PromocionPuntos extends Promocion
 		return null;
 	}
 	
+	
+	public String toStringARCHIVO()
+	{
+		String resultado = "3,"+productoAplicado+","+
+				TransformadorFechas.fechaTransf(fechaInicio)+","+TransformadorFechas.fechaTransf(fechaFinal)
+				+","+multiplicadorPuntos.toString()+",0";
+				
+		
+		return resultado;
+	}
 
 }

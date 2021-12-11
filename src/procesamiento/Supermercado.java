@@ -11,6 +11,9 @@ import modelo.Compra;
 import modelo.Lote;
 import modelo.Producto;
 import modelo.Promocion;
+import modelo.PromocionDescuento;
+import modelo.PromocionPuntos;
+import modelo.PromocionRegalo;
 import modelo.TransformadorFechas;
 
 import java.io.BufferedReader;
@@ -66,8 +69,12 @@ public class Supermercado
 		leerInfoArchivos("puntos");
 		leerInfoArchivos("compras");
 		
+		leerPromociones();
+		
 	}
 	
+	
+
 	public Inventario getInventario()
 	{
 		return this.inventario;
@@ -203,6 +210,13 @@ public class Supermercado
 				
 				registroCompras.guadarCompra(cedula, compra);
 				
+				for (Promocion promocion: promociones)
+				{
+					if (promocion.aplicable())
+					{
+							promocion.aplicarPromocion(compra);	
+					}
+				}
 	
 				String factura = compra.generarfactura();
 				
@@ -257,7 +271,14 @@ public class Supermercado
 				
 				registroCompras.guadarCompra(cedula, compra);
 				
-	
+
+				for (Promocion promocion: promociones)
+				{
+					if (promocion.aplicable())
+					{
+							promocion.aplicarPromocion(compra);	
+					}
+				}
 				String factura = compra.generarFacturaConPuntos(puntos, puntosAntiguos - puntosCompra);
 				
 				
@@ -283,7 +304,74 @@ public class Supermercado
 		
 	}
 	
+
 	
+	
+	
+	public void leerPromociones() throws IOException, ParseException 
+	{
+		
+		try 
+		{
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
+			
+			
+			
+				Inventario inventario = getInventario();
+				SistemaPuntos sistemaPuntos = getSistemaPuntos();
+
+				RegistroCompras registroCompras = getRegistroCompras();
+				
+				//leer csv y configurar lectura para leer atributos:
+				
+			
+				BufferedReader br = new BufferedReader(new FileReader("Promociones/promociones.csv"));
+				
+				
+				
+				String linea = br.readLine();
+				linea = br.readLine();
+				
+				
+					
+					
+					
+				while (linea != null) 
+				{	
+					String[] partes = linea.split(",");
+					Date fechaInicio = formatter.parse(partes[1]);
+					Date fechaFinal = formatter.parse(partes[2]);
+					String prod = partes[3];
+					Double num1 = Double.parseDouble(partes[4]);
+					Double num2 = Double.parseDouble(partes[5]);
+					if ("1".equals(partes[0]))
+					{
+						Promocion promocion = new PromocionRegalo(fechaInicio, fechaFinal, prod, num1, this, num2);
+					}
+					else if ("2".equals(partes[0]))
+					{
+						Promocion promocion = new PromocionDescuento(fechaInicio, fechaFinal, prod, num1, this);	
+					}
+					else if ("3".equals(partes[0]))
+					{
+						Promocion promocion = new PromocionPuntos(fechaInicio, fechaFinal, prod, num1, this);	
+					}
+					
+					
+					linea = br.readLine();
+					
+				}
+				
+				
+				br.close();
+		}	
+		catch(FileNotFoundException ex)
+		{
+			System.out.println("Archivo no encontrado");
+		}
+
+	}
 	
 	public void leerInfoArchivos(String baseDatos) throws IOException, ParseException 
 	{

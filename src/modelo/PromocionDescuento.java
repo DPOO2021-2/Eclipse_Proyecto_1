@@ -55,6 +55,15 @@ public class PromocionDescuento extends Promocion
 		return null;
 	}
 	
+	public String toStringARCHIVO()
+	{
+		String resultado = "2,"+productoAplicado+","+
+				TransformadorFechas.fechaTransf(fechaInicio)+","+TransformadorFechas.fechaTransf(fechaFinal)
+				+","+descuento.toString()+",0";
+				
+		
+		return resultado;
+	}
 	
 
 }

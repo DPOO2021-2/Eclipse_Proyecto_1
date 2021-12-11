@@ -72,4 +72,15 @@ public class PromocionRegalo extends Promocion
 				
 		return null;
 	}
+	
+	
+	public String toStringARCHIVO()
+	{
+		String resultado = "1,"+productoAplicado+","+
+				TransformadorFechas.fechaTransf(fechaInicio)+","+TransformadorFechas.fechaTransf(fechaFinal)
+				+","+cantidadOferta.toString()+","+cantidadAplicable.toString();
+				
+		
+		return resultado;
+	}
 }

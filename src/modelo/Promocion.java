@@ -10,8 +10,8 @@ import procesamiento.Supermercado;
 
 public abstract class Promocion 
 {
-	private Date fechaInicio;
-	private Date fechaFinal;
+	protected Date fechaInicio;
+	protected Date fechaFinal;
 	protected String productoAplicado;
 	protected Supermercado supermercado;
 	
@@ -34,5 +34,7 @@ public abstract class Promocion
 	}
 	
 	abstract public void aplicarPromocion(Compra compra);
+	
+	abstract public String toStringARCHIVO();
 
 }
