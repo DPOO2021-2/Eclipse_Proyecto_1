@@ -37,9 +37,10 @@ public class PromocionDescuento extends Promocion
 			
 		}
 
-		
-		compra.registrarPromocion(this);
-		
+		if(aplicada)
+		{
+			compra.registrarPromocion(this);	
+		}
 		
 	}
 

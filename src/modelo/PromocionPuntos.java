@@ -21,12 +21,22 @@ public class PromocionPuntos extends Promocion
 	@Override
 	public void aplicarPromocion(Compra compra) 
 	{
+		boolean aplicada = false;
 		for (String codigoBarras : compra.getProductos().keySet())
 		{
 			if(codigoBarras.equals(this.productoAplicado))
 			{
+				aplicada = true;
+				
+				
+				
+				
 				
 			}
+		}
+		if(aplicada)
+		{
+			compra.registrarPromocion(this);	
 		}
 	}
 
