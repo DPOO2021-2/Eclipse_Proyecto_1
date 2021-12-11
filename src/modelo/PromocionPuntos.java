@@ -30,8 +30,18 @@ public class PromocionPuntos extends Promocion
 				aplicada = true;
 				
 				
+				Producto producto = supermercado.getInventario().getProducto(codigoBarras);
+				
+				Double costoProducto = producto.calcularPrecio(compra.getProductos().get(codigoBarras));
+				
+				Double puntosProducto = supermercado.getSistemaPuntos().calcularPuntos(costoProducto);
+				
+				Double aumentoPuntos = puntosProducto * (multiplicadorPuntos-1);
 				
 				
+				compra.setPuntosFinal(aumentoPuntos + compra.getPuntos());
+				
+				compra.getCliente().sumarPuntos(aumentoPuntos);
 				
 			}
 		}
