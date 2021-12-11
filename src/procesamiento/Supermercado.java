@@ -10,7 +10,7 @@ import modelo.ClienteRegistrado;
 import modelo.Compra;
 import modelo.Lote;
 import modelo.Producto;
-
+import modelo.Promocion;
 import modelo.TransformadorFechas;
 
 import java.io.BufferedReader;
@@ -36,6 +36,7 @@ public class Supermercado
 	
 	private String nombre;
 	private Date fecha;
+	private ArrayList<Promocion> promociones;
 	
 	public Supermercado (String nombre) throws IOException, ParseException
 	{
@@ -56,6 +57,7 @@ public class Supermercado
 		this.inventario = new Inventario();
 		this.registroCompras = new RegistroCompras();
 		this.sistemaPuntos = new SistemaPuntos();
+		
 		
 		//aqui se debe ejecutar el metodo de cargar nuestros archivos
 		
@@ -219,50 +221,57 @@ public class Supermercado
 	
 	public String registrarCompraCONPUNTOS(Map<String, Double> productosyCantidades, String nombre, String cedula, Integer puntos) 
 	{
-		Inventario inventario = getInventario();
-		RegistroCompras registroCompras = getRegistroCompras();
-		SistemaPuntos sistemaPuntos = getSistemaPuntos();
-		
-		boolean sePudieronComprar = true;
-		
-		
-		for (String codigoBarras: productosyCantidades.keySet())
+		if(!productosyCantidades.isEmpty())
 		{
-			double cantidad = productosyCantidades.get(codigoBarras);
-			sePudieronComprar = sePudieronComprar && inventario.sePuedeComprar(codigoBarras, cantidad);
-		} 
-		
-		if(sePudieronComprar) 
-		{
-			double precioTotalCompra = 0;
-		
+			Inventario inventario = getInventario();
+			RegistroCompras registroCompras = getRegistroCompras();
+			SistemaPuntos sistemaPuntos = getSistemaPuntos();
+			
+			boolean sePudieronComprar = true;
+			
+			
 			for (String codigoBarras: productosyCantidades.keySet())
 			{
 				double cantidad = productosyCantidades.get(codigoBarras);
-				precioTotalCompra = precioTotalCompra + inventario.comprar(codigoBarras, cantidad);
+				sePudieronComprar = sePudieronComprar && inventario.sePuedeComprar(codigoBarras, cantidad);
+			} 
+			
+			if(sePudieronComprar) 
+			{
+				double precioTotalCompra = 0;
+			
+				for (String codigoBarras: productosyCantidades.keySet())
+				{
+					double cantidad = productosyCantidades.get(codigoBarras);
+					precioTotalCompra = precioTotalCompra + inventario.comprar(codigoBarras, cantidad);
+				}
+				
+				double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
+	//			System.out.println(puntosCompra);
+				ClienteRegistrado cliente = (ClienteRegistrado) sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
+				Double puntosAntiguos = cliente.getPuntos();
+				cliente.restarPuntos(puntos);
+				
+				Compra compra = new Compra(precioTotalCompra, cliente, 
+						productosyCantidades,  puntosCompra);
+				
+				registroCompras.guadarCompra(cedula, compra);
+				
+	
+				String factura = compra.generarFacturaConPuntos(puntos, puntosAntiguos - puntosCompra);
+				
+				
+				
+				return factura;
 			}
-			
-			double puntosCompra = sistemaPuntos.calcularPuntos(precioTotalCompra);
-//			System.out.println(puntosCompra);
-			ClienteRegistrado cliente = (ClienteRegistrado) sistemaPuntos.registrarPuntos(cedula, nombre, puntosCompra);
-			Double puntosAntiguos = cliente.getPuntos();
-			cliente.restarPuntos(puntos);
-			
-			Compra compra = new Compra(precioTotalCompra, cliente, 
-					productosyCantidades,  puntosCompra);
-			
-			registroCompras.guadarCompra(cedula, compra);
-			
-
-			String factura = compra.generarFacturaConPuntos(puntos, puntosAntiguos - puntosCompra);
-			
-			
-			
-			return factura;
+			else 
+			{ 
+				return "no";
+			}
 		}
 		else 
 		{ 
-			return "no";
+			return "vacia";
 		}
 	}
 	

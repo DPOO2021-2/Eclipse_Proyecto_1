@@ -120,6 +120,7 @@ public abstract class Producto
 	//antes de llamar este metodo asegurese de llamar al metodo sePuedeComprar
 	public double calcularPrecio(double cantidad)
 	{
+		
 		return getPrecioActual()*cantidad;
 	}
 	
