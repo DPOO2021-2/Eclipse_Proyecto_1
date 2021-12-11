@@ -45,33 +45,6 @@ public class ProductoUnidades extends Producto
 		 return costo;
 		
 	}
-	
-
-	public void entregarProducto(double cantidad)
-	{
-		int cantidad_entera = (int) cantidad;
-		 HashMap<String, Lote> lotes = getLotes();
-		 for (Lote lote: lotes.values())
-		 {
-
-
-			 
-			 
-			 
-			 
-			 
-			 
-			 cantidad = lote.restarCantidad(cantidad_entera);
-			 
-		 }
-		
-//		 double costo = calcularPrecio(cantidad);
-//		 setGananciaTotal(getGananciaTotal() + costo);
-		 
-		 actualizarActividad();
-		 
-//		 return costo;
-	}
 
 
 
