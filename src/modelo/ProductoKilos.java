@@ -41,6 +41,32 @@ public class ProductoKilos extends Producto
 		 
 		 return costo;
 	}
+	
+	public void entregarProducto(double cantidad)
+	{
+		
+		 HashMap<String, Lote> lotes = getLotes();
+		 for (Lote lote: lotes.values())
+		 {
+
+
+			 
+			 
+			 
+			 
+			 
+			 
+			 cantidad = lote.restarCantidad(cantidad);
+			 
+		 }
+		
+//		 double costo = calcularPrecio(cantidad);
+//		 setGananciaTotal(getGananciaTotal() + costo);
+		 
+		 actualizarActividad();
+		 
+//		 return costo;
+	}
 
 
 

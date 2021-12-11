@@ -9,14 +9,15 @@ import procesamiento.Supermercado;
 public class PromocionRegalo extends Promocion
 {
 
-	//private Double descuento;
+	private Double cantidadAplicable;
+	private Double cantidadOferta;
 
-	public PromocionRegalo(Date fechaInicio, Date fechaFinal, String productoAplicado, Double descuento
-			, Supermercado supermercado) 
+	public PromocionRegalo(Date fechaInicio, Date fechaFinal, String productoAplicado, Double cantidadAplicable
+			, Supermercado supermercado, Double cantidadOferta) 
 	{
 		super(fechaInicio, fechaFinal, productoAplicado, supermercado);
-	//	this.descuento = descuento;
-
+		this.cantidadOferta = cantidadOferta;
+		this.cantidadAplicable = cantidadAplicable;
 	}
 
 	@Override
